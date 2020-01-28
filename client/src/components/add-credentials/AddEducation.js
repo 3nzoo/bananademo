@@ -63,7 +63,7 @@ class AddEducation extends Component {
     const { errors } = this.state;
 
     return (
-      <div className="add-education">
+      <div className="add-address">
         <div className="container">
           <div className="row">
             <div className="col-md-8 m-auto">

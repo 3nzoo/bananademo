@@ -7,11 +7,11 @@ const ProfileActions = () => {
       <Link to="/edit-profile" className="btn btn-light">
         <i className="fas fa-user-circle text-info mr-1" /> Edit Profile
       </Link>
-      <Link to="/add-experience" className="btn btn-light">
+      <Link to="/add-payment" className="btn btn-light">
         <i className="fas fa-credit-card text-info mr-1" />
         Payment
       </Link>
-      <Link to="/add-education" className="btn btn-light">
+      <Link to="/add-address" className="btn btn-light">
         <i className="fas fa-map-marker text-info mr-1" />
         Delivery Address
       </Link>

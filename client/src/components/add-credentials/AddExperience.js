@@ -63,7 +63,7 @@ class AddExperience extends Component {
     const { errors } = this.state;
 
     return (
-      <div className="add-experience">
+      <div className="add-payment">
         <div className="container">
           <div className="row">
             <div className="col-md-8 m-auto">

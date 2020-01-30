@@ -319,4 +319,27 @@ router.delete(
   }
 );
 
+// @route   DELETE api/profile/admin
+// @desc    Delete user and profile by admin
+// @access  Private
+router.delete(
+  "/admin",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    User.findOne({ email: req.body.email }).then(user => {
+      if (req.user.is_admin && req.user.position == "admin" && user) {
+        Profile.findOneAndRemove({ email: req.body.email }).then(() => {
+          User.findOneAndRemove({ email: req.body.email }).then(() =>
+            res.json({ success: true })
+          );
+        });
+      } else {
+        res.json({
+          error: "try again"
+        });
+      }
+    });
+  }
+);
+
 module.exports = router;

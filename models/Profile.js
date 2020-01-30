@@ -8,107 +8,82 @@ const ProfileSchema = new Schema({
     ref: "users"
   },
   handle: {
-    type: String,
-    required: true,
-    max: 40
+    type: String
   },
   company: {
+    type: String
+  },
+  telephone: {
+    type: String
+  },
+  fax: {
     type: String
   },
   website: {
     type: String
   },
-  location: {
+  businessType: {
     type: String
   },
-  status: {
-    type: String,
-    required: true
-  },
-  skills: {
-    type: [String],
-    required: true
-  },
-  bio: {
-    type: String
-  },
-  githubusername: {
-    type: String
-  },
-  experience: [
+  address: [
     {
-      title: {
+      name: {
         type: String,
         required: true
       },
       company: {
+        type: String
+      },
+      streetAddress: {
         type: String,
         required: true
       },
-      location: {
-        type: String
+      city: {
+        type: String,
+        required: true
       },
-      from: {
-        type: Date
+      state: {
+        type: String,
+        required: true
       },
-      to: {
-        type: Date
+      zipCode: {
+        type: String,
+        required: true
       },
-      current: {
+      deliveryAdd: {
         type: Boolean,
         default: false
       },
-      description: {
-        type: String
+      billingAdd: {
+        type: Boolean,
+        default: false
       }
     }
   ],
-  education: [
+  payment: [
     {
-      school: {
+      cardNum: {
         type: String,
         required: true
       },
-      degree: {
+      nameCard: {
         type: String,
         required: true
       },
-      fieldofstudy: {
+      expiration: {
         type: String,
         required: true
       },
-      from: {
-        type: Date
+      cvCode: {
+        type: String,
+        required: true
       },
-      to: {
-        type: Date
-      },
-      current: {
+      is_Default: {
         type: Boolean,
         default: false
-      },
-      description: {
-        type: String
       }
     }
   ],
-  social: {
-    youtube: {
-      type: String
-    },
-    twitter: {
-      type: String
-    },
-    facebook: {
-      type: String
-    },
-    linkedin: {
-      type: String
-    },
-    instagram: {
-      type: String
-    }
-  },
   date: {
     type: Date,
     default: Date.now

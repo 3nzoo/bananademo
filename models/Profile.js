@@ -11,10 +11,12 @@ const ProfileSchema = new Schema({
     type: String
   },
   company: {
-    type: String
+    type: String,
+    required: true
   },
   telephone: {
-    type: String
+    type: String,
+    required: true
   },
   fax: {
     type: String

@@ -40,7 +40,7 @@ router.post("/register", (req, res) => {
         email: req.body.email,
         password: req.body.password,
         is_admin: false,
-        position: req.body.position
+        position: "premiere"
       });
 
       bcrypt.genSalt(10, (err, salt) => {
@@ -83,9 +83,17 @@ router.post(
           name: req.body.name,
           email: req.body.email,
           password: req.body.password,
-          is_admin: true,
+          is_admin: req.body.is_admin,
           position: req.body.position
         });
+        if (newUser.position == "professional") {
+          newUser.isApproved = true;
+          newUser.is_admin = false;
+        } else if (newUser.position == "premiere") {
+          newUser.is_admin = false;
+        } else {
+          newUser.is_admin = true;
+        }
 
         bcrypt.genSalt(10, (err, salt) => {
           bcrypt.hash(newUser.password, salt, (err, hash) => {
@@ -105,6 +113,35 @@ router.post(
 // @route   POST api/users/register/approve
 // @desc    Approve user by admin
 // @access  Private
+// Done
+router.post(
+  "/register/pro",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    User.findOne({ email: req.body.email }).then(user => {
+      if (!user) {
+        errors.email = "user not found";
+        return res.status(400).json(errors);
+      } else if (req.user.is_admin && user.position != "admin") {
+        //client position cant be admin
+        //req.user should be admin (true)
+        User.findOneAndUpdate(
+          { email: user.email },
+          { position: "professional" },
+          { new: true }
+        ).then(user => res.json(user));
+      } else {
+        errors = "Page not found";
+        return res.status(400).json(errors);
+      }
+    });
+  }
+);
+
+// @route   POST api/users/register/approve
+// @desc    Approve user by admin
+// @access  Private
+// Done
 router.post(
   "/register/approve",
   passport.authenticate("jwt", { session: false }),
@@ -150,6 +187,7 @@ router.post("/login", (req, res) => {
       errors.email = "User not found";
       return res.status(404).json(errors);
     }
+    // console.log(user);
 
     // Check Password
     bcrypt.compare(password, user.password).then(isMatch => {
@@ -157,18 +195,24 @@ router.post("/login", (req, res) => {
         // User Matched
         const payload = { id: user.id, name: user.name, avatar: user.avatar }; // Create JWT Payload
 
-        // Sign Token
-        jwt.sign(
-          payload,
-          keys.secretOrKey,
-          { expiresIn: 3600 },
-          (err, token) => {
-            res.json({
-              success: true,
-              token: "Bearer " + token
-            });
-          }
-        );
+        if (user.is_admin || user.isApproved) {
+          // Sign Token
+          jwt.sign(
+            payload,
+            keys.secretOrKey,
+            { expiresIn: 3600 },
+            (err, token) => {
+              res.json({
+                approved: user.isApproved,
+                success: true,
+                token: "Bearer " + token
+              });
+            }
+          );
+        } else {
+          errors.isApproved = "Account is not yet Approved";
+          return res.status(400).json(errors);
+        }
       } else {
         errors.password = "Password incorrect";
         return res.status(400).json(errors);

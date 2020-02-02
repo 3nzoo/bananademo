@@ -180,29 +180,75 @@ router.post(
         is_Default: req.body.is_Default
       };
 
-      const checkPay = profile.payment
-        .map(item => item.is_Default)
-        .indexOf(true);
+      if (profile.payment.length < 1) {
+        newPayment.is_Default = true;
+      } else {
+        const card = profile.payment
+          .map(payload => payload.cardNum)
+          .indexOf(req.body.cardNum);
+        if (card >= 0) {
+          profile.payment.splice(card, 1);
+        }
 
-      const card = profile.payment
-        .map(payload => payload.cardNum)
-        .indexOf(req.body.cardNum);
+        const checkPay = profile.payment
+          .map(item => item.is_Default)
+          .indexOf(true);
 
-      if (checkPay != -1) {
-        const oldPay = profile.payment[checkPay];
-        profile.payment.splice(checkPay, 1);
-        oldPay.is_Default = false;
-        profile.payment.unshift(oldPay);
-      }
-
-      if (card > -1) {
-        profile.payment.splice(card, 1);
+        if (checkPay >= 0) {
+          if (req.body.is_Default == "true") {
+            const oldPayment = profile.payment[checkPay];
+            profile.payment.splice(checkPay, 1);
+            oldPayment.is_Default = false;
+            profile.payment.unshift(oldPayment);
+          }
+        } else {
+          if (req.body.is_Default == "false") {
+            profile.payment[0].is_Default = true;
+          }
+        }
       }
 
       profile.payment.unshift(newPayment);
-      console.log(profile.payment);
+
       profile.save().then(profile => res.json(profile));
     });
+  }
+);
+
+// @route   DELETE api/profile/payment/:pay_id
+// @desc    Delete payment from profile
+// @access  Private
+// DONE
+router.delete(
+  "/payment/:pay_id",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    Profile.findOne({ user: req.user.id })
+      .then(profile => {
+        // Get remove index
+        const removeIndex = profile.payment
+          .map(item => item.id)
+          .indexOf(req.params.pay_id);
+
+        // check payid before Splice out of array
+        if (removeIndex >= 0) {
+          profile.payment.splice(removeIndex, 1);
+        }
+
+        // if payment count is equal to 1
+        if (profile.payment.length >= 1) {
+          const checkPay = profile.payment
+            .map(item => item.is_Default)
+            .indexOf(true);
+          if (checkPay == -1) {
+            profile.payment[0].is_Default = true;
+          }
+        }
+
+        // Save
+        profile.save().then(profile => res.json(profile));
+      })
+      .catch(err => res.status(404).json(err));
   }
 );
 
@@ -296,40 +342,6 @@ router.post(
   }
 );
 
-// @route   POST api/profile/education
-// @desc    Add education to profile
-// @access  Private
-router.post(
-  "/education",
-  passport.authenticate("jwt", { session: false }),
-  (req, res) => {
-    const { errors, isValid } = validateEducationInput(req.body);
-
-    // Check Validation
-    if (!isValid) {
-      // Return any errors with 400 status
-      return res.status(400).json(errors);
-    }
-
-    Profile.findOne({ user: req.user.id }).then(profile => {
-      const newEdu = {
-        school: req.body.school,
-        degree: req.body.degree,
-        fieldofstudy: req.body.fieldofstudy,
-        from: req.body.from,
-        to: req.body.to,
-        current: req.body.current,
-        description: req.body.description
-      };
-
-      // Add to exp array
-      profile.education.unshift(newEdu);
-
-      profile.save().then(profile => res.json(profile));
-    });
-  }
-);
-
 // @route   DELETE api/profile/experience/:exp_id
 // @desc    Delete experience from profile
 // @access  Private
@@ -342,34 +354,23 @@ router.delete(
         // Get remove index
         const removeIndex = profile.address
           .map(item => item.id)
-          .indexOf(req.params.exp_id);
+          .indexOf(req.params.add_id);
 
-        // Splice out of array
-        profile.address.splice(removeIndex, 1);
+        // check add_id before Splice out of array
+        if (removeIndex >= 0) {
+          profile.address.splice(removeIndex, 1);
+        }
 
-        // Save
-        profile.save().then(profile => res.json(profile));
-      })
-      .catch(err => res.status(404).json(err));
-  }
-);
+        // if payment count is equal to 1
+        if (profile.address.length >= 1) {
+          const checkAdd = profile.address
+            .map(item => item.deliveryAdd)
+            .indexOf(true);
 
-// @route   DELETE api/profile/education/:edu_id
-// @desc    Delete education from profile
-// @access  Private
-router.delete(
-  "/education/:edu_id",
-  passport.authenticate("jwt", { session: false }),
-  (req, res) => {
-    Profile.findOne({ user: req.user.id })
-      .then(profile => {
-        // Get remove index
-        const removeIndex = profile.education
-          .map(item => item.id)
-          .indexOf(req.params.edu_id);
-
-        // Splice out of array
-        profile.education.splice(removeIndex, 1);
+          if (checkPay == -1) {
+            profile.address[0].deliveryAdd = true;
+          }
+        }
 
         // Save
         profile.save().then(profile => res.json(profile));
@@ -385,11 +386,15 @@ router.delete(
   "/",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
-    Profile.findOneAndRemove({ user: req.user.id }).then(() => {
-      User.findOneAndRemove({ _id: req.user.id }).then(() =>
-        res.json({ success: "Account Deleted" })
-      );
-    });
+    if (!req.user.is_admin) {
+      Profile.findOneAndRemove({ user: req.user.id }).then(() => {
+        User.findOneAndRemove({ _id: req.user.id }).then(() =>
+          res.json({ success: "Account Deleted" })
+        );
+      });
+    } else {
+      res.json({ fail: "Admin Account cannot be deleted" });
+    }
   }
 );
 
@@ -402,14 +407,18 @@ router.delete(
   (req, res) => {
     User.findOne({ email: req.body.email }).then(user => {
       if (req.user.is_admin && req.user.position == "admin" && user) {
-        Profile.findOneAndRemove({ email: req.body.email }).then(() => {
-          User.findOneAndRemove({ email: req.body.email }).then(() =>
-            res.json({ success: "account Deleted" })
-          );
-        });
+        if (req.user.email != req.body.email && req.user.position == "admin") {
+          Profile.findOneAndRemove({ handle: req.body.handle }).then(() => {
+            User.findOneAndRemove({ email: req.body.email }).then(() =>
+              res.json({ success: "account Deleted" })
+            );
+          });
+        } else {
+          res.json({ fail: "Admin account cannot be deleted" });
+        }
       } else {
         res.json({
-          error: "try again"
+          error: "Use only Admin account"
         });
       }
     });

@@ -31,7 +31,8 @@ class Dashboard extends Component {
           <div>
             <p className="lead">
               <strong>Welcome </strong>
-              <Link to={`/profile/${profile.handle}`}>{profile.handle} </Link>
+              {profile.handle}
+              {/* <Link to={`/profile/${profile.handle}`}>{profile.handle} </Link> */}
             </p>
             <button
               onClick={this.onDeleteClick.bind(this)}

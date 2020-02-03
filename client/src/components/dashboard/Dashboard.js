@@ -53,7 +53,7 @@ class Dashboard extends Component {
         dashboardContent = (
           <div>
             <p className="lead text-muted">Welcome {user.name}</p>
-            <p>Your Premiere Account has been approved</p>
+            <p>Your Account has been approved</p>
             <p>You may now setup your profile, please add some info</p>
             <Link to="/create-profile" className="btn btn-lg btn-info">
               Create Profile

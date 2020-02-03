@@ -5,8 +5,8 @@ import { connect } from "react-redux";
 import { getCurrentProfile, deleteAccount } from "../../actions/profileActions";
 import Spinner from "../common/Spinner";
 import ProfileActions from "./ProfileActions";
-import Experience from "./Experience";
-import Education from "./Education";
+import Payment from "./Payment";
+import Address from "./Address";
 
 class Dashboard extends Component {
   componentDidMount() {
@@ -20,7 +20,6 @@ class Dashboard extends Component {
   render() {
     const { user } = this.props.auth;
     const { profile, loading } = this.props.profile;
-
     let dashboardContent;
 
     if (profile === null || loading) {
@@ -30,21 +29,22 @@ class Dashboard extends Component {
       if (Object.keys(profile).length > 0) {
         dashboardContent = (
           <div>
-            <p className="lead text-muted">
-              Welcome{" "}
-              <Link to={`/profile/${profile.handle}`}>{profile.handle}</Link>
+            <p className="lead">
+              <strong>Welcome </strong>
+              <Link to={`/profile/${profile.handle}`}>{profile.handle} </Link>
             </p>
-            <ProfileActions />
-            <Experience experience={profile.experience} />
-            <br></br>
-            <Education education={profile.education} />
-            <div style={{ marginBottom: "60px" }} />
             <button
               onClick={this.onDeleteClick.bind(this)}
-              className="btn btn-danger"
+              className="btn  float-right btn-danger "
             >
               Delete My Account
             </button>
+            <p className="lead text-muted">Account Type: {profile.position}</p>
+            <ProfileActions />
+
+            <Payment payment={profile.payment} />
+            <br></br>
+            <Address address={profile.address} />
           </div>
         );
       } else {
@@ -66,10 +66,7 @@ class Dashboard extends Component {
       <div className="dashboard">
         <div className="container">
           <div className="row">
-            <div className="col-md-12">
-              <h1 className="display-4">Dashboard</h1>
-              {dashboardContent}
-            </div>
+            <div className="col-md-12">{dashboardContent}</div>
           </div>
         </div>
       </div>

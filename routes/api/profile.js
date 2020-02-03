@@ -33,7 +33,7 @@ router.get(
     const errors = {};
 
     Profile.findOne({ user: req.user.id })
-      .populate("user", ["name"])
+      .populate("user", ["name", "position"])
       .then(profile => {
         if (!profile) {
           errors.noprofile = "There is no profile for this user";
@@ -125,6 +125,7 @@ router.post(
     const profileFields = {};
     profileFields.user = req.user.id;
     profileFields.handle = req.user.name;
+    profileFields.position = req.user.position;
     if (req.body.company) profileFields.company = req.body.company;
     if (req.body.telephone) profileFields.telephone = req.body.telephone;
     if (req.body.fax) profileFields.fax = req.body.fax;
@@ -195,7 +196,7 @@ router.post(
           .indexOf(true);
 
         if (checkPay >= 0) {
-          if (req.body.is_Default == "true") {
+          if (req.body.is_Default == "true" || req.body.is_Default == true) {
             const oldPayment = profile.payment[checkPay];
             profile.payment.splice(checkPay, 1);
             oldPayment.is_Default = false;
@@ -367,7 +368,7 @@ router.delete(
             .map(item => item.deliveryAdd)
             .indexOf(true);
 
-          if (checkPay == -1) {
+          if (checkAdd == -1) {
             profile.address[0].deliveryAdd = true;
           }
         }

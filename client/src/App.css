@@ -1,30 +1,30 @@
 img {
   width: 100%;
 }
-
-.landing {
-  position: relative;
-  background: url('./img/showcase.jpg') no-repeat;
-  background-size: cover;
-  background-position: center;
-  height: 100vh;
-  margin-top: -24px;
-  margin-bottom: -50px;
+body {
+  background-color: #f1f1f1;
+  padding-bottom: 100px;
 }
 
-.landing-inner {
-  padding-top: 80px;
+.SignU {
+  background-color: orange;
 }
 
-.dark-overlay {
-  background-color: rgba(0, 0, 0, 0.7);
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+.bannerLink {
+  background-color: #fbedc3;
+}
+.bannerLink:hover {
+  background-color: #926b00;
+  color: white;
+}
+.bannerLink:focus {
+  background-color: #926b00;
+  color: white;
 }
 
+.add-address {
+  padding-bottom: 50px;
+}
 .card-form {
   opacity: 0.9;
 }

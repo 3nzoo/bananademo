@@ -23,7 +23,7 @@ module.exports = function validatePaymentInput(data) {
   }
 
   if (Validator.isEmpty(data.cvCode)) {
-    errors.cvCode = "Please Choose which State are you from";
+    errors.cvCode = "CVV code is required";
   }
 
   return {

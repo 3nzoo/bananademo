@@ -68,7 +68,7 @@ class Dashboard extends Component {
                       <small className="float-right"> ></small>
                     </a>
                     <a
-                      className="list-group-item bannerLink list-group-item-action active"
+                      className="list-group-item bannerLink list-group-item-action "
                       href=""
                     >
                       Super Smooth <small className="float-right"> ></small>

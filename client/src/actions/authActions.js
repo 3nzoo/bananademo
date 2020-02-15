@@ -8,7 +8,7 @@ import { GET_ERRORS, SET_CURRENT_USER } from "./types";
 export const registerUser = (userData, history) => dispatch => {
   axios
     .post("/api/users/register", userData)
-    .then(res => history.push("/login"))
+    .then(res => history.push("/"))
     .catch(err =>
       dispatch({
         type: GET_ERRORS,
@@ -24,6 +24,7 @@ export const loginUser = userData => dispatch => {
     .then(res => {
       // Save to localStorage
       const { token } = res.data;
+
       // Set token to ls
       localStorage.setItem("jwtToken", token);
       // Set token to Auth header

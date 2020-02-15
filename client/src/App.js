@@ -15,6 +15,11 @@ import Footer from "./components/layout/Footer";
 import Landing from "./components/layout/Landing";
 import Register from "./components/auth/Register";
 import Login from "./components/auth/Login";
+import VinlyBanner13 from "./components/banners/VinylBanner13";
+import VinlyBanner18 from "./components/banners/VinylBanner18";
+import MeshBanner from "./components/banners/MeshBanner";
+
+import SuperSmooth from "./components/banners/SuperSmooth";
 import Dashboard from "./components/dashboard/Dashboard";
 import CreateProfile from "./components/create-profile/CreateProfile";
 import EditProfile from "./components/edit-profile/EditProfile";
@@ -45,7 +50,7 @@ if (localStorage.jwtToken) {
     // Clear current Profile
     store.dispatch(clearCurrentProfile());
     // Redirect to login
-    window.location.href = "/login";
+    window.location.href = "/";
   }
 }
 
@@ -56,8 +61,16 @@ class App extends Component {
         <Router>
           <div className="App">
             <Navbar />
-            <Route exact path="/" component={Landing} />
+
             <div className="container">
+              <Route exact path="/" component={Landing} />
+              <Switch>
+                <Route exact path="/vinyl13" component={VinlyBanner13} />
+                <Route path="/vinyl18" component={VinlyBanner18} />
+                <Route path="/meshBanner" component={MeshBanner} />
+                <Route path="/superSmooth" component={SuperSmooth} />
+              </Switch>
+
               <Route exact path="/register" component={Register} />
               <Route exact path="/login" component={Login} />
               <Route exact path="/profiles" component={Profiles} />

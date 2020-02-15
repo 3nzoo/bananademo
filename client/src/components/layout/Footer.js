@@ -3,7 +3,7 @@ import React from "react";
 export default () => {
   return (
     <footer className="bg-warning text-dark fixed-bottom py-2 text-center">
-      <div className="row">
+      <div className="row ">
         <div className="col-md-6 my-0">
           <a href="#" className="text-secondary mr-1">
             <small> Terms & Condition</small>

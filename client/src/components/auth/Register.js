@@ -4,7 +4,7 @@ import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { registerUser } from "../../actions/authActions";
 import TextFieldGroup from "../common/TextFieldGroup";
-
+import modal from "../common/modal";
 class Register extends Component {
   constructor() {
     super();
@@ -47,6 +47,9 @@ class Register extends Component {
     };
 
     this.props.registerUser(newUser, this.props.history);
+    // alert(
+    //   "Registration Successful, your account will be approved by our admin. Thank you"
+    // );
   }
 
   render() {
@@ -61,31 +64,32 @@ class Register extends Component {
                 <p className="list-group-item lead bg-warning">BANNERS</p>
                 <a
                   className="list-group-item bannerLink list-group-item-action"
-                  href="#"
+                  href="/vinyl13"
                 >
                   Vinyl Banner (13oz.)
                   <small className="float-right"> ></small>
                 </a>
                 <a
                   className="list-group-item bannerLink list-group-item-action"
-                  href="#"
+                  href="/vinyl18"
                 >
                   Vinyl Banner (18oz.)
                   <small className="float-right"> ></small>
                 </a>
                 <a
                   className="list-group-item bannerLink list-group-item-action"
-                  href="#"
+                  href="/meshBanner"
                 >
                   Mesh Banner (13oz.)<small className="float-right"> ></small>
                 </a>
                 <a
                   className="list-group-item bannerLink list-group-item-action"
-                  href="#"
+                  href="/superSmooth"
                 >
                   Super Smooth <small className="float-right"> ></small>
                 </a>
               </div>
+
               <div className="col-md-12 mt-2">
                 <h1 className="text-center py-4">
                   <i className="fab fa-cc-paypal mr-1"></i>

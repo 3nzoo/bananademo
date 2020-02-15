@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { loginUser } from "../../actions/authActions";
 import TextFieldGroup from "../common/TextFieldGroup";
-import { Link } from "react-router-dom";
+
 class Login extends Component {
   constructor() {
     super();
@@ -55,13 +55,58 @@ class Login extends Component {
     }
     return (
       <div className="login">
-        <div className="container p-4">
+        <div className="container">
           <div className="row">
-            <div className="m-auto">
-              <h3 className="display-4 text-center">
-                <strong>Log In </strong>
-              </h3>
-              <p className=" text-center">
+            <div className="col-md-4 pl-1">
+              <div className="list-group my-3 ">
+                <p className="list-group-item lead bg-warning">BANNERS</p>
+                <a
+                  className="list-group-item bannerLink list-group-item-action"
+                  href="#"
+                >
+                  Vinyl Banner (13oz.)
+                  <small className="float-right"> ></small>
+                </a>
+                <a
+                  className="list-group-item bannerLink list-group-item-action"
+                  href="#"
+                >
+                  Vinyl Banner (18oz.)
+                  <small className="float-right"> ></small>
+                </a>
+                <a
+                  className="list-group-item bannerLink list-group-item-action"
+                  href="#"
+                >
+                  Mesh Banner (13oz.)<small className="float-right"> ></small>
+                </a>
+                <a
+                  className="list-group-item bannerLink list-group-item-action"
+                  href="#"
+                >
+                  Super Smooth <small className="float-right"> ></small>
+                </a>
+              </div>
+              <div className="col-md-12 mt-2">
+                <h1 className="text-center py-4">
+                  <i className="fab fa-cc-paypal mr-1"></i>
+                  <i className="fab fa-cc-mastercard ml-1"></i>
+                  <i className="fab fa-cc-visa ml-2"></i>
+                  <i className="fab fa-cc-amex ml-2"></i>
+                </h1>
+
+                <p className=" text-center">
+                  High quality affordable banners, ordered from anywhere, sent
+                  anywhere: worldwide.
+                </p>
+                <p className="text-center">
+                  <i className="fas fa-clock"></i> Mon - Sun: 8:00 am to 5:00 pm
+                </p>
+              </div>
+            </div>
+            <div className="col-md-5 p-0 mt-5 mx-auto">
+              <h2 className="display-4 text-center">Log In</h2>
+              <p className="lead text-center">
                 Sign in to your Banana Banner account
               </p>
               <form onSubmit={this.onSubmit}>
@@ -86,13 +131,6 @@ class Login extends Component {
                   type="submit"
                   className="btn SignU text-white btn-block mt-4"
                 />
-                <h3 className="text-center mt-4">OR</h3>
-                <Link
-                  to="/register"
-                  className="btn text-center btn-primary btn-block  text-white mt-3"
-                >
-                  Register
-                </Link>
               </form>
             </div>
           </div>

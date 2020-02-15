@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import Moment from "react-moment";
 import { deleteAddress } from "../../actions/profileActions";
 
 class Address extends Component {

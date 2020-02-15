@@ -15,37 +15,37 @@ class Landing extends Component {
       <div className="landing">
         <div className="container">
           <div className="row">
-            <div className="col-md-4 ml-1">
+            <div className="col-md-3 pl-1 ">
               <div className="list-group my-3 ">
                 <p className="list-group-item lead bg-warning">BANNERS</p>
                 <a
                   className="list-group-item bannerLink list-group-item-action"
-                  href="#"
+                  href="/vinyl13"
                 >
                   Vinyl Banner (13oz.)
                   <small className="float-right"> ></small>
                 </a>
                 <a
                   className="list-group-item bannerLink list-group-item-action"
-                  href="#"
+                  href="/vinyl18"
                 >
                   Vinyl Banner (18oz.)
                   <small className="float-right"> ></small>
                 </a>
                 <a
                   className="list-group-item bannerLink list-group-item-action"
-                  href="#"
+                  href="/meshBanner"
                 >
                   Mesh Banner (13oz.)<small className="float-right"> ></small>
                 </a>
                 <a
                   className="list-group-item bannerLink list-group-item-action"
-                  href="#"
+                  href="/superSmooth"
                 >
                   Super Smooth <small className="float-right"> ></small>
                 </a>
               </div>
-              <div className="col-md-12 mt-2">
+              <div className="mt-2">
                 <h1 className="text-center py-4">
                   <i className="fab fa-cc-paypal mr-1"></i>
                   <i className="fab fa-cc-mastercard ml-1"></i>
@@ -63,7 +63,7 @@ class Landing extends Component {
               </div>
             </div>
 
-            <div className="col-md-7 ml-4">
+            <div className="col-md-8 ml-auto">
               <div className="col-md-12">
                 <img
                   className="img-fluid col-md-5  position-relative
@@ -91,7 +91,7 @@ class Landing extends Component {
 
               <p
                 style={{ lineHeight: 2 }}
-                className="text-left my-5 col-md-12 p-0 pb-4"
+                className="text-left my-4 col-md-12 p-0 pb-4"
               >
                 Lorem ipsum dolor sit amet consectetur adipisicing elit.
                 Consectetur eaque laborum nisi maiores amet modi porro,

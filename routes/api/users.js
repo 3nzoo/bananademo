@@ -115,7 +115,7 @@ router.post(
 // @access  Private
 // Done
 router.post(
-  "/register/pro",
+  "/approve/pro",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
     User.findOne({ email: req.body.email }).then(user => {
@@ -128,34 +128,6 @@ router.post(
         User.findOneAndUpdate(
           { email: user.email },
           { position: "professional" },
-          { new: true }
-        ).then(user => res.json(user));
-      } else {
-        errors = "Page not found";
-        return res.status(400).json(errors);
-      }
-    });
-  }
-);
-
-// @route   POST api/users/register/approve
-// @desc    Approve user by admin
-// @access  Private
-// Done
-router.post(
-  "/register/approve",
-  passport.authenticate("jwt", { session: false }),
-  (req, res) => {
-    User.findOne({ email: req.body.email }).then(user => {
-      if (!user) {
-        errors.email = "user not found";
-        return res.status(400).json(errors);
-      } else if (req.user.is_admin && user.position != "admin") {
-        //client position cant be admin
-        //req.user should be admin (true)
-        User.findOneAndUpdate(
-          { email: user.email },
-          { isApproved: true },
           { new: true }
         ).then(user => res.json(user));
       } else {
@@ -192,8 +164,12 @@ router.post("/login", (req, res) => {
     bcrypt.compare(password, user.password).then(isMatch => {
       if (isMatch) {
         // User Matched
-        const payload = { id: user.id, name: user.name, avatar: user.avatar }; // Create JWT Payload
-
+        const payload = {
+          id: user.id,
+          name: user.name,
+          is_admin: user.is_admin,
+          position: user.position
+        }; // Create JWT Payload
         if (user.is_admin || user.isApproved) {
           // Sign Token
           jwt.sign(
@@ -232,6 +208,61 @@ router.get(
       name: req.user.name,
       email: req.user.email
     });
+  }
+);
+
+// @route   POST api/users/register/approve
+// @desc    Approve user by admin
+// @access  Private
+// Done
+router.post(
+  "/approve",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    User.findOne({ email: req.body.email }).then(user => {
+      if (!user) {
+        errors.email = "user not found";
+        return res.status(400).json(errors);
+      } else if (req.user.is_admin && user.position != "admin") {
+        //client position cant be admin
+        //req.user should be admin (true)
+        User.findOneAndUpdate(
+          { email: user.email },
+          { isApproved: true },
+          { new: true }
+        ).then(user => res.json(user));
+      } else {
+        errors = "Page not found";
+        return res.status(400).json(errors);
+      }
+    });
+  }
+);
+
+// @route   GET api/users/approve
+// @desc    Return unapproved users
+// @access  Private
+router.get(
+  "/unapproved",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    const errors = {};
+    if (!req.user.is_admin) {
+      errors.access = "Unauthorized";
+      return res.status(400).json(errors);
+    }
+    User.find({ isApproved: false })
+      .select("name")
+      .select("email")
+      .select("isApproved")
+      .then(user => {
+        if (!user) {
+          errors.nouser = "No user available";
+          return res.json(404).json(errors);
+        }
+        res.json(user);
+      })
+      .catch(err => res.status(404).json({ user: "No user available" }));
   }
 );
 

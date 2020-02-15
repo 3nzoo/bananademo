@@ -13,13 +13,18 @@ body {
 .bannerLink {
   background-color: #fbedc3;
 }
-.bannerLink:hover {
-  background-color: #926b00;
+a.bannerLink:hover,
+a.bannerLink:active {
+  background-color: #926b00 !important;
   color: white;
 }
 .bannerLink:focus {
-  background-color: #926b00;
+  background-color: #926b00 !important;
   color: white;
+}
+
+.bannerLink--active {
+  background-color: black !important;
 }
 
 .add-address {
@@ -28,7 +33,9 @@ body {
 .card-form {
   opacity: 0.9;
 }
-
+.loginBG {
+  background-color: #fbedc3;
+}
 .latest-profiles-img {
   width: 40px;
   height: 40px;

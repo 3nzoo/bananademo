@@ -10,8 +10,19 @@ class QuoteV13 extends Component {
   constructor() {
     super();
     this.state = {
-      email: "",
-      password: "",
+      widthFt: "",
+      widthIn: "",
+      heightFt: "",
+      heightIn: "",
+      widthFeet: "",
+      widthInch: "",
+      heightFeet: "",
+      heightInch: "",
+      widthTot: "",
+      heightTot: "",
+      numSlides: "",
+      pocket: "",
+      quantity: "",
       errors: {}
     };
 
@@ -24,8 +35,47 @@ class QuoteV13 extends Component {
   }
 
   onChange(e) {
-    this.setState({ [e.target.name]: e.target.value });
-    // this.setState({})
+    const re = /^[0-9\b]+$/;
+    if (e.target.value === "" || re.test(e.target.value)) {
+      this.setState({ [e.target.name]: e.target.value });
+    }
+
+    if (e.target.name == "widthFt") {
+      this.state.widthFeet = parseFloat(e.target.value) * 12;
+    } else if (e.target.name == "widthIn") {
+      this.state.widthInch = parseFloat(e.target.value);
+    } else if (e.target.name == "heightFt") {
+      this.state.heightFeet = parseFloat(e.target.value) * 12;
+      console.log(this.state.heightFeet);
+    } else if (e.target.name == "heightIn") {
+      this.state.heightInch = parseFloat(e.target.value);
+    } else if (e.target.name == "quantity") {
+      this.state.quantity = parseFloat(e.target.value);
+    }
+
+    if (isNaN(this.state.widthFeet)) {
+      this.state.widthFeet = 0;
+    } else if (isNaN(this.state.widthInch)) {
+      this.state.widthInch = 0;
+    } else if (isNaN(this.state.heightInch)) {
+      this.state.heightInch = 0;
+    } else if (isNaN(this.state.heightFeet)) {
+      this.state.heightFeet = 0;
+    } else if (isNaN(this.state.quantity || this.state.quantity == 0)) {
+      this.state.quantity = 1;
+    }
+
+    this.state.widthTot = this.state.widthInch + this.state.widthFeet;
+    this.state.heightTot = this.state.heightFeet + this.state.heightInch;
+    if (isNaN(this.state.widthTot)) {
+      this.state.widthTot = "0";
+      //   console.log(this.state.widthTot);
+    } else if (isNaN(this.state.heightTot)) {
+      this.state.heightTot = "0";
+    }
+    this.state.totalBanner = (this.state.widthTot * this.state.heightTot) / 144;
+    this.state.totalBanner = Math.round(this.state.totalBanner * 100) / 100;
+    // console.log(this.state.totalBanner);
   }
 
   render() {
@@ -33,7 +83,7 @@ class QuoteV13 extends Component {
     if (errors.isApproved) {
       errors.email = errors.isApproved;
     }
-    const options = [
+    const optionsSlides = [
       { label: "1", value: "1" },
       { label: "2", value: "2" }
     ];
@@ -135,21 +185,21 @@ class QuoteV13 extends Component {
               <div className="col-md-3 p-0 ml-md-auto ml-3 mr-3 bg-warning ">
                 <SmallTextFieldGroup
                   placeholder={"0" + " ft"}
-                  name="email"
-                  type="email"
-                  value={this.state.email}
+                  name="widthFt"
+                  type="widthFt"
+                  value={this.state.widthFt}
                   onChange={this.onChange}
-                  error={errors.email}
+                  error={errors.widthFt}
                 />
               </div>
               <div className="col-md-3 p-0 mr-3 ml-3 ml-md-0">
                 <SmallTextFieldGroup
                   placeholder={"0" + " in"}
-                  name="email"
-                  type="email"
-                  value={this.state.email}
+                  name="widthIn"
+                  type="widthIn"
+                  value={this.state.widthIn}
                   onChange={this.onChange}
-                  error={errors.email}
+                  error={errors.widthIn}
                 />
               </div>
             </div>
@@ -159,40 +209,52 @@ class QuoteV13 extends Component {
               <div className="col-md-3 p-0 ml-md-auto ml-3 mr-3 bg-warning ">
                 <SmallTextFieldGroup
                   placeholder={"0" + " ft"}
-                  name="email"
-                  type="email"
-                  value={this.state.email}
+                  name="heightFt"
+                  type="heightFt"
+                  value={this.state.heightFt}
                   onChange={this.onChange}
-                  error={errors.email}
+                  error={errors.heightFt}
                 />
               </div>
               <div className="col-md-3 p-0 mr-3 ml-3 ml-md-0">
                 <SmallTextFieldGroup
                   placeholder={"0" + " in"}
-                  name="email"
-                  type="email"
-                  value={this.state.email}
+                  name="heightIn"
+                  type="heightIn"
+                  value={this.state.heightIn}
                   onChange={this.onChange}
-                  error={errors.email}
+                  error={errors.heightIn}
                 />
               </div>
               <div
                 className="col-md-12 my-3 text-right 
               "
               >
-                0" x 0" = 0 ft<sup>2</sup>
+                {this.state.widthTot == null || !this.state.widthTot
+                  ? "0"
+                  : this.state.widthTot}
+                " x{" "}
+                {this.state.heightTot == null || !this.state.heightTot
+                  ? "0"
+                  : this.state.heightTot}
+                " ={" "}
+                {this.state.totalBanner == null || !this.state.totalBanner
+                  ? "0"
+                  : this.state.totalBanner}{" "}
+                ft
+                <sup>2</sup>
               </div>
             </div>
             <div className="row mb-1  mx-auto">
               <span className="ml-3 my-1 "># of Slides</span>
               <div className="col-md-7  ml-auto">
                 <SmallSelectListGroup
-                  placeholder="Business Type"
-                  name="businessType"
-                  value={this.state.businessType}
+                  placeholder="1"
+                  name="numSlides"
+                  value={this.state.numSlides}
                   onChange={this.onChange}
-                  options={options}
-                  error={errors.businessType}
+                  options={optionsSlides}
+                  error={errors.numSlides}
                 />
               </div>
             </div>
@@ -201,7 +263,7 @@ class QuoteV13 extends Component {
               <span className="ml-3 my-1 ">Pole Pocket</span>
               <div className="col-md-7  ml-auto">
                 <SmallSelectListGroup
-                  placeholder="Business Type"
+                  placeholder="No Pole Pockets"
                   name="businessType"
                   value={this.state.businessType}
                   onChange={this.onChange}
@@ -299,14 +361,25 @@ class QuoteV13 extends Component {
               <div className="col-md-3 p-0 ml-4 mr-2 bg-warning ">
                 <SmallTextFieldGroup
                   placeholder="1"
-                  name="email"
-                  type="email"
-                  value={this.state.email}
+                  name="quantity"
+                  type="quantity"
+                  value={this.state.quantity}
                   onChange={this.onChange}
-                  error={errors.email}
+                  error={errors.quantity}
                 />
               </div>
-              <strong className="ml-auto pr-2 "> $0.00</strong>
+              <strong className="ml-auto pr-2 ">
+                {" "}
+                $
+                {isNaN(this.state.totalBanner)
+                  ? "0.00"
+                  : this.state.totalBanner *
+                    3 *
+                    (this.state.quantity == 0 ? 1 : this.state.quantity)}
+                {console.log(
+                  this.state.totalBanner + " " + this.state.quantity
+                )}
+              </strong>
             </div>
             <div className="row mt-4 mx-auto">
               <span className="ml-3 my-1 ">Turnaround</span>

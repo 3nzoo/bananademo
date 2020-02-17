@@ -23,6 +23,7 @@ class QuoteV13 extends Component {
       numSlides: "",
       pocket: "",
       quantity: "",
+      price: "",
       errors: {}
     };
 
@@ -61,21 +62,31 @@ class QuoteV13 extends Component {
       this.state.heightInch = 0;
     } else if (isNaN(this.state.heightFeet)) {
       this.state.heightFeet = 0;
-    } else if (isNaN(this.state.quantity || this.state.quantity == 0)) {
+    } else if (
+      isNaN(this.state.quantity) ||
+      this.state.quantity == 0 ||
+      this.state.quantity == null
+    ) {
       this.state.quantity = 1;
+    } else if (
+      isNaN(this.state.price) ||
+      this.state.quantity == 0 ||
+      this.state.quantity == null
+    ) {
+      this.state.price = "0.00";
     }
 
     this.state.widthTot = this.state.widthInch + this.state.widthFeet;
     this.state.heightTot = this.state.heightFeet + this.state.heightInch;
     if (isNaN(this.state.widthTot)) {
       this.state.widthTot = "0";
-      //   console.log(this.state.widthTot);
     } else if (isNaN(this.state.heightTot)) {
       this.state.heightTot = "0";
     }
     this.state.totalBanner = (this.state.widthTot * this.state.heightTot) / 144;
     this.state.totalBanner = Math.round(this.state.totalBanner * 100) / 100;
-    // console.log(this.state.totalBanner);
+    this.state.price = this.state.quantity * (this.state.totalBanner * 3);
+    this.state.price = this.state.price.toFixed(2);
   }
 
   render() {
@@ -370,15 +381,12 @@ class QuoteV13 extends Component {
               </div>
               <strong className="ml-auto pr-2 ">
                 {" "}
-                $
-                {isNaN(this.state.totalBanner)
+                {console.log(this.state.price + "ere")}$
+                {isNaN(this.state.price) ||
+                this.state.price == null ||
+                this.state.price == 0
                   ? "0.00"
-                  : this.state.totalBanner *
-                    3 *
-                    (this.state.quantity == 0 ? 1 : this.state.quantity)}
-                {console.log(
-                  this.state.totalBanner + " " + this.state.quantity
-                )}
+                  : this.state.price}
               </strong>
             </div>
             <div className="row mt-4 mx-auto">

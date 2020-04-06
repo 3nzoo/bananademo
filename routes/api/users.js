@@ -211,7 +211,7 @@ router.get(
   }
 );
 
-// @route   POST api/users/register/approve
+// @route   POST api/users/approve
 // @desc    Approve user by admin
 // @access  Private
 // Done
@@ -219,7 +219,7 @@ router.post(
   "/approve",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
-    User.findOne({ email: req.body.email }).then(user => {
+    User.findOne({ _id: req.body.id }).then(user => {
       if (!user) {
         errors.email = "user not found";
         return res.status(400).json(errors);
@@ -227,10 +227,12 @@ router.post(
         //client position cant be admin
         //req.user should be admin (true)
         User.findOneAndUpdate(
-          { email: user.email },
+          { _id: user.id },
           { isApproved: true },
           { new: true }
-        ).then(user => res.json(user));
+        )
+          .then(user => res.json(user))
+          .catch(err => res.status(404).json(err));
       } else {
         errors = "Page not found";
         return res.status(400).json(errors);
@@ -239,30 +241,27 @@ router.post(
   }
 );
 
-// @route   GET api/users/approve
-// @desc    Return unapproved users
-// @access  Private
-router.get(
-  "/unapproved",
+// @route   POST api/users/declineRequest
+// @desc    Decline Premiere registration using _id by admin
+// @access  Private Admin
+//
+router.delete(
+  "/declineRequest/",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
-    const errors = {};
-    if (!req.user.is_admin) {
-      errors.access = "Unauthorized";
-      return res.status(400).json(errors);
-    }
-    User.find({ isApproved: false })
-      .select("name")
-      .select("email")
-      .select("isApproved")
-      .then(user => {
-        if (!user) {
-          errors.nouser = "No user available";
-          return res.json(404).json(errors);
+    User.findOne({ _id: req.body.id }).then(user => {
+      if (req.user.is_admin && req.user.position == "admin" && user) {
+        if (req.user.email != req.body.email && req.user.position == "admin") {
+          User.findOneAndRemove({ _id: req.body.id })
+            .then(() => res.json({ success: "Registration Declined" }))
+            .catch(err => res.status(404).json(err));
         }
-        res.json(user);
-      })
-      .catch(err => res.status(404).json({ user: "No user available" }));
+      } else {
+        res.json({
+          error: "Use only Admin account"
+        });
+      }
+    });
   }
 );
 

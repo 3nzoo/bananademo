@@ -2,31 +2,23 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { loginUser } from "../../actions/authActions";
-import TextFieldGroup from "../common/TextFieldGroup";
-import superSmooth from "../../img/superSmooth.jpg";
-import { Link } from "react-router-dom";
-import Login from "../auth/Login";
-import QuoteV13 from "../quote/quoteV13";
 
+import superSmooth from "../../img/superSmooth.jpg";
+import Login from "../auth/Login";
+import QuoteV13 from "./quote/quoteV13";
+import BannerLinks from "./BannerLinks";
 class SuperSmooth extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
+      banner: "superSmooth",
       errors: {}
     };
   }
 
-  componentDidMount() {
-    if (this.props.auth.isAuthenticated) {
-      //   this.props.history.push("/dashboard");
-    }
-  }
+  componentDidMount() {}
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.auth.isAuthenticated) {
-      //   this.props.history.push("/dashboard");
-    }
-
     if (nextProps.errors) {
       this.setState({ errors: nextProps.errors });
     }
@@ -49,55 +41,10 @@ class SuperSmooth extends Component {
         <div className="container">
           <div className="row">
             <div className="col-md-3 pl-1 order-6 order-md-2">
-              <div className="list-group my-3 ">
-                <p className="list-group-item lead bg-warning">BANNERS</p>
-                <a
-                  className="list-group-item bannerLink list-group-item-action "
-                  href="/vinyl13"
-                >
-                  Vinyl Banner (13oz.)
-                  <small className="float-right"> ></small>
-                </a>
-                <a
-                  className="list-group-item bannerLink list-group-item-action "
-                  href="/vinyl18"
-                >
-                  Vinyl Banner (18oz.)
-                  <small className="float-right"> ></small>
-                </a>
-                <a
-                  className="list-group-item bannerLink list-group-item-action"
-                  href="/meshBanner"
-                >
-                  Mesh Banner (13oz.)<small className="float-right"> ></small>
-                </a>
-                <a
-                  className="list-group-item bannerLink list-group-item-action active"
-                  href=""
-                >
-                  Super Smooth <small className="float-right"> ></small>
-                </a>
-              </div>
-
-              <div className="col-md-12 mt-2">
-                <h1 className="text-center py-4">
-                  <i className="fab fa-cc-paypal mr-1"></i>
-                  <i className="fab fa-cc-mastercard ml-1"></i>
-                  <i className="fab fa-cc-visa ml-2"></i>
-                  <i className="fab fa-cc-amex ml-2"></i>
-                </h1>
-
-                <p className=" text-center">
-                  High quality affordable banners, ordered from anywhere, sent
-                  anywhere: worldwide.
-                </p>
-                <p className="text-center">
-                  <i className="fas fa-clock"></i> Mon - Sun: 8:00 am to 5:00 pm
-                </p>
-              </div>
+              <BannerLinks banner={this.state.banner} />
             </div>
 
-            <div className="col-md-5 p-0 mt-3 ml-auto mx-auto order-4">
+            <div className="col-md-5 mx-auto p-0 mt-3 ml-auto order-4">
               <img
                 className="img-fluid mb-4"
                 src={superSmooth}
@@ -117,7 +64,7 @@ class SuperSmooth extends Component {
                 <li>Usage: Indoor use with UV printing to last for years</li>
               </ul>
             </div>
-            <div className="col-md-3 p-0 mt-3 ml-auto order-2 p-4 order-md-6 loginBG">
+            <div className="col-md-3 mt-3 ml-auto mb-4 order-2 order-md-6 loginBG">
               {client ? <QuoteV13 /> : <Login />}
             </div>
           </div>

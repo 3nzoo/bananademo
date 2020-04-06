@@ -2,31 +2,23 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { loginUser } from "../../actions/authActions";
-import TextFieldGroup from "../common/TextFieldGroup";
 import mesh from "../../img/mesh.png";
 
-import QuoteV13 from "../quote/quoteV13";
+import QuoteV13 from "./quote/quoteV13";
 import Login from "../auth/Login";
-
+import BannerLinks from "./BannerLinks";
 class MeshBanner extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
+      banner: "meshBanner",
       errors: {}
     };
   }
 
-  componentDidMount() {
-    if (this.props.auth.isAuthenticated) {
-      //   this.props.history.push("/dashboard");
-    }
-  }
+  componentDidMount() {}
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.auth.isAuthenticated) {
-      //   this.props.history.push("/dashboard");
-    }
-
     if (nextProps.errors) {
       this.setState({ errors: nextProps.errors });
     }
@@ -48,52 +40,7 @@ class MeshBanner extends Component {
         <div className="container">
           <div className="row">
             <div className="col-md-3 pl-1 order-6 order-md-2">
-              <div className="list-group my-3 ">
-                <p className="list-group-item lead bg-warning">BANNERS</p>
-                <a
-                  className="list-group-item bannerLink list-group-item-action "
-                  href="/vinyl13"
-                >
-                  Vinyl Banner (13oz.)
-                  <small className="float-right"> ></small>
-                </a>
-                <a
-                  className="list-group-item bannerLink list-group-item-action "
-                  href="/vinyl18"
-                >
-                  Vinyl Banner (18oz.)
-                  <small className="float-right"> ></small>
-                </a>
-                <a
-                  className="list-group-item bannerLink list-group-item-action active"
-                  href=""
-                >
-                  Mesh Banner (13oz.)<small className="float-right"> ></small>
-                </a>
-                <a
-                  className="list-group-item bannerLink list-group-item-action "
-                  href="/superSmooth"
-                >
-                  Super Smooth <small className="float-right"> ></small>
-                </a>
-              </div>
-
-              <div className="col-md-12 mt-2">
-                <h1 className="text-center py-4">
-                  <i className="fab fa-cc-paypal mr-1"></i>
-                  <i className="fab fa-cc-mastercard ml-1"></i>
-                  <i className="fab fa-cc-visa ml-2"></i>
-                  <i className="fab fa-cc-amex ml-2"></i>
-                </h1>
-
-                <p className=" text-center">
-                  High quality affordable banners, ordered from anywhere, sent
-                  anywhere: worldwide.
-                </p>
-                <p className="text-center">
-                  <i className="fas fa-clock"></i> Mon - Sun: 8:00 am to 5:00 pm
-                </p>
-              </div>
+              <BannerLinks banner={this.state.banner} />
             </div>
 
             <div className="col-md-5 mx-auto p-0 mt-3 ml-auto order-4">

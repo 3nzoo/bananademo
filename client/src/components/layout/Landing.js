@@ -1,8 +1,10 @@
+// Public Home Page
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { PropTypes } from "prop-types";
 import { connect } from "react-redux";
 import logo from "../../img/LOGO.png";
+import BannerLinks from "../banners/BannerLinks";
 class Landing extends Component {
   componentDidMount() {
     if (this.props.auth.isAuthenticated) {
@@ -16,62 +18,16 @@ class Landing extends Component {
         <div className="container">
           <div className="row">
             <div className="col-md-3 pl-1 ">
-              <div className="list-group my-3 ">
-                <p className="list-group-item lead bg-warning">BANNERS</p>
-                <a
-                  className="list-group-item bannerLink list-group-item-action"
-                  href="/vinyl13"
-                >
-                  Vinyl Banner (13oz.)
-                  <small className="float-right"> ></small>
-                </a>
-                <a
-                  className="list-group-item bannerLink list-group-item-action"
-                  href="/vinyl18"
-                >
-                  Vinyl Banner (18oz.)
-                  <small className="float-right"> ></small>
-                </a>
-                <a
-                  className="list-group-item bannerLink list-group-item-action"
-                  href="/meshBanner"
-                >
-                  Mesh Banner (13oz.)<small className="float-right"> ></small>
-                </a>
-                <a
-                  className="list-group-item bannerLink list-group-item-action"
-                  href="/superSmooth"
-                >
-                  Super Smooth <small className="float-right"> ></small>
-                </a>
-              </div>
-              <div className="mt-2">
-                <h1 className="text-center py-4">
-                  <i className="fab fa-cc-paypal mr-1"></i>
-                  <i className="fab fa-cc-mastercard ml-1"></i>
-                  <i className="fab fa-cc-visa ml-2"></i>
-                  <i className="fab fa-cc-amex ml-2"></i>
-                </h1>
-
-                <p className=" text-center">
-                  High quality affordable banners, ordered from anywhere, sent
-                  anywhere: worldwide.
-                </p>
-                <p className="text-center">
-                  <i className="fas fa-clock"></i> Mon - Sun: 8:00 am to 5:00 pm
-                </p>
-              </div>
+              <BannerLinks />
             </div>
 
-            <div className="col-md-8 ml-auto">
-              <div className="col-md-12">
-                <img
-                  className="img-fluid col-md-5  position-relative
+            <div className="col-md-8 m-auto">
+              <img
+                className="img-fluid col-md-5 position-relative
                 float-right"
-                  src={logo}
-                  alt="Logo"
-                />
-              </div>
+                src={logo}
+                alt="Logo"
+              />
               <h1 className="text-left py-1">bananabanners.com</h1>
               <h3 className="text-left font-weight-normal">
                 From your desktop to your door

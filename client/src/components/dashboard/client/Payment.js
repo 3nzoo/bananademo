@@ -1,9 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import Moment from "react-moment";
-import { deletePayment } from "../../actions/profileActions";
-import { addPayment } from "../../actions/profileActions";
+import { deletePayment } from "../../../actions/profileActions";
 class Payment extends Component {
   onDeleteClick(id) {
     this.props.deletePayment(id);
@@ -13,7 +11,7 @@ class Payment extends Component {
 
   render() {
     const payment = this.props.payment.map(pay => (
-      <tr key={pay._id}>
+      <tr className="pay" key={pay._id}>
         <td>{pay.nameCard}</td>
         <td>
           {"******" +

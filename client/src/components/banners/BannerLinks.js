@@ -1,67 +1,60 @@
 import React, { Component } from "react";
-import classnames from "classnames";
-import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
 
 class BannerLinks extends Component {
   constructor(props) {
     super(props);
-    this.toggle = this.toggle.bind(this);
     this.state = {
-      isPressed: props.isPressed
+      banner: props.banner
     };
   }
-  toggle() {
-    this.setState({
-      isPressed: !this.state.isPressed
-    });
-  }
   render() {
-    // const buttonClass = this.state.isPressed ? "pressed" : null;
     return (
       <div>
-        <button onClick={this.toggle} href="/vinyl18">
-          Click me
-        </button>
-
         <div className="list-group my-3 ">
           <p className="list-group-item lead bg-warning">BANNERS</p>
-          <a
-            className={classnames(
-              "list-group-item bannerLink list-group-item-action ",
-              { active: this.state.isPressed }
-            )}
-            href="/vinyl13"
-            label="vinyl13"
+
+          <Link
+            to={this.state.banner === "vinyl13" ? "#" : "/vinyl13"}
+            className={
+              "list-group-item bannerLink list-group-item-action" +
+              (this.state.banner === "vinyl13" ? " active" : "")
+            }
           >
             Vinyl Banner (13oz.)
             <small className="float-right"> ></small>
-          </a>
-          <a
-            className="list-group-item bannerLink list-group-item-action "
-            href="/vinyl18"
-            label="vinly18"
+          </Link>
+
+          <Link
+            to={this.state.banner === "vinyl18" ? "#" : "/vinyl18"}
+            className={
+              "list-group-item bannerLink list-group-item-action" +
+              (this.state.banner === "vinyl18" ? " active" : "")
+            }
           >
             Vinyl Banner (18oz.)
             <small className="float-right"> ></small>
-          </a>
-          <a
-            className={classnames(
-              "list-group-item bannerLink list-group-item-action ",
-              { active: this.state.isPressed }
-            )}
-            onClick={this.toggle}
-            href="/meshBanner"
-            label="meshBanner"
+          </Link>
+          <Link
+            to={this.state.banner === "meshBanner" ? "#" : "/meshBanner"}
+            className={
+              "list-group-item bannerLink list-group-item-action" +
+              (this.state.banner === "meshBanner" ? " active" : "")
+            }
           >
-            Mesh Banner (13oz.)<small className="float-right"> ></small>
-          </a>
-          <a
-            className="list-group-item list-group-item-action bannerLink"
-            href="/superSmooth"
-            label="superSmooth"
+            Mesh Banner (13oz.)
+            <small className="float-right"> ></small>
+          </Link>
+          <Link
+            to={this.state.banner === "superSmooth" ? "#" : "/superSmooth"}
+            className={
+              "list-group-item bannerLink list-group-item-action" +
+              (this.state.banner === "superSmooth" ? " active" : "")
+            }
           >
-            Super Smooth <small className="float-right"> ></small>
-          </a>
+            Super Smooth
+            <small className="float-right"> ></small>
+          </Link>
         </div>
 
         <div className="col-md-12 mt-2">
@@ -85,7 +78,4 @@ class BannerLinks extends Component {
   }
 }
 
-BannerLinks.defaultProps = {
-  isPressed: false
-};
 export default BannerLinks;

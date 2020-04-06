@@ -15,20 +15,28 @@ import Footer from "./components/layout/Footer";
 import Landing from "./components/layout/Landing";
 import Register from "./components/auth/Register";
 import Login from "./components/auth/Login";
+
 import VinlyBanner13 from "./components/banners/VinylBanner13";
 import VinlyBanner18 from "./components/banners/VinylBanner18";
 import MeshBanner from "./components/banners/MeshBanner";
-
 import SuperSmooth from "./components/banners/SuperSmooth";
+
 import Dashboard from "./components/dashboard/Dashboard";
+
+import AdminDash from "./components/admin/AdminDash";
+
 import CreateProfile from "./components/create-profile/CreateProfile";
 import EditProfile from "./components/edit-profile/EditProfile";
-import AddPayment from "./components/add-credentials/AddPayment";
-import AddAddress from "./components/add-credentials/AddAddress";
+import AddPayment from "./components/add-info/AddPayment";
+import AddAddress from "./components/add-info/AddAddress";
+
 import Profiles from "./components/profiles/Profiles";
 import Profile from "./components/profile/Profile";
-import Posts from "./components/posts/Posts";
-import Post from "./components/post/Post";
+
+//footer
+import Contact from "./components/footerLinks/Contact";
+import Terms from "./components/footerLinks/Terms";
+import HelpCenter from "./components/footerLinks/HelpCenter";
 import NotFound from "./components/not-found/NotFound";
 
 import "./App.css";
@@ -65,7 +73,7 @@ class App extends Component {
             <div className="container">
               <Route exact path="/" component={Landing} />
               <Switch>
-                <Route exact path="/vinyl13" component={VinlyBanner13} />
+                <Route path="/vinyl13" component={VinlyBanner13} />
                 <Route path="/vinyl18" component={VinlyBanner18} />
                 <Route path="/meshBanner" component={MeshBanner} />
                 <Route path="/superSmooth" component={SuperSmooth} />
@@ -73,10 +81,14 @@ class App extends Component {
 
               <Route exact path="/register" component={Register} />
               <Route exact path="/login" component={Login} />
+
               <Route exact path="/profiles" component={Profiles} />
               <Route exact path="/profile/:handle" component={Profile} />
               <Switch>
                 <PrivateRoute exact path="/dashboard" component={Dashboard} />
+              </Switch>
+              <Switch>
+                <PrivateRoute exact path="/AdminDash" component={AdminDash} />
               </Switch>
               <Switch>
                 <PrivateRoute
@@ -106,13 +118,11 @@ class App extends Component {
                   component={AddAddress}
                 />
               </Switch>
-              <Switch>
-                <PrivateRoute exact path="/feed" component={Posts} />
-              </Switch>
-              <Switch>
-                <PrivateRoute exact path="/post/:id" component={Post} />
-              </Switch>
               <Route exact path="/not-found" component={NotFound} />
+
+              <Route exact path="/contact" component={Contact} />
+              <Route exact path="/HelpCenter" component={HelpCenter} />
+              <Route exact path="/terms" component={Terms} />
             </div>
             <Footer />
           </div>

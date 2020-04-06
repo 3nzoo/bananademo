@@ -5,26 +5,33 @@ body {
   background-color: #f1f1f1;
   padding-bottom: 100px;
 }
-
+.pay:hover {
+  background-color: blue;
+  cursor: pointer;
+}
 .SignU {
   background-color: orange;
+}
+
+.myPager {
+  text-align: right;
 }
 
 .bannerLink {
   background-color: #fbedc3;
 }
-a.bannerLink:hover,
+/* a.bannerLink:hover,
 a.bannerLink:active {
   background-color: #926b00 !important;
   color: white;
-}
-.bannerLink:focus {
+}*/
+.bannerLink:hover {
   background-color: #926b00 !important;
   color: white;
 }
 
-.bannerLink--active {
-  background-color: black !important;
+.bannerLink:active {
+  background-color: #926b00 !important;
 }
 
 .add-address {

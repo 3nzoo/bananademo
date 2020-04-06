@@ -33,9 +33,7 @@ class ProfileItem extends Component {
               View Profile
             </Link>
           </div>
-          <div className="col-md-4 d-none d-md-block">
-            <h4></h4>
-          </div>
+          <div className="col-md-4 d-none d-md-block"></div>
         </div>
       </div>
     );

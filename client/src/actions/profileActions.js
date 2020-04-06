@@ -1,3 +1,6 @@
+// get notifications
+// post application for professional accounts
+
 import axios from "axios";
 
 import {
@@ -60,22 +63,8 @@ export const createProfile = (profileData, history) => dispatch => {
     );
 };
 
-// Add experience
-export const addExperience = (expData, history) => dispatch => {
-  axios
-    .post("/api/profile/experience", expData)
-    .then(res => history.push("/dashboard"))
-    .catch(err =>
-      dispatch({
-        type: GET_ERRORS,
-        payload: err.response.data
-      })
-    );
-};
-
 // Add payment
 export const addPayment = (payData, history) => dispatch => {
-  console.log(payData);
   axios
     .post("/api/profile/payment", payData)
     .then(res => history.push("/dashboard"))
@@ -92,24 +81,6 @@ export const addAddress = (addData, history) => dispatch => {
   axios
     .post("/api/profile/address", addData)
     .then(res => history.push("/dashboard"))
-    .catch(err =>
-      dispatch({
-        type: GET_ERRORS,
-        payload: err.response.data
-      })
-    );
-};
-
-// Delete Experience
-export const deleteExperience = id => dispatch => {
-  axios
-    .delete(`/api/profile/experience/${id}`)
-    .then(res =>
-      dispatch({
-        type: GET_PROFILE,
-        payload: res.data
-      })
-    )
     .catch(err =>
       dispatch({
         type: GET_ERRORS,
@@ -158,7 +129,7 @@ export const deleteAddress = id => dispatch => {
 export const getProfiles = () => dispatch => {
   dispatch(setProfileLoading());
   axios
-    .get("/api/profile/all")
+    .get("/api/profile/all/client")
     .then(res =>
       dispatch({
         type: GET_PROFILES,

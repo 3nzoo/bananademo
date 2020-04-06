@@ -30,6 +30,11 @@ const ProfileSchema = new Schema({
   businessType: {
     type: String
   },
+  isRequesting: {
+    type: Boolean,
+    default: false
+  },
+
   address: [
     {
       name: {

@@ -2,12 +2,14 @@ import {
   GET_PROFILE,
   GET_PROFILES,
   PROFILE_LOADING,
-  CLEAR_CURRENT_PROFILE
-} from '../actions/types';
+  CLEAR_CURRENT_PROFILE,
+  GET_UNAPPROVEDPROFILES
+} from "../actions/types";
 
 const initialState = {
   profile: null,
   profiles: null,
+  unapproved: null,
   loading: false
 };
 
@@ -28,6 +30,12 @@ export default function(state = initialState, action) {
       return {
         ...state,
         profiles: action.payload,
+        loading: false
+      };
+    case GET_UNAPPROVEDPROFILES:
+      return {
+        ...state,
+        unapproved: action.payload,
         loading: false
       };
     case CLEAR_CURRENT_PROFILE:

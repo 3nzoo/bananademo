@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import { deleteAddress } from "../../actions/profileActions";
+import { deleteAddress } from "../../../actions/profileActions";
 
 class Address extends Component {
   onDeleteClick(id) {

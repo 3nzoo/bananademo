@@ -6,9 +6,6 @@ const passport = require("passport");
 
 // Load Validation
 const validateProfileInput = require("../../validation/profile");
-const validateExperienceInput = require("../../validation/experience");
-const validateEducationInput = require("../../validation/education");
-
 const validateAddressInput = require("../../validation/address");
 const validatePaymentInput = require("../../validation/payment");
 
@@ -47,7 +44,7 @@ router.get(
 
 // @route   GET api/profile/all/client
 // @desc    Get all client profiles
-// @access  Private
+// @access  Private Admin
 // DONE
 router.get(
   "/all/client",
@@ -66,7 +63,7 @@ router.get(
         if (!profiles) {
           errors.noprofile = "There are no profiles";
 
-          return res.status(404).json(errors);
+          return res.status(404).json({ errors: "There are no profiles" });
         }
 
         res.json(profiles);
@@ -103,6 +100,145 @@ router.get(
         res.json(profiles);
       })
       .catch(err => res.status(404).json({ profile: "There are no profiles" }));
+  }
+);
+
+// @route   GET api/profile/all/
+// @desc    Get all admin profiles
+// @access  Private admin
+// DONE
+router.get(
+  "/all",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    const errors = {};
+
+    if (!req.user.is_admin) {
+      errors.access = "Unauthorized";
+      return res.status(400).json(errors);
+    }
+    const profileFields = {};
+    User.find({ is_admin: false })
+      .select("name")
+      .select("position")
+      .select("email")
+      .then(profiles => {
+        if (!profiles) {
+          errors.noprofile = "There are no profiles";
+          return res.status(404).json(errors);
+        }
+
+        res.json(profiles);
+      })
+      .catch(err => res.status(404).json({ profile: "There are no profiles" }));
+  }
+);
+
+// @route   GET api/profile/all/premiere
+// @desc    Get all premiere client profiles
+// @access  Private Admin
+// DONE
+router.get(
+  "/all/premiere",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    const errors = {};
+    if (!req.user.is_admin) {
+      errors.access = "Unauthorized";
+      return res.status(400).json(errors);
+    }
+    User.find({ position: "premiere" })
+      .select("name")
+      .select("email")
+      .then(profiles => {
+        if (!profiles) {
+          errors.noprofile = "There are no profiles";
+          return res.status(404).json(errors);
+        }
+        res.json(profiles);
+      })
+      .catch(err => res.status(404).json({ profile: "There are no profiles" }));
+  }
+);
+
+// @route   GET api/profile/unapprove
+// @desc    Return unapproved users
+// @access  Private
+router.get(
+  "/unapproved",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    const errors = {};
+    if (!req.user.is_admin) {
+      errors.access = "Unauthorized";
+      return res.status(400).json(errors);
+    }
+    User.find({ isApproved: false })
+      .select("name")
+      .select("email")
+      .select("is_admin")
+      .select("isApproved")
+      .then(user => {
+        if (!user) {
+          errors.nouser = "No user available";
+          return res.json(404).json(errors);
+        }
+
+        const client = user.filter(item => item.is_admin === false);
+
+        res.json(client);
+      })
+      .catch(err => res.status(404).json({ user: "No user available" }));
+  }
+);
+
+// @route   GET api/profile/all/Pro
+// @desc    Get all pro clients profiles
+// @access  Private Admin
+// DONE
+router.get(
+  "/all/pro",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    const errors = {};
+
+    if (!req.user.is_admin) {
+      errors.access = "Unauthorized";
+      return res.status(400).json(errors);
+    }
+    const profileFields = {};
+    User.find({ position: "professional" })
+      .select("name")
+      .select("email")
+      .then(profiles => {
+        if (!profiles) {
+          errors.noprofile = "There are no profiles";
+          return res.status(404).json(errors);
+        }
+
+        res.json(profiles);
+      })
+      .catch(err => res.status(404).json({ profile: "There are no profiles" }));
+  }
+);
+
+// @route   POST api/profile/request
+// @desc    Create profile request for Professional
+// @access  Private Client
+
+router.post(
+  "/request",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    Profile.findOne({ user: req.user.id }).then(profile => {
+      if (profile) {
+        Profile.findOneAndUpdate(
+          { user: req.user.id },
+          { isRequesting: true },
+          { new: true }
+        ).then(profile => res.json(profile));
+      }
+    });
   }
 );
 
@@ -343,8 +479,8 @@ router.post(
   }
 );
 
-// @route   DELETE api/profile/experience/:exp_id
-// @desc    Delete experience from profile
+// @route   DELETE api/profile/address/:exp_id
+// @desc    Delete address from profile
 // @access  Private
 router.delete(
   "/address/:add_id",

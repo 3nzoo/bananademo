@@ -222,10 +222,42 @@ router.get(
   }
 );
 
+// @route   GET api/profile/all/proRequest
+// @desc    Get all pro clients profiles
+// @access  Private Admin
+// DONE
+router.get(
+  "/all/proRequest",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    const errors = {};
+
+    if (!req.user.is_admin) {
+      errors.access = "Unauthorized";
+      return res.status(400).json(errors);
+    }
+
+    const profileFields = {};
+    Profile.find({ isRequesting: true })
+      .select("user")
+      .select("handle")
+      .select("isRequesting")
+      .select("docs")
+      .then(profiles => {
+        if (!profiles) {
+          errors.noprofile = "There are no profiles";
+          return res.status(404).json(errors);
+        }
+
+        res.json(profiles);
+      })
+      .catch(err => res.status(404).json({ profile: "There are no profiles" }));
+  }
+);
+
 // @route   POST api/profile/request
 // @desc    Create profile request for Professional
 // @access  Private Client
-
 router.post(
   "/request",
   passport.authenticate("jwt", { session: false }),
@@ -237,6 +269,33 @@ router.post(
           { isRequesting: true },
           { new: true }
         ).then(profile => res.json(profile));
+      }
+    });
+  }
+);
+
+// @route   POST api/profile/request
+// @desc    Create profile request for Professional
+// @access  Private Client
+router.post(
+  "/declineProRequest/:id",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    Profile.findOne({ user: req.params.id }).then(profile => {
+      if (req.user.is_admin && req.user.position == "admin") {
+        if (req.user.email != req.body.email && req.user.position == "admin") {
+          if (profile) {
+            Profile.findOneAndUpdate(
+              { user: req.params.id },
+              { isRequesting: false },
+              { new: true }
+            ).then(profile => {
+              profile.docs.splice(0, profile.docs.length);
+              profile.save();
+              res.json(profile);
+            });
+          }
+        }
       }
     });
   }
@@ -475,6 +534,44 @@ router.post(
 
       profile.address.unshift(newAdd);
       profile.save().then(profile => res.json(profile));
+    });
+  }
+);
+
+// @route   POST api/profile/approvePro
+// @desc    Approve ProRequest using admin
+// @access  Private Admin
+router.post(
+  "/approvePro",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    User.findOne({ _id: req.body.id }).then(user => {
+      if (!user) {
+        errors.email = "user not found";
+        return res.status(400).json(errors);
+      } else if (req.user.is_admin && user.position != "admin") {
+        Profile.findOneAndUpdate(
+          { user: user.id },
+          { position: "professional" },
+          { new: true }
+        ).then(x => {
+          Profile.findOneAndUpdate(
+            { user: user.id },
+            { isRequesting: false },
+            { new: true }
+          ).then(item => console.log());
+        });
+        User.findOneAndUpdate(
+          { _id: user.id },
+          { position: "professional" },
+          { new: true }
+        )
+          .then(user => res.json(user.position))
+          .catch(err => res.status(404).json(err));
+      } else {
+        errors = "Page not found";
+        return res.status(400).json(errors);
+      }
     });
   }
 );

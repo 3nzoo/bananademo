@@ -113,11 +113,11 @@ class Navbar extends Component {
             <input
               type="submit"
               value="Login"
-              className="btn btn-primary btn-block"
+              className="btn btn-sm btn-dark btn-block"
             />
           </li>
           <li className="nav-item my-1 my-lg-auto my-md-auto mx-1">
-            <Link className=" btn btn-primary btn-block " to="/register">
+            <Link className=" btn btn-sm btn-danger btn-block " to="/register">
               Sign Up
             </Link>
           </li>

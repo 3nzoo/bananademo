@@ -14,7 +14,7 @@ class Payment extends Component {
       <tr className="pay" key={pay._id}>
         <td>{pay.nameCard}</td>
         <td>
-          {"******" +
+          {"****" +
             pay.cardNum.substring(pay.cardNum.length - 4, pay.cardNum.length)}
         </td>
         <td>{pay.expiration}</td>
@@ -22,7 +22,7 @@ class Payment extends Component {
         <td>
           <button
             onClick={this.onDeleteClick.bind(this, pay._id)}
-            className="btn btn-danger mr-2"
+            className="btn btn-danger btn-sm py-0 mr-2"
           >
             Delete
           </button>
@@ -31,9 +31,9 @@ class Payment extends Component {
     ));
 
     return (
-      <div>
-        <h4 className="mb-0 bannerLink p-2">Payment Info</h4>
-        <table className="table">
+      <div className="small">
+        <h5 className="mb-0 bannerLink p-2">Payment Info</h5>
+        <table className="table table-sm">
           <thead>
             <tr>
               <th>Name on the Card</th>

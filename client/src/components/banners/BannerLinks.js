@@ -12,12 +12,12 @@ class BannerLinks extends Component {
     return (
       <div>
         <div className="list-group my-3 ">
-          <p className="list-group-item lead bg-warning">BANNERS</p>
+          <p className="list-group-item py-2 bg-warning">BANNERS</p>
 
           <Link
             to={this.state.banner === "vinyl13" ? "#" : "/vinyl13"}
             className={
-              "list-group-item bannerLink list-group-item-action" +
+              "list-group-item small bannerLink list-group-item-action" +
               (this.state.banner === "vinyl13" ? " active" : "")
             }
           >
@@ -28,7 +28,7 @@ class BannerLinks extends Component {
           <Link
             to={this.state.banner === "vinyl18" ? "#" : "/vinyl18"}
             className={
-              "list-group-item bannerLink list-group-item-action" +
+              "list-group-item small bannerLink list-group-item-action" +
               (this.state.banner === "vinyl18" ? " active" : "")
             }
           >
@@ -38,7 +38,7 @@ class BannerLinks extends Component {
           <Link
             to={this.state.banner === "meshBanner" ? "#" : "/meshBanner"}
             className={
-              "list-group-item bannerLink list-group-item-action" +
+              "list-group-item small bannerLink list-group-item-action" +
               (this.state.banner === "meshBanner" ? " active" : "")
             }
           >
@@ -48,7 +48,7 @@ class BannerLinks extends Component {
           <Link
             to={this.state.banner === "superSmooth" ? "#" : "/superSmooth"}
             className={
-              "list-group-item bannerLink list-group-item-action" +
+              "list-group-item small bannerLink list-group-item-action" +
               (this.state.banner === "superSmooth" ? " active" : "")
             }
           >
@@ -57,13 +57,13 @@ class BannerLinks extends Component {
           </Link>
         </div>
 
-        <div className="col-md-12 mt-2">
-          <h1 className="text-center py-4">
+        <div className="col-md-12 mt-2 small">
+          <h2 className="text-center py-4">
             <i className="fab fa-cc-paypal mr-1"></i>
             <i className="fab fa-cc-mastercard ml-1"></i>
             <i className="fab fa-cc-visa ml-2"></i>
             <i className="fab fa-cc-amex ml-2"></i>
-          </h1>
+          </h2>
 
           <p className=" text-center">
             High quality affordable banners, ordered from anywhere, sent

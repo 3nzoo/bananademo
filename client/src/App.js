@@ -32,7 +32,7 @@ import AddAddress from "./components/add-info/AddAddress";
 
 import Profiles from "./components/profiles/Profiles";
 import Profile from "./components/profile/Profile";
-
+import ProRequest from "./components/dashboard/client/ProRequest";
 //footer
 import Contact from "./components/footerLinks/Contact";
 import Terms from "./components/footerLinks/Terms";
@@ -111,6 +111,14 @@ class App extends Component {
                   component={AddPayment}
                 />
               </Switch>
+              <Switch>
+                <PrivateRoute
+                  exact
+                  path="/professionalRequest"
+                  component={ProRequest}
+                />
+              </Switch>
+
               <Switch>
                 <PrivateRoute
                   exact

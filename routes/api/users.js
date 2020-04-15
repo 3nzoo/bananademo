@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const gravatar = require("gravatar");
+
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const keys = require("../../config/keys");
@@ -17,6 +17,42 @@ const User = require("../../models/User");
 // @desc    Tests users route
 // @access  Public
 router.get("/test", (req, res) => res.json({ msg: "Users Works" }));
+
+// //register freda
+// router.post("/register/freda", (req, res) => {
+//   const { errors, isValid } = validateRegisterInput(req.body);
+
+//   // Check Validation
+//   if (!isValid) {
+//     return res.status(400).json(errors);
+//   }
+
+//   User.findOne({ email: req.body.email }).then(user => {
+//     if (user) {
+//       errors.email = "Email already exists";
+//       return res.status(400).json(errors);
+//     } else {
+//       const newUser = new User({
+//         name: req.body.name,
+//         email: req.body.email,
+//         password: req.body.password,
+//         is_admin: true,
+//         position: "admin"
+//       });
+
+//       bcrypt.genSalt(10, (err, salt) => {
+//         bcrypt.hash(newUser.password, salt, (err, hash) => {
+//           if (err) throw err;
+//           newUser.password = hash;
+//           newUser
+//             .save()
+//             .then(user => res.json(user))
+//             .catch(err => console.log(err));
+//         });
+//       });
+//     }
+//   });
+// });
 
 // @route   POST api/users/register
 // @desc    Register user
@@ -244,11 +280,12 @@ router.post(
 // @route   POST api/users/declineRequest
 // @desc    Decline Premiere registration using _id by admin
 // @access  Private Admin
-//
+
 router.delete(
   "/declineRequest/",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
+    console.log(req);
     User.findOne({ _id: req.body.id }).then(user => {
       if (req.user.is_admin && req.user.position == "admin" && user) {
         if (req.user.email != req.body.email && req.user.position == "admin") {
@@ -260,6 +297,27 @@ router.delete(
         res.json({
           error: "Use only Admin account"
         });
+      }
+    });
+  }
+);
+
+// decline registration
+router.delete(
+  "/declineRequest1/:cl_id",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    User.findOne({ _id: req.params.cl_id }).then(user => {
+      if (!user) {
+        errors.email = "user not found";
+        return res.status(400).json(errors);
+      } else if (req.user.is_admin && user.position != "admin") {
+        User.findOneAndRemove({ _id: req.params.cl_id })
+          .then(() => res.json({ success: "Registration Declined" }))
+          .catch(err => res.status(404).json(err));
+      } else {
+        errors = "Page not found";
+        return res.status(400).json(errors);
       }
     });
   }

@@ -3,13 +3,16 @@ import {
   GET_PROFILES,
   PROFILE_LOADING,
   CLEAR_CURRENT_PROFILE,
-  GET_UNAPPROVEDPROFILES
+  GET_UNAPPROVEDPROFILES,
+  GET_PRO_PROFILES,
+  GET_PRO_REQUEST
 } from "../actions/types";
 
 const initialState = {
   profile: null,
   profiles: null,
   unapproved: null,
+  proRequest: null,
   loading: false
 };
 
@@ -30,6 +33,18 @@ export default function(state = initialState, action) {
       return {
         ...state,
         profiles: action.payload,
+        loading: false
+      };
+    case GET_PRO_PROFILES:
+      return {
+        ...state,
+        profiles: action.payload,
+        loading: false
+      };
+    case GET_PRO_REQUEST:
+      return {
+        ...state,
+        proRequest: action.payload,
         loading: false
       };
     case GET_UNAPPROVEDPROFILES:

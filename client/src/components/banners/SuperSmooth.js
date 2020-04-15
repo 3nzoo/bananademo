@@ -5,7 +5,7 @@ import { loginUser } from "../../actions/authActions";
 
 import superSmooth from "../../img/superSmooth.jpg";
 import Login from "../auth/Login";
-import QuoteV13 from "./quote/quoteV13";
+import QuoteSuperSmooth from "./quote/quoteSuper";
 import BannerLinks from "./BannerLinks";
 class SuperSmooth extends Component {
   constructor(props) {
@@ -44,13 +44,13 @@ class SuperSmooth extends Component {
               <BannerLinks banner={this.state.banner} />
             </div>
 
-            <div className="col-md-5 mx-auto p-0 mt-3 ml-auto order-4">
+            <div className="col-md-5 small mx-auto p-0 mt-3 ml-auto order-4">
               <img
                 className="img-fluid mb-4"
                 src={superSmooth}
                 alt="superSmooth"
               />
-              <h3 className="display-5 text-center">Super Smooth</h3>
+              <h4 className="display-5 text-center">Super Smooth</h4>
               <p className="text-left">
                 Our premium super smooth banner is great for displaying graphics
                 indoors. The smooth surface ensures your vivid prints will come
@@ -65,7 +65,7 @@ class SuperSmooth extends Component {
               </ul>
             </div>
             <div className="col-md-3 mt-3 ml-auto mb-4 order-2 order-md-6 loginBG">
-              {client ? <QuoteV13 /> : <Login />}
+              {client ? <QuoteSuperSmooth /> : <Login />}
             </div>
           </div>
         </div>

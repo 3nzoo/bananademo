@@ -58,9 +58,9 @@ class Register extends Component {
       <div className="register">
         <div className="container">
           <div className="row">
-            <div className="col-md-4 pl-1">
+            <div className="col-md-4 pl-1 small">
               <div className="list-group my-3 ">
-                <p className="list-group-item lead bg-warning">BANNERS</p>
+                <h6 className="list-group-item py-2 bg-warning">BANNERS</h6>
                 <a
                   className="list-group-item bannerLink list-group-item-action"
                   href="/vinyl13"
@@ -90,12 +90,12 @@ class Register extends Component {
               </div>
 
               <div className="col-md-12 mt-2">
-                <h1 className="text-center py-4">
+                <h2 className="text-center py-4">
                   <i className="fab fa-cc-paypal mr-1"></i>
                   <i className="fab fa-cc-mastercard ml-1"></i>
                   <i className="fab fa-cc-visa ml-2"></i>
                   <i className="fab fa-cc-amex ml-2"></i>
-                </h1>
+                </h2>
 
                 <p className=" text-center">
                   High quality affordable banners, ordered from anywhere, sent

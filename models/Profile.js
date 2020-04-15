@@ -34,7 +34,22 @@ const ProfileSchema = new Schema({
     type: Boolean,
     default: false
   },
-
+  docs: [
+    {
+      title: {
+        type: String,
+        required: true
+      },
+      newFileName: {
+        type: String,
+        required: true
+      },
+      date: {
+        type: Date,
+        default: Date.now
+      }
+    }
+  ],
   address: [
     {
       name: {

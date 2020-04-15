@@ -16,7 +16,7 @@ const SmallSelectListGroup = ({
     </option>
   ));
   return (
-    <div className="form-group">
+    <div className="form-group small">
       <select
         className={classnames("form-control form-control-sm", {
           "is-invalid": error

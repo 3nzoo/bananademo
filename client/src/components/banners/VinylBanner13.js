@@ -50,9 +50,9 @@ class VinylBanner13 extends Component {
             <div className="col-md-3 pl-1 order-6 order-md-2">
               <BannerLinks banner={this.state.banner} />
             </div>
-            <div className="col-md-5 p-0 mx-auto mt-3 ml-auto order-4">
+            <div className="col-md-5 p-0 small mx-auto mt-3 ml-auto order-4">
               <img className="img-fluid mb-4" src={vinyl13} alt="viny13oz" />
-              <h3 className="display-5 text-center">Vinyl Banner (13oz)</h3>
+              <h4 className="display-5 text-center">Vinyl Banner (13oz)</h4>
               <p className="text-left">
                 We use a premium heavyweight 13 oz. scrim vinyl banner. It has a
                 very smooth surface for best printing results. This material is

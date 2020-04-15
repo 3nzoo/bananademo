@@ -132,8 +132,9 @@ class QuoteV13 extends Component {
         <div>
           <div className="row mt-3 mx-auto">
             <span className="ml-3 my-1 ">Hem</span>
-            <div className="col-md-7  ml-auto">
+            <div className="col-md-7 ml-auto">
               <SmallSelectListGroup
+                className="small"
                 placeholder="Business Type"
                 name="hem"
                 value={this.state.hem}
@@ -147,6 +148,7 @@ class QuoteV13 extends Component {
             <span className="ml-3 my-1 ">Windslit</span>
             <div className="col-md-7 ml-auto">
               <SmallSelectListGroup
+                className="small"
                 placeholder="Business Type"
                 name="windSlit"
                 value={this.state.windSlit}
@@ -160,6 +162,7 @@ class QuoteV13 extends Component {
             <span className="ml-3 my-1 ">Windslit</span>
             <div className="col-md-7  ml-auto">
               <SmallSelectListGroup
+                className="small"
                 placeholder="Business Type"
                 name="businessType"
                 value={this.state.businessType}
@@ -174,6 +177,7 @@ class QuoteV13 extends Component {
             <span className="ml-3 my-1 ">Webbing</span>
             <div className="col-md-7  ml-auto">
               <SmallSelectListGroup
+                className="small"
                 placeholder="Business Type"
                 name="businessType"
                 value={this.state.businessType}
@@ -188,6 +192,7 @@ class QuoteV13 extends Component {
             <span className="ml-3 my-1 ">Corners</span>
             <div className="col-md-7  ml-auto">
               <SmallSelectListGroup
+                className="small"
                 placeholder="Business Type"
                 name="businessType"
                 value={this.state.businessType}
@@ -202,6 +207,7 @@ class QuoteV13 extends Component {
             <span className="ml-3 my-1 ">Rope</span>
             <div className="col-md-7  ml-auto">
               <SmallSelectListGroup
+                className="small"
                 placeholder="Business Type"
                 name="businessType"
                 value={this.state.businessType}
@@ -216,15 +222,16 @@ class QuoteV13 extends Component {
     }
 
     return (
-      <div className="">
+      <div className="small">
         <div className="row">
           <div className="p-0 mx-0 mb-3">
-            <p className="py-2 pl-3 bg-warning">Quote</p>
+            <h5 className="py-2 pl-3 bg-warning">Quote</h5>
             <div className="row  mb-2 mx-auto">
               <span className="ml-3 my-auto ">Width</span>
 
               <div className="col-md-3 p-0 ml-md-auto ml-3 mr-3 bg-warning ">
                 <SmallTextFieldGroup
+                  className="small"
                   placeholder={"0 ft"}
                   name="widthFt"
                   value={this.state.widthFt}
@@ -234,6 +241,7 @@ class QuoteV13 extends Component {
               </div>
               <div className="col-md-3 p-0 mr-3 ml-3 ml-md-0">
                 <SmallTextFieldGroup
+                  className="small"
                   placeholder={"0 in"}
                   name="widthIn"
                   value={this.state.widthIn}
@@ -247,6 +255,7 @@ class QuoteV13 extends Component {
 
               <div className="col-md-3 p-0 ml-md-auto ml-3 mr-3 bg-warning ">
                 <SmallTextFieldGroup
+                  className="small"
                   placeholder={"0 ft"}
                   name="heightFt"
                   value={this.state.heightFt}
@@ -256,6 +265,7 @@ class QuoteV13 extends Component {
               </div>
               <div className="col-md-3 p-0 mr-3 ml-3 ml-md-0">
                 <SmallTextFieldGroup
+                  className="small"
                   placeholder={"0 in"}
                   name="heightIn"
                   value={this.state.heightIn}
@@ -263,8 +273,9 @@ class QuoteV13 extends Component {
                   error={errors.heightIn}
                 />
               </div>
+
               <div
-                className="col-md-12 my-3 text-right 
+                className="col-md-12 my-2 text-right 
               "
               >
                 {this.state.widthTot == null || !this.state.widthTot
@@ -281,6 +292,11 @@ class QuoteV13 extends Component {
                 ft
                 <sup>2</sup>
               </div>
+              <div className="row ml-3 mb-2">
+                Materials:
+                <span className="ml-5"> 13oz. Matte Vinyl Banner</span>
+              </div>
+              <br />
             </div>
             <div className="row mb-1  mx-auto">
               <span className="ml-3 my-1 "># of Slides</span>
@@ -311,8 +327,9 @@ class QuoteV13 extends Component {
             </div>
             <div className="row  mx-auto">
               <span className="ml-3 my-1 ">Grommet</span>
-              <div className="col-md-7  ml-auto">
+              <div className="col-md-7 small ml-auto">
                 <SmallSelectListGroup
+                  className="small"
                   placeholder="Business Type"
                   name="grommet"
                   value={this.state.grommet}

@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import { loginUser } from "../../actions/authActions";
 import mesh from "../../img/mesh.png";
 
-import QuoteV13 from "./quote/quoteV13";
+import Mesh from "./quote/mesh";
 import Login from "../auth/Login";
 import BannerLinks from "./BannerLinks";
 class MeshBanner extends Component {
@@ -45,14 +45,14 @@ class MeshBanner extends Component {
 
             <div className="col-md-5 mx-auto p-0 mt-3 ml-auto order-4">
               <img className="img-fluid mb-4" src={mesh} alt="mesh" />
-              <h3 className="display-5 text-center">Mesh Banner</h3>
-              <p className="text-left">
+              <h4 className="display-5 text-center">Mesh Banner</h4>
+              <p className="text-left small">
                 Mesh banners are printed on 10 oz. heavy-duty banner material.
                 They are suitable for large outdoor advertisements where wind
                 load is an issue. Mesh banners are printed with UV inks.
               </p>
               <strong>Features</strong>
-              <ul>
+              <ul className="small">
                 <li>
                   Single-Sided single piece maximum size 10’ x 145’ w/o pocket
                   and 9.5’ x 145’ w/ pocket ; Double-Sided banners maximum size
@@ -74,7 +74,7 @@ class MeshBanner extends Component {
             </div>
 
             <div className="col-md-3 mt-3 ml-auto mb-4 order-2 order-md-6 loginBG">
-              {client ? <QuoteV13 /> : <Login />}
+              {client ? <Mesh /> : <Login />}
             </div>
           </div>
         </div>

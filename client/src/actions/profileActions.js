@@ -89,6 +89,10 @@ export const addAddress = (addData, history) => dispatch => {
     );
 };
 
+export const sendProRequest = history => dispatch => {
+  axios.post("/api/profile/request").then(res => history.push("/dashboard"));
+};
+
 // Delete Payment
 export const deletePayment = id => dispatch => {
   axios
@@ -105,6 +109,32 @@ export const deletePayment = id => dispatch => {
         payload: err.response.data
       })
     );
+};
+
+// Upload Form
+export const uploadFilePro = (form, permit) => dispatch => {
+  axios
+    .post("api/files/upload/form", form, {
+      headers: {
+        "Content-Type": "multipart/form-data"
+      }
+    })
+    .then(item => {
+      axios.post("api/files/upload/permit", permit, {
+        headers: {
+          "Content-Type": "multipart/form-data"
+        }
+      });
+    });
+};
+
+// Upload Form
+export const uploadFile = e => dispatch => {
+  axios.post("api/files/upload/permit", e, {
+    headers: {
+      "Content-Type": "multipart/form-data"
+    }
+  });
 };
 
 // Delete Education

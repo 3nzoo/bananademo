@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import {
   postApproveRegister,
-  declineRegistration
+  declineRegistration1
 } from "../../../actions/adminActions";
 import Pagination from "../../common/Pagination";
 
@@ -20,18 +20,12 @@ class Unapproved extends Component {
       id: e
     };
 
-    // console.log(this.props);
     this.props.postApproveRegister(payData);
-
-    // console.log(this.props.unapproved);
   }
 
   onDeclineClick(e) {
-    const payData = {
-      id: e
-    };
-    this.props.declineRegistration(payData);
-    console.log(payData);
+    console.log(e);
+    this.props.declineRegistration1(e);
   }
 
   onPageChanged1 = data => {
@@ -62,13 +56,13 @@ class Unapproved extends Component {
         <td>
           <button
             onClick={this.onApproveClick.bind(this, item._id)}
-            className="btn btn-dark mr-2"
+            className="btn btn-dark btn-sm py-1 mr-2"
           >
             Approve
           </button>
           <button
             onClick={this.onDeclineClick.bind(this, item._id)}
-            className="btn btn-danger mr-2"
+            className="btn btn-danger btn-sm py-1 mr-2"
           >
             Decline
           </button>
@@ -77,9 +71,11 @@ class Unapproved extends Component {
     ));
 
     return (
-      <div className="mb-4">
-        <h4 className="mb-0 bannerLink p-2 text-center">Payment Info</h4>
-        <table className="table text-center">
+      <div className="mb-4 ">
+        <h4 className="mb-0 bannerLink p-2 text-center">
+          Premiere Account Request
+        </h4>
+        <table className="table text-center table-sm">
           <thead>
             <tr>
               <th>Name</th>
@@ -107,12 +103,10 @@ class Unapproved extends Component {
 
 Unapproved.propTypes = {
   postApproveRegister: PropTypes.func.isRequired,
-  declineRegistration: PropTypes.func.isRequired
+  declineRegistration1: PropTypes.func.isRequired
 };
 
-const mapStateToProps = state => ({});
-
-export default connect(mapStateToProps, {
+export default connect(null, {
   postApproveRegister,
-  declineRegistration
+  declineRegistration1
 })(Unapproved);

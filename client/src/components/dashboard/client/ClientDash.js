@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import { deleteAccount } from "../../../actions/profileActions";
+import { getFile } from "../../../actions/adminActions";
 import BannerLinks from "../../banners/BannerLinks";
 import Payment from "./Payment";
 import Address from "./Address";
@@ -12,6 +13,10 @@ class ClientDash extends Component {
   onDeleteClick(e) {
     this.props.deleteAccount();
   }
+  test1 = e => {
+    e.preventDefault();
+    this.props.getFile(e);
+  };
 
   render() {
     const { profile } = this.props.profile;
@@ -28,16 +33,31 @@ class ClientDash extends Component {
             <p className="lead">
               <strong>Welcome </strong>
               {profile.handle}
-            </p>
-            <button
+            </p>{" "}
+            {/* <button
               onClick={this.onDeleteClick.bind(this)}
-              className="btn float-right btn-danger "
+              className="btn float-right btn-sm btn-danger "
             >
               Delete My Account
-            </button>
-            <p className="lead text-muted">Account Type: {profile.position}</p>
+            </button> */}
+            <p className="lead text-muted text-capitalize">
+              Account Type: {profile.position}
+              {profile.position === "premiere" ? (
+                <Link
+                  to="/professionalRequest"
+                  className="btn btn-success float-right btn-sm mx-2"
+                >
+                  Request to pro
+                </Link>
+              ) : (
+                ""
+              )}
+            </p>
             <ProfileActions />
-
+            {/* <button onClick={this.test1} value="abc.jpg">
+              testit it
+            </button> */}
+            <br />
             <Payment payment={profile.payment} />
             <br></br>
             <Address address={profile.address} />
@@ -47,11 +67,20 @@ class ClientDash extends Component {
     } else {
       // User is logged in but has no profile
       clientContent = (
-        <div>
-          <p className="lead text-muted">Welcome {user.name}</p>
-          <p>Your Account has been approved</p>
-          <p>You may now setup your profile, please add some info</p>
-          <Link to="/create-profile" className="btn btn-lg btn-info">
+        <div className="text-center my-5">
+          <h1 className=" text-muted text-capitalize">Welcome {user.name}</h1>
+          <br />
+          <h3 className="mt-3">Your Account has been approved</h3>
+
+          <p className="mt-3">
+            You may now setup your profile, <br />
+            Please add some info before starting your order. <br />
+            Thank you!
+          </p>
+          <Link
+            to="/create-profile"
+            className="mt-3 btn SignU btn-lg btn-light"
+          >
             Create Profile
           </Link>
         </div>
@@ -63,6 +92,7 @@ class ClientDash extends Component {
 ClientDash.propTypes = {
   deleteAccount: PropTypes.func.isRequired,
   profile: PropTypes.object.isRequired,
+  getFile: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired
 };
 
@@ -71,4 +101,4 @@ const mapStateToProps = state => ({
   auth: state.auth
 });
 
-export default connect(mapStateToProps, { deleteAccount })(ClientDash);
+export default connect(mapStateToProps, { deleteAccount, getFile })(ClientDash);

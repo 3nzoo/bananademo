@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import { loginUser } from "../../actions/authActions";
 import vinyl18 from "../../img/18oz.png";
 import Login from "../auth/Login";
-import QuoteV13 from "./quote/quoteV13";
+import QuoteV18 from "./quote/quoteV18";
 import BannerLinks from "./BannerLinks";
 
 class VinylBanner18 extends Component {
@@ -50,9 +50,9 @@ class VinylBanner18 extends Component {
             <div className="col-md-3 pl-1 order-6 order-md-2">
               <BannerLinks banner={this.state.banner} />
             </div>
-            <div className="col-md-5 p-0 mt-3 mx-auto ml-auto order-4">
+            <div className="col-md-5 small p-0 mt-3 mx-auto ml-auto order-4">
               <img className="img-fluid mb-4" src={vinyl18} alt="vinly18oz" />
-              <h3 className="display-5 text-center">Vinyl Banner (18oz)</h3>
+              <h4 className="display-5 text-center">Vinyl Banner (18oz)</h4>
               <p className="text-left">
                 Our 18oz. Blockout Matte Vinyl Banner material is suitable for
                 street banners and light pole banners. It is more heavy duty and
@@ -80,7 +80,7 @@ class VinylBanner18 extends Component {
               </ul>
             </div>
             <div className="col-md-3 mb-4 mt-3 ml-auto order-2 order-md-6 loginBG">
-              {client ? <QuoteV13 /> : <Login />}
+              {client ? <QuoteV18 /> : <Login />}
             </div>
           </div>
         </div>

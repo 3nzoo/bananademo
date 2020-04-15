@@ -17,7 +17,7 @@ class Landing extends Component {
       <div className="landing">
         <div className="container">
           <div className="row">
-            <div className="col-md-3 pl-1 ">
+            <div className="col-md-3 pl-1">
               <BannerLinks />
             </div>
 
@@ -47,12 +47,17 @@ class Landing extends Component {
 
               <p
                 style={{ lineHeight: 2 }}
-                className="text-left my-4 col-md-12 p-0 pb-4"
+                className="text-left my-4 col-md-12 p-0"
               >
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Consectetur eaque laborum nisi maiores amet modi porro,
-                reiciendis molestias praesentium iste odit sunt suscipit
-                dolorum. Nobis laborum praesentium eos nesciunt repudiandae?
+                Banana Banners is one of the fastest growing large format
+                producers in the entire US. Our massive production volume allows
+                us to pass savings onto an ever-growing customer base. We cater
+                to privately owned print shops and brokers, ad agencies, sign
+                shops, graphic designers and photo studios.
+              </p>
+              <p>
+                We welcome you to our growing family. Please apply for a
+                premiere account today
               </p>
             </div>
           </div>

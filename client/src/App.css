@@ -6,13 +6,27 @@ body {
   padding-bottom: 100px;
 }
 .pay:hover {
-  background-color: blue;
+  background-color: white;
   cursor: pointer;
+}
+/* .premiere:hover {
+  background-color: #ffd31d;
+  cursor: pointer;
+} */
+.page-active {
+  background-color: black;
+}
+.pageColor {
+  background-color: black !important;
+  color: yellow;
 }
 .SignU {
   background-color: orange;
 }
 
+.page-Link {
+  background-color: blueviolet !important;
+}
 .myPager {
   text-align: right;
 }
@@ -28,6 +42,27 @@ a.bannerLink:active {
 .bannerLink:hover {
   background-color: #926b00 !important;
   color: white;
+}
+.pagination > .active > a {
+  color: black;
+  background-color: #8f8f8f !Important;
+  border: solid 1px #8f8f8f !Important;
+}
+.pagination > li > a:focus,
+.pagination > li > a:hover,
+.pagination > li > span:focus,
+.pagination > li > span:hover {
+  color: #5a5a5a;
+  background-color: #eee;
+  border-color: #ddd;
+}
+.list-group-item.active {
+  background-color: #926b00 !important;
+  border-color: lightgray !important;
+}
+.pagination > li > a {
+  background-color: white;
+  color: #8f8f8f;
 }
 
 .bannerLink:active {

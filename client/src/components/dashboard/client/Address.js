@@ -18,13 +18,13 @@ class Address extends Component {
           {myadd.city}
           {myadd.state}
         </td>
-        <td> {myadd.zipCode}</td>
-        <td>{myadd.deliveryAdd.toString()}</td>
-        <td>{myadd.billingAdd.toString()}</td>
+        {/* <td> {myadd.zipCode}</td> */}
+        {/* <td>{myadd.deliveryAdd.toString()}</td>
+        <td>{myadd.billingAdd.toString()}</td> */}
         <td>
           <button
             onClick={this.onDeleteClick.bind(this, myadd._id)}
-            className="btn btn-danger"
+            className="btn btn-sm py-0 btn-danger"
           >
             Delete
           </button>
@@ -32,17 +32,17 @@ class Address extends Component {
       </tr>
     ));
     return (
-      <div>
-        <h4 className="mb-0 bannerLink p-2">Address Book</h4>
-        <table className="table">
+      <div className="small">
+        <h5 className="mb-0 bannerLink p-2">Address Book</h5>
+        <table className="table table-sm">
           <thead>
             <tr>
               <th>Name</th>
               <th>Company</th>
               <th>Address</th>
-              <th>zipCode</th>
-              <th> Shipping</th>
-              <th> Billing</th>
+              {/* <th>zipCode</th> */}
+              {/* <th> Shipping</th> */}
+              {/* <th> Billing</th> */}
             </tr>
             {address}
           </thead>

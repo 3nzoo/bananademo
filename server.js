@@ -3,15 +3,18 @@ const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const passport = require("passport");
 const path = require("path");
+const fileUpload = require("express-fileupload");
 
 const users = require("./routes/api/users");
 const profile = require("./routes/api/profile");
 const contact = require("./routes/api/contact");
+const files = require("./routes/api/files");
 const app = express();
 
 // Body parser middleware
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+app.use(fileUpload());
 
 // DB Config
 const db = require("./config/keys").mongoURI;
@@ -32,6 +35,7 @@ require("./config/passport")(passport);
 app.use("/api/users", users);
 app.use("/api/profile", profile);
 app.use("/api/contact", contact);
+app.use("/api/files", files);
 
 // Server static assets if in production
 if (process.env.NODE_ENV === "production") {

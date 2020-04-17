@@ -20,71 +20,71 @@ import {
   GET_ERRORS,
   // GET_CLIENTPROFILES,
   GET_PRO_PROFILES,
-  GET_PRO_REQUEST
+  GET_PRO_REQUEST,
   // GET_CURRENTCLIENTPROFILE,
   // DELETE_CLIENTACCOUNT,
   // GET_PROFILE
 } from "./types";
 
 // Get unapproved Profiles
-export const getUnapprovedUser = () => dispatch => {
+export const getUnapprovedUser = () => (dispatch) => {
   axios
     .get("/api/profile/unapproved")
-    .then(res =>
+    .then((res) =>
       dispatch({
         type: GET_UNAPPROVEDPROFILES,
-        payload: res.data
+        payload: res.data,
       })
     )
-    .catch(err =>
+    .catch((err) =>
       dispatch({
         type: GET_UNAPPROVEDPROFILES,
-        payload: null
+        payload: null,
       })
     );
 };
 
 // Get Professional Profiles
-export const getProfessionals = () => dispatch => {
+export const getProfessionals = () => (dispatch) => {
   axios
     .get("/api/profile/all/pro")
-    .then(res =>
+    .then((res) =>
       dispatch({
         type: GET_PRO_PROFILES,
-        payload: res.data
+        payload: res.data,
       })
     )
-    .catch(err =>
+    .catch((err) =>
       dispatch({
         type: GET_PRO_PROFILES,
-        payload: null
+        payload: null,
       })
     );
 };
 
 // Get Professional Profiles
-export const getProRequest = () => dispatch => {
+export const getProRequest = () => (dispatch) => {
   axios
     .get("/api/profile/all/proRequest")
-    .then(res =>
+    .then((res) =>
       dispatch({
         type: GET_PRO_REQUEST,
-        payload: res.data
+        payload: res.data,
       })
     )
-    .catch(err =>
+    .catch((err) =>
       dispatch({
         type: GET_PRO_REQUEST,
-        payload: null
+        payload: null,
       })
     );
 };
 
-export const getFile = e => dispatch => {
+export const getFile = (e) => (dispatch) => {
   // console.log(e.target.value);
   axios
-    .get(`/api/files/download/${e.target.value}`, { responseType: "blob" })
-    .then(res => {
+    .get(`/api/files/download/${e}`, { responseType: "blob" })
+    .then((res) => {
       let blob = new Blob([res.data], { type: res }),
         downloadUrl = window.URL.createObjectURL(blob),
         filename = "",
@@ -106,45 +106,47 @@ export const getFile = e => dispatch => {
         a.click();
       }
     })
-    .catch(err => {
+    .catch((err) => {
       console.log(err);
     });
 };
 
 // Approve Premiere Registration
-export const postApproveRegister = e => dispatch => {
-  axios.post("/api/users/approve", e).then(res => window.location.reload(true));
+export const postApproveRegister = (e) => (dispatch) => {
+  axios
+    .post("/api/users/approve", e)
+    .then((res) => window.location.reload(true));
 };
 
 // Approve Professional Account Request
-export const postApproveProRequest = e => dispatch => {
+export const postApproveProRequest = (e) => (dispatch) => {
   axios
     .post("/api/profile/approvePro", e)
-    .then(res => window.location.reload(true));
+    .then((res) => window.location.reload(true));
 };
 
 // Decline Pro Request
-export const declineProRequest = id => dispatch => {
+export const declineProRequest = (id) => (dispatch) => {
   axios
     .post(`/api/profile/declineProRequest/${id}`)
-    .then(res => window.location.reload(true))
-    .catch(err =>
+    .then((res) => window.location.reload(true))
+    .catch((err) =>
       dispatch({
         type: GET_ERRORS,
-        payload: err.response.data
+        payload: err.response.data,
       })
     );
 };
 
 // Delete decline registration
-export const declineRegistration1 = id => dispatch => {
+export const declineRegistration1 = (id) => (dispatch) => {
   axios
     .delete(`/api/users/declineRequest1/${id}`)
-    .then(res => window.location.reload(true))
-    .catch(err =>
+    .then((res) => window.location.reload(true))
+    .catch((err) =>
       dispatch({
         type: GET_ERRORS,
-        payload: err.response.data
+        payload: err.response.data,
       })
     );
 };
@@ -152,13 +154,13 @@ export const declineRegistration1 = id => dispatch => {
 // Profile loading
 export const setProfileLoading = () => {
   return {
-    type: PROFILE_LOADING
+    type: PROFILE_LOADING,
   };
 };
 
 // Clear profile
 export const clearCurrentProfile = () => {
   return {
-    type: CLEAR_CURRENT_PROFILE
+    type: CLEAR_CURRENT_PROFILE,
   };
 };

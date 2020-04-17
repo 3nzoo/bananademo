@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import {
   postApproveProRequest,
   getFile,
-  declineProRequest
+  declineProRequest,
 } from "../../../actions/adminActions";
 import Pagination from "../../common/Pagination";
 
@@ -13,21 +13,19 @@ class ProRequest extends Component {
     allUnapproved: [],
     currentUnapproved: [],
     currentPage: null,
-    totalPages: null
+    totalPages: null,
   };
 
   onApproveClick(e) {
     const payData = {
-      id: e
+      id: e,
     };
     this.props.postApproveProRequest(payData);
   }
 
-  onDownload = e => {
-    if (e.target.value !== undefined) {
+  onDownload = (e) => {
+    if (e !== undefined) {
       this.props.getFile(e);
-    } else {
-      window.location.reload(true);
     }
   };
 
@@ -35,7 +33,7 @@ class ProRequest extends Component {
     this.props.declineProRequest(e);
   }
 
-  onPageChanged1 = data => {
+  onPageChanged1 = (data) => {
     const { currentPage, totalPages, pageLimit } = data;
     const offset = (currentPage - 1) * pageLimit;
     const currentUnapproved = this.props.proRequest.slice(
@@ -51,25 +49,24 @@ class ProRequest extends Component {
     if (totalItems === 0) return null;
     if (totalItems === undefined) {
     }
-
-    const unapproved = this.state.currentUnapproved.map(item => (
+    let proForm;
+    const unapproved = this.state.currentUnapproved.map((item) => (
       <tr className="professional" key={item.user}>
         <td>{item.handle}</td>
         <td>
           {item.docs[0] !== undefined ? (
             <p>
+              {console.log(proForm)}
               {"..." +
                 item.docs[0].title.substr(
                   Number(item.docs[0].title.length) - 7,
                   7
                 )}
               <button
-                onClick={this.onDownload}
-                value={
-                  item.docs[0].newFileName === undefined
-                    ? item.docs[0].newFileName.toString()
-                    : item.docs[0].newFileName.toString()
-                }
+                onClick={this.onDownload.bind(
+                  this,
+                  item.docs[0].newFileName.toString()
+                )}
                 className={
                   "btn btn-warning btn-sm py-1 ml-2 pr-1" +
                   (item.docs[0].newFileName === undefined
@@ -166,11 +163,11 @@ class ProRequest extends Component {
 ProRequest.propTypes = {
   postApproveProRequest: PropTypes.func.isRequired,
   getFile: PropTypes.func.isRequired,
-  declineProRequest: PropTypes.func.isRequired
+  declineProRequest: PropTypes.func.isRequired,
 };
 
 export default connect(null, {
   postApproveProRequest,
   getFile,
-  declineProRequest
+  declineProRequest,
 })(ProRequest);

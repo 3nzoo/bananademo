@@ -36,8 +36,8 @@ class Pagination extends Component {
     this.gotoPage(1);
   }
 
-  gotoPage = page => {
-    const { onPageChanged = f => f } = this.props;
+  gotoPage = (page) => {
+    const { onPageChanged = (f) => f } = this.props;
 
     const currentPage = Math.max(0, Math.min(page, this.totalPages));
 
@@ -45,23 +45,23 @@ class Pagination extends Component {
       currentPage,
       totalPages: this.totalPages,
       pageLimit: this.pageLimit,
-      totalRecords: this.totalRecords
+      totalRecords: this.totalRecords,
     };
 
     this.setState({ currentPage }, () => onPageChanged(paginationData));
   };
 
-  handleClick = page => evt => {
+  handleClick = (page) => (evt) => {
     evt.preventDefault();
     this.gotoPage(page);
   };
 
-  handleMoveLeft = evt => {
+  handleMoveLeft = (evt) => {
     evt.preventDefault();
     this.gotoPage(this.state.currentPage - this.pageNeighbours * 2 - 1);
   };
 
-  handleMoveRight = evt => {
+  handleMoveRight = (evt) => {
     evt.preventDefault();
     this.gotoPage(this.state.currentPage + this.pageNeighbours * 2 + 1);
   };
@@ -138,7 +138,7 @@ class Pagination extends Component {
                   <li key={index} className=" page-item">
                     <a
                       className="page-link"
-                      href=""
+                      href="/#"
                       aria-label="Previous"
                       onClick={this.handleMoveLeft}
                     >
@@ -153,7 +153,7 @@ class Pagination extends Component {
                   <li key={index} className="page-item">
                     <a
                       className="page-link"
-                      href=""
+                      href="/#"
                       aria-label="Next"
                       onClick={this.handleMoveRight}
                     >
@@ -172,7 +172,7 @@ class Pagination extends Component {
                 >
                   <a
                     className="page-link"
-                    href=""
+                    href="/#"
                     onClick={this.handleClick(page)}
                   >
                     {page}
@@ -191,7 +191,7 @@ Pagination.propTypes = {
   totalRecords: PropTypes.number.isRequired,
   pageLimit: PropTypes.number,
   pageNeighbours: PropTypes.number,
-  onPageChanged: PropTypes.func
+  onPageChanged: PropTypes.func,
 };
 
 export default Pagination;

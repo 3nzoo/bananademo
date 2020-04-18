@@ -11,7 +11,7 @@ import { optionsSlides } from "./options";
 import { optionsTurnaround } from "./options";
 import { optionsHem } from "./options";
 import { optionsWebbing } from "./options";
-import { optionsWindslit } from "./options";
+
 import { optionsGrommet } from "./options";
 import { optionsPole } from "./options";
 import { optionsCorners } from "./options";
@@ -37,7 +37,7 @@ class Mesh extends Component {
       quantity: "",
       price: "",
       displayMoreOptions: "",
-      errors: {}
+      errors: {},
     };
 
     this.onChange = this.onChange.bind(this);
@@ -63,7 +63,7 @@ class Mesh extends Component {
     const totalSize = Math.round(((htot * wtot) / 144) * 100) / 100;
     this.setState({ totalBanner: totalSize });
   }
-  onChange = e => {
+  onChange = (e) => {
     // Disable alphabetic
     const re = /^[0-9\b]+$/;
     if (isNaN(e.target.value)) {
@@ -283,8 +283,8 @@ class Mesh extends Component {
               <button
                 type="button"
                 onClick={() => {
-                  this.setState(prevState => ({
-                    displayMoreOptions: !prevState.displayMoreOptions
+                  this.setState((prevState) => ({
+                    displayMoreOptions: !prevState.displayMoreOptions,
                   }));
                 }}
                 className={"btn ml-3 btn-sm btn-dark mt-2"}
@@ -359,12 +359,12 @@ class Mesh extends Component {
 Mesh.propTypes = {
   loginUser: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired,
-  errors: PropTypes.object.isRequired
+  errors: PropTypes.object.isRequired,
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   auth: state.auth,
-  errors: state.errors
+  errors: state.errors,
 });
 
 export default connect(mapStateToProps, { loginUser })(Mesh);

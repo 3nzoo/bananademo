@@ -16,7 +16,7 @@ class AddPayment extends Component {
       cvCode: "",
       is_Default: false,
       errors: {},
-      disabled: false
+      disabled: false,
     };
 
     this.onChange = this.onChange.bind(this);
@@ -38,7 +38,7 @@ class AddPayment extends Component {
       nameCard: this.state.nameCard,
       expiration: this.state.expiration,
       cvCode: this.state.cvCode,
-      is_Default: this.state.is_Default
+      is_Default: this.state.is_Default,
     };
 
     this.props.addPayment(payData, this.props.history);
@@ -51,7 +51,7 @@ class AddPayment extends Component {
   onCheck(e) {
     this.setState({
       disabled: !this.state.disabled,
-      is_Default: !this.state.is_Default
+      is_Default: !this.state.is_Default,
     });
   }
 
@@ -132,12 +132,12 @@ class AddPayment extends Component {
 AddPayment.propTypes = {
   addPayment: PropTypes.func.isRequired,
   profile: PropTypes.object.isRequired,
-  errors: PropTypes.object.isRequired
+  errors: PropTypes.object.isRequired,
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   profile: state.profile,
-  errors: state.errors
+  errors: state.errors,
 });
 
 export default connect(mapStateToProps, { addPayment })(withRouter(AddPayment));

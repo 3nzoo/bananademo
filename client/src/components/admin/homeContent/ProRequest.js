@@ -49,14 +49,12 @@ class ProRequest extends Component {
     if (totalItems === 0) return null;
     if (totalItems === undefined) {
     }
-    let proForm;
     const unapproved = this.state.currentUnapproved.map((item) => (
       <tr className="professional" key={item.user}>
         <td>{item.handle}</td>
         <td>
           {item.docs[0] !== undefined ? (
             <p>
-              {console.log(proForm)}
               {"..." +
                 item.docs[0].title.substr(
                   Number(item.docs[0].title.length) - 7,

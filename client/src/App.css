@@ -30,6 +30,20 @@ body {
 .myPager {
   text-align: right;
 }
+.myDefault {
+  color: #f1f1f1;
+}
+
+.myDefault:hover {
+  color: green;
+  cursor: pointer;
+}
+.acbtn {
+  white-space: normal;
+}
+.navLink {
+  background-color: #fbedc3;
+}
 
 .bannerLink {
   background-color: #fbedc3;
@@ -45,8 +59,8 @@ a.bannerLink:active {
 }
 .pagination > .active > a {
   color: black;
-  background-color: #8f8f8f !Important;
-  border: solid 1px #8f8f8f !Important;
+  background-color: #8f8f8f !important;
+  border: solid 1px #8f8f8f !important;
 }
 .pagination > li > a:focus,
 .pagination > li > a:hover,
@@ -85,4 +99,67 @@ a.bannerLink:active {
 
 .form-control::placeholder {
   color: #bbb !important;
+}
+
+/* modal form */
+
+.contctUs-content {
+  width: 70% !important;
+}
+
+.modal1 {
+  font-size: 14px;
+}
+.modal1 > .header {
+  width: 80%;
+  border-bottom: 1px solid gray;
+  font-size: 18px;
+  text-align: center;
+  padding: 5px;
+  background-color: #fbedc3;
+}
+.modal1 > .content {
+  width: 90%;
+  padding: 10px 5px;
+}
+.modal1 > .actions {
+  width: 80%;
+  padding: 10px 5px;
+  margin: auto;
+  text-align: center;
+}
+.modal1 > .close {
+  cursor: pointer;
+  position: absolute;
+  display: block;
+  padding: 2px 5px;
+  line-height: 20px;
+  right: -10px;
+  top: -10px;
+  font-size: 24px;
+  background: #fbedc3;
+  border-radius: 18px;
+  border: 1px solid #cfcece;
+}
+
+.popup-content {
+  background-color: #fbedc3 !important;
+}
+
+.divid {
+  background-color: #f1f1f1;
+}
+
+.quant {
+  width: 100%;
+  margin-left: 0px;
+}
+
+.brown {
+  background-color: #926b00 !important;
+}
+
+.monkey {
+  max-width: 210px;
+  height: auto;
 }

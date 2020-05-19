@@ -9,186 +9,250 @@ import {
   PROFILE_LOADING,
   CLEAR_CURRENT_PROFILE,
   GET_ERRORS,
-  SET_CURRENT_USER
+  SET_CURRENT_USER,
 } from "./types";
 
 // Get current profile
-export const getCurrentProfile = () => dispatch => {
+export const getCurrentProfile = () => (dispatch) => {
   dispatch(setProfileLoading());
   axios
     .get("/api/profile")
-    .then(res =>
+    .then((res) =>
       dispatch({
         type: GET_PROFILE,
-        payload: res.data
+        payload: res.data,
       })
     )
-    .catch(err =>
+    .catch((err) =>
       dispatch({
         type: GET_PROFILE,
-        payload: {}
+        payload: {},
       })
     );
 };
 
 // Get profile by handle
-export const getProfileByHandle = handle => dispatch => {
+export const getProfileByHandle = (handle) => (dispatch) => {
   dispatch(setProfileLoading());
   axios
     .get(`/api/profile/handle/${handle}`)
-    .then(res =>
+    .then((res) =>
       dispatch({
         type: GET_PROFILE,
-        payload: res.data
+        payload: res.data,
       })
     )
-    .catch(err =>
+    .catch((err) =>
       dispatch({
         type: GET_PROFILE,
-        payload: null
+        payload: null,
       })
     );
 };
 
 // Create Profile
-export const createProfile = (profileData, history) => dispatch => {
+export const createProfile = (profileData, history) => (dispatch) => {
   axios
     .post("/api/profile", profileData)
-    .then(res => history.push("/dashboard"))
-    .catch(err =>
+    .then((res) => history.push("/dashboard"))
+    .catch((err) =>
       dispatch({
         type: GET_ERRORS,
-        payload: err.response.data
+        payload: err.response.data,
       })
     );
 };
 
+// Add message
+export const addMessage = (payData, history) => (dispatch) => {
+  axios
+    .post("/api/contact/", payData)
+    .then((res) => history.push("/"))
+    .catch((err) => {
+      console.log("error");
+    });
+};
+
 // Add payment
-export const addPayment = (payData, history) => dispatch => {
+export const addPayment = (payData, history) => (dispatch) => {
   axios
     .post("/api/profile/payment", payData)
-    .then(res => history.push("/dashboard"))
-    .catch(err =>
+    .then((res) => history.push("/dashboard"))
+    .catch((err) =>
       dispatch({
         type: GET_ERRORS,
-        payload: err.response.data
+        payload: err.response.data,
       })
     );
 };
 
 // Add address
-export const addAddress = (addData, history) => dispatch => {
+export const addAddress = (addData, history) => (dispatch) => {
   axios
     .post("/api/profile/address", addData)
-    .then(res => history.push("/dashboard"))
-    .catch(err =>
+    .then((res) => history.push("/dashboard"))
+    .catch((err) =>
       dispatch({
         type: GET_ERRORS,
-        payload: err.response.data
+        payload: err.response.data,
       })
     );
 };
 
-export const sendProRequest = history => dispatch => {
-  axios.post("/api/profile/request").then(res => history.push("/dashboard"));
+export const sendProRequest = (history) => (dispatch) => {
+  axios.post("/api/profile/request").then((res) => history.push("/dashboard"));
+};
+
+// change billing default
+export const setBilling = (id) => (dispatch) => {
+  axios
+    .post(`/api/profile/address/billing/${id}`)
+    .then((res) =>
+      dispatch({
+        type: GET_PROFILE,
+        payload: res.data,
+      })
+    )
+    .catch((err) =>
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data,
+      })
+    );
+};
+
+// change shipping default
+export const setShipping = (id) => (dispatch) => {
+  axios
+    .post(`/api/profile/address/shipping/${id}`)
+    .then((res) =>
+      dispatch({
+        type: GET_PROFILE,
+        payload: res.data,
+      })
+    )
+    .catch((err) =>
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data,
+      })
+    );
+};
+
+// change shipping default
+export const setPayment = (id) => (dispatch) => {
+  axios
+    .post(`/api/profile/payment/default/${id}`)
+    .then((res) =>
+      dispatch({
+        type: GET_PROFILE,
+        payload: res.data,
+      })
+    )
+    .catch((err) =>
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data,
+      })
+    );
 };
 
 // Delete Payment
-export const deletePayment = id => dispatch => {
+export const deletePayment = (id) => (dispatch) => {
   axios
     .delete(`/api/profile/payment/${id}`)
-    .then(res =>
+    .then((res) =>
       dispatch({
         type: GET_PROFILE,
-        payload: res.data
+        payload: res.data,
       })
     )
-    .catch(err =>
+    .catch((err) =>
       dispatch({
         type: GET_ERRORS,
-        payload: err.response.data
+        payload: err.response.data,
       })
     );
 };
 
 // Upload Form
-export const uploadFilePro = (form, permit) => dispatch => {
+export const uploadFilePro = (form, permit) => (dispatch) => {
   axios
     .post("api/files/upload/form", form, {
       headers: {
-        "Content-Type": "multipart/form-data"
-      }
+        "Content-Type": "multipart/form-data",
+      },
     })
-    .then(item => {
+    .then((item) => {
       axios.post("api/files/upload/permit", permit, {
         headers: {
-          "Content-Type": "multipart/form-data"
-        }
+          "Content-Type": "multipart/form-data",
+        },
       });
     });
 };
 
 // Upload Form
-export const uploadFile = e => dispatch => {
+export const uploadFile = (e) => (dispatch) => {
   axios.post("api/files/upload/permit", e, {
     headers: {
-      "Content-Type": "multipart/form-data"
-    }
+      "Content-Type": "multipart/form-data",
+    },
   });
 };
 
 // Delete Education
-export const deleteAddress = id => dispatch => {
+export const deleteAddress = (id) => (dispatch) => {
   axios
     .delete(`/api/profile/address/${id}`)
-    .then(res =>
+    .then((res) =>
       dispatch({
         type: GET_PROFILE,
-        payload: res.data
+        payload: res.data,
       })
     )
-    .catch(err =>
+    .catch((err) =>
       dispatch({
         type: GET_ERRORS,
-        payload: err.response.data
+        payload: err.response.data,
       })
     );
 };
 
 // Get all profiles
-export const getProfiles = () => dispatch => {
+export const getProfiles = () => (dispatch) => {
   dispatch(setProfileLoading());
   axios
     .get("/api/profile/all/client")
-    .then(res =>
+    .then((res) =>
       dispatch({
         type: GET_PROFILES,
-        payload: res.data
+        payload: res.data,
       })
     )
-    .catch(err =>
+    .catch((err) =>
       dispatch({
         type: GET_PROFILES,
-        payload: null
+        payload: null,
       })
     );
 };
 
 // Delete account & profile
-export const deleteAccount = () => dispatch => {
+export const deleteAccount = () => (dispatch) => {
   if (window.confirm("Are you sure? This can NOT be undone!")) {
     axios
       .delete("/api/profile")
-      .then(res =>
+      .then((res) =>
         dispatch({
           type: SET_CURRENT_USER,
-          payload: {}
+          payload: {},
         })
       )
-      .catch(err =>
+      .catch((err) =>
         dispatch({
           type: GET_ERRORS,
-          payload: err.response.data
+          payload: err.response.data,
         })
       );
   }
@@ -197,13 +261,13 @@ export const deleteAccount = () => dispatch => {
 // Profile loading
 export const setProfileLoading = () => {
   return {
-    type: PROFILE_LOADING
+    type: PROFILE_LOADING,
   };
 };
 
 // Clear profile
 export const clearCurrentProfile = () => {
   return {
-    type: CLEAR_CURRENT_PROFILE
+    type: CLEAR_CURRENT_PROFILE,
   };
 };

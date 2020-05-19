@@ -10,7 +10,7 @@ class Login extends Component {
     this.state = {
       email: "",
       password: "",
-      errors: {}
+      errors: {},
     };
 
     this.onChange = this.onChange.bind(this);
@@ -37,7 +37,7 @@ class Login extends Component {
     e.preventDefault();
     const userData = {
       email: this.state.email,
-      password: this.state.password
+      password: this.state.password,
     };
     this.props.loginUser(userData);
   }
@@ -53,12 +53,12 @@ class Login extends Component {
     }
     return (
       <div className="login">
-        <div className="container p-4">
+        <div className="container mt-5">
           <div className="row">
             <div className="m-auto">
-              <h3 className="display-4 text-center">
+              <h1 className=" text-center">
                 <strong>Log In </strong>
-              </h3>
+              </h1>
               <p className=" text-center">
                 Sign in to your Banana Banner account
               </p>
@@ -87,7 +87,7 @@ class Login extends Component {
                 <h3 className="text-center mt-4">OR</h3>
                 <Link
                   to="/register"
-                  className="btn text-center btn-primary btn-block  text-white mt-3"
+                  className="btn text-center btn-primary btn-block mb-5 text-white mt-3"
                 >
                   Register
                 </Link>
@@ -103,12 +103,12 @@ class Login extends Component {
 Login.propTypes = {
   loginUser: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired,
-  errors: PropTypes.object.isRequired
+  errors: PropTypes.object.isRequired,
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   auth: state.auth,
-  errors: state.errors
+  errors: state.errors,
 });
 
 export default connect(mapStateToProps, { loginUser })(Login);

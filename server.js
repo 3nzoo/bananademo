@@ -9,6 +9,8 @@ const users = require("./routes/api/users");
 const profile = require("./routes/api/profile");
 const contact = require("./routes/api/contact");
 const files = require("./routes/api/files");
+const order = require("./routes/api/order");
+
 const app = express();
 
 // Body parser middleware
@@ -23,7 +25,7 @@ const db = require("./config/keys").mongoURI;
 mongoose
   .connect(db, { useNewUrlParser: true })
   .then(() => console.log("MongoDB Connected"))
-  .catch(err => console.log(err));
+  .catch((err) => console.log(err));
 
 // Passport middleware
 app.use(passport.initialize());
@@ -36,6 +38,7 @@ app.use("/api/users", users);
 app.use("/api/profile", profile);
 app.use("/api/contact", contact);
 app.use("/api/files", files);
+app.use("/api/order", order);
 
 // Server static assets if in production
 if (process.env.NODE_ENV === "production") {

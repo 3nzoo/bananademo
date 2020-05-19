@@ -1,10 +1,13 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-
+import Popup from "reactjs-popup";
+import SmallTextFieldGroup from "../common/SmallTextFieldGroup";
+import TextAreaFieldGroup from "../common/TextAreaFieldGroup";
 class Footer extends Component {
   render() {
     const { user } = this.props.auth;
+
     let showFooter;
     if (user.is_admin === true) {
       showFooter = <div></div>;
@@ -51,12 +54,12 @@ class Footer extends Component {
         </footer>
       );
     }
-    return <div>{showFooter}</div>;
+    return <div className="col-12 ">{showFooter}</div>;
   }
 }
 
-const mapStateToProps = state => ({
-  auth: state.auth
+const mapStateToProps = (state) => ({
+  auth: state.auth,
 });
 
 export default connect(mapStateToProps, {})(Footer);

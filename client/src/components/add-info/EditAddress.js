@@ -3,9 +3,9 @@ import { Link, withRouter } from "react-router-dom";
 import TextFieldGroup from "../common/TextFieldGroup";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import { addAddress } from "../../actions/profileActions";
+import { editAddress } from "../../actions/profileActions";
 import SelectListGroup from "../common/SelectListGroup";
-class AddAddress extends Component {
+class EditAddress extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -116,21 +116,24 @@ class AddAddress extends Component {
       { label: "Wisconsin", value: "Wisconsin" },
       { label: "Wyoming", value: "Wyoming" },
     ];
+
     return (
       <div className="add-address">
         <div className="container">
           <div className="row">
             <div className="col-md-8 m-auto">
-              <Link to="/dashboard" className="btn  btn-secondary">
+              <Link to="/dashboard" className="btn btn-light">
                 Go Back
               </Link>
-              <h1 className=" mt-4 text-center">Add Delivery Address</h1>
+              <h4 className="display-4 mt-4 text-center">
+                Edit Delivery Address
+              </h4>
               <p className="lead text-center">
-                Add your new shipping or Billing address
+                Edit your shipping or Billing address
               </p>
 
               <form onSubmit={this.onSubmit}>
-                <div className="form-check mb-3 mt-4 text-center text-lg-left">
+                <div className="form-check mb-3 mt-4">
                   <input
                     type="checkbox"
                     className="form-check-input"
@@ -145,7 +148,7 @@ class AddAddress extends Component {
                     Default Delivery Address
                   </label>
                 </div>
-                <div className="form-check text-center text-lg-left mb-4">
+                <div className="form-check mb-4">
                   <input
                     type="checkbox"
                     className="form-check-input"
@@ -218,8 +221,8 @@ class AddAddress extends Component {
   }
 }
 
-AddAddress.propTypes = {
-  addAddress: PropTypes.func.isRequired,
+EditAddress.propTypes = {
+  editAddress: PropTypes.func.isRequired,
   profile: PropTypes.object.isRequired,
   errors: PropTypes.object.isRequired,
 };
@@ -229,4 +232,6 @@ const mapStateToProps = (state) => ({
   errors: state.errors,
 });
 
-export default connect(mapStateToProps, { addAddress })(withRouter(AddAddress));
+export default connect(mapStateToProps, { editAddress })(
+  withRouter(EditAddress)
+);

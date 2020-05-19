@@ -5,24 +5,24 @@ const Schema = mongoose.Schema;
 const ContactSchema = new Schema({
   name: {
     type: String,
-    required: true
+    required: true,
   },
-  company: {
-    type: String,
-    required: true
+  open: {
+    type: Boolean,
+    required: true,
   },
   email: {
     type: String,
-    required: true
+    required: true,
   },
   message: {
     type: String,
-    required: true
+    required: true,
   },
   Date: {
     type: Date,
-    default: Date.now
-  }
+    default: Date.now,
+  },
 });
 
 module.exports = Contact = mongoose.model("contact", ContactSchema);

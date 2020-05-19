@@ -2,55 +2,69 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 // Create Schema
-const PostSchema = new Schema({
+const OrderSchema = new Schema({
   user: {
     type: Schema.Types.ObjectId,
-    ref: "users"
+    ref: "users",
   },
-  jobID: {
+  orderID: {
     type: String,
-    required: true
-  },
-  accountName: {
-    type: String,
-    ref: "user"
+    required: true,
   },
   is_Discounted: {
     type: Boolean,
-    required: true
+    default: false,
+    required: true,
   },
   orderDate: {
     type: Date,
-    default: Date.now
+    default: Date.now,
   },
   lastModified: {
-    type: String
+    type: String,
   },
   deliveryStatus: {
-    type: String
+    type: String,
   },
   deliveryDate: {
-    type: String
+    type: String,
   },
-  imgLocation: {
-    type: String
-  },
+  details: [
+    {
+      jobName: {
+        type: String,
+        required: true,
+      },
+      imgLocation: {
+        type: String,
+        required: true,
+      },
+      orderDetails: {
+        type: String,
+        required: true,
+      },
+      shipDetails: {
+        type: String,
+        required: true,
+      },
+    },
+  ],
   is_Paid: {
     type: Boolean,
-    default: false
+    default: false,
   },
   totalAmount: {
-    type: String
-  },
-  orderDetails: {
-    type: String
-  },
-  payment: {
-    type: String
+    type: String,
+    required: true,
   },
   billingAddress: {
-    type: String
-  }
+    type: String,
+    required: true,
+  },
+  opened: {
+    type: Boolean,
+    default: false,
+  },
 });
 
-module.exports = Post = mongoose.model("post", PostSchema);
+module.exports = Order = mongoose.model("order", OrderSchema);

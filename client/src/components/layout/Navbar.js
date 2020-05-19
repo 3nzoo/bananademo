@@ -53,27 +53,67 @@ class Navbar extends Component {
     const { user } = this.props.auth;
     const isValid = user.is_admin;
     const authLinks = (
-      <ul className="navbar-nav ml-auto">
+      <ul className="navbar-nav text-center ml-auto">
         <li className="nav-item">
           <Link className="nav-link" to="/dashboard">
             Home
           </Link>
         </li>
         <li className="nav-item">
-          <Link
-            className="nav-link"
-            onClick={this.onLogoutClick.bind(this)}
-            to="/landing"
-          >
-            Logout
+          <Link className="nav-link" to="/cart">
+            <i className="fas fa-shopping-cart mr-1"></i>
           </Link>
+        </li>
+        <li className="nav-item dropdown ">
+          <Link
+            className="nav-link dropdown-toggle"
+            to="/#"
+            id="navbarDropdown"
+            role="button"
+            data-toggle="dropdown"
+            aria-haspopup="true"
+            aria-expanded="false"
+          >
+            <i className="fas fa-user mr-1"></i>{" "}
+          </Link>
+
+          <div
+            className="dropdown-menu navLink text-center"
+            aria-labelledby="navbarDropdown"
+          >
+            <Link className="dropdown-item small bannerLink" to="/settings">
+              Account Settings
+            </Link>
+            <Link
+              className="dropdown-item small bannerLink"
+              to="/change_password"
+            >
+              Change Password
+            </Link>
+
+            <div className="dropdown-divider small border-white"></div>
+            <Link className="dropdown-item small bannerLink" to="/orders">
+              Order Status
+            </Link>
+            <Link className="dropdown-item small bannerLink" to="/unpaidOrders">
+              Pending Payment
+            </Link>
+            <div className="dropdown-divider border-white"></div>
+            <Link
+              className="dropdown-item small bannerLink"
+              onClick={this.onLogoutClick.bind(this)}
+              to="/landing"
+            >
+              LOGOUT
+            </Link>
+          </div>
         </li>
       </ul>
     );
 
     const adminLinks = (
       <ul className="navbar-nav ml-auto">
-        <li className="nav-item">
+        <li className="nav-item text-center">
           <Link
             className="nav-link"
             onClick={this.onLogoutClick.bind(this)}
@@ -141,15 +181,19 @@ class Navbar extends Component {
           </button>
           <div className=" collapse navbar-collapse" id="mobile-nav">
             <ul className="navbar-nav mr-auto ">
-              <li className="nav-item">
-                <a
-                  className="nav-link text-center text-dark muted mr-auto"
-                  href="tel:1(808)739-2842"
-                >
-                  <i className="fas fa-phone mr-1"></i>
-                  1(808)739-2842
-                </a>
-              </li>
+              {!isValid ? (
+                <li className="nav-item">
+                  <a
+                    className="nav-link text-center small text-dark muted mr-auto"
+                    href="tel:1(808)739-2842"
+                  >
+                    <i className="fas fa-phone mr-1"></i>
+                    1(808)739-2842
+                  </a>
+                </li>
+              ) : (
+                <div></div>
+              )}
             </ul>
             {isAuthenticated ? (isValid ? adminLinks : authLinks) : guestLinks}
           </div>

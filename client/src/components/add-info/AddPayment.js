@@ -1,25 +1,32 @@
 import React, { Component } from "react";
 import { Link, withRouter } from "react-router-dom";
 import TextFieldGroup from "../common/TextFieldGroup";
-
+import Cards from "react-credit-cards";
 import { connect } from "react-redux";
+import "react-credit-cards/es/styles-compiled.css";
 import PropTypes from "prop-types";
 import { addPayment } from "../../actions/profileActions";
+
+import valid from "card-validator";
 // import SelectListGroup from "../common/SelectListGroup";
 class AddPayment extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      cardNum: "",
-      nameCard: "",
-      expiration: "",
-      cvCode: "",
+      cvc: "",
+      expiry: "",
+      focus: "",
+      name: "",
+      number: "",
+      cardValid: "",
+      cardType: "",
+
       is_Default: false,
       errors: {},
       disabled: false,
     };
 
-    this.onChange = this.onChange.bind(this);
+    // this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
     this.onCheck = this.onCheck.bind(this);
   }
@@ -30,23 +37,71 @@ class AddPayment extends Component {
     }
   }
 
+  handleInputFocus = (e) => {
+    this.setState({ focus: e.target.name });
+  };
+
+  handleInputChange = (e) => {
+    // Disable alphabetic
+
+    const { name, value } = e.target;
+
+    if (
+      e.target.name === "number" ||
+      e.target.name === "cvc" ||
+      e.target.name === "expiry"
+    ) {
+      if (isNaN(e.target.value)) {
+        return;
+      } else {
+        this.setState({ [name]: value });
+      }
+    } else {
+      this.setState({ [name]: value });
+    }
+
+    if (isNaN(e.target.value)) {
+      return;
+    }
+
+    if (e.target.name === "number") {
+      if (e.target.value.length >= 13) {
+        this.checkCard(e.target.value);
+      } else {
+        this.checkCard(12);
+      }
+    }
+  };
+
+  checkCard(e) {
+    const cardStat = valid.number(e);
+    this.setState({ cardValid: cardStat });
+    if (cardStat.isValid) {
+      if (cardStat.card) {
+        this.setState({ cardType: cardStat.card.type });
+      }
+    } else {
+      this.setState({ cardType: "" });
+    }
+  }
+
   onSubmit(e) {
     e.preventDefault();
 
     const payData = {
-      cardNum: this.state.cardNum,
-      nameCard: this.state.nameCard,
-      expiration: this.state.expiration,
-      cvCode: this.state.cvCode,
+      cardNum: this.state.number,
+      nameCard: this.state.name,
+      expiration: this.state.expiry,
+      cvCode: this.state.cvc,
       is_Default: this.state.is_Default,
     };
 
     this.props.addPayment(payData, this.props.history);
   }
 
-  onChange(e) {
-    this.setState({ [e.target.name]: e.target.value });
-  }
+  // onChange(e) {
+  //   this.setState({ [e.target.name]: e.target.value });
+  // }
 
   onCheck(e) {
     this.setState({
@@ -62,16 +117,32 @@ class AddPayment extends Component {
       <div className="add-payment">
         <div className="container">
           <div className="row">
-            <div className="col-md-8 m-auto">
-              <Link to="/dashboard" className="btn btn-light">
+            <div className="col-md-7 m-auto">
+              <Link to="/dashboard" className="btn btn-secondary mb-1">
                 Go Back
               </Link>
-              <h1 className="display-4 text-center">Add Payment Card</h1>
-              <p className="lead text-center">
+
+              <h1 className=" mt-4 text-center">Add Payment Card</h1>
+              <p className="text-center my-3">
                 Please complete the fields to add Payment Info
               </p>
+              <Cards
+                cvc={this.state.cvc}
+                expiry={this.state.expiry}
+                focused={this.state.focus}
+                name={this.state.name}
+                number={this.state.number}
+              />
+              <div className="text-center text-success mt-2 text-capitalize">
+                {this.state.cardValid.isValid === true ? "Valid Card: " : ""}
+                {this.state.cardType !== null ||
+                this.state.cardType !== undefined
+                  ? this.state.cardType
+                  : ""}
+              </div>
+
               <form onSubmit={this.onSubmit}>
-                <div className="form-check mb-4">
+                <div className="form-check mt-3 mb-3">
                   <input
                     type="checkbox"
                     className="form-check-input"
@@ -81,38 +152,51 @@ class AddPayment extends Component {
                     onChange={this.onCheck}
                     id="is_Default"
                   />
+
                   <label htmlFor="is_Default" className="form-check-label">
                     Set as Default
                   </label>
                 </div>
-                <TextFieldGroup
-                  placeholder="* Name on The Card"
-                  name="nameCard"
-                  value={this.state.nameCard}
-                  onChange={this.onChange}
-                  error={errors.nameCard}
-                />
-                <TextFieldGroup
-                  placeholder="* Card Number"
-                  name="cardNum"
-                  value={this.state.cardNum}
-                  onChange={this.onChange}
-                  error={errors.cardNum}
-                />
-                <TextFieldGroup
-                  placeholder="* Month/Year"
-                  name="expiration"
-                  value={this.state.expiration}
-                  onChange={this.onChange}
-                  error={errors.expiration}
-                />
 
                 <TextFieldGroup
-                  placeholder="* cvv"
-                  name="cvCode"
-                  value={this.state.cvCode}
-                  onChange={this.onChange}
-                  error={errors.cvCode}
+                  placeholder="* Card Number"
+                  type="text"
+                  name="number"
+                  value={this.state.number}
+                  onChange={this.handleInputChange}
+                  onFocus={this.handleInputFocus}
+                  error={errors.number}
+                  maxLength="19"
+                />
+                <TextFieldGroup
+                  placeholder="* Name on the Card"
+                  type="text"
+                  name="name"
+                  value={this.state.name}
+                  onChange={this.handleInputChange}
+                  onFocus={this.handleInputFocus}
+                  error={errors.name}
+                  maxLength="23"
+                />
+                <TextFieldGroup
+                  placeholder="* Expiration Date"
+                  type="text"
+                  name="expiry"
+                  value={this.state.expiry}
+                  onChange={this.handleInputChange}
+                  onFocus={this.handleInputFocus}
+                  error={errors.expiry}
+                  maxLength="4"
+                />
+                <TextFieldGroup
+                  placeholder="* cvc"
+                  type="text"
+                  name="cvc"
+                  value={this.state.cvc}
+                  onChange={this.handleInputChange}
+                  onFocus={this.handleInputFocus}
+                  error={errors.cvc}
+                  maxLength="3"
                 />
 
                 <input

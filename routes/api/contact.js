@@ -20,7 +20,7 @@ router.get(
     if (!req.user.is_admin) {
       return res.status(401).json("unauthorized");
     } else {
-      Contact.find().then(contacts => {
+      Contact.find().then((contacts) => {
         res.json(contacts);
       });
     }
@@ -37,7 +37,7 @@ router.get(
     if (!req.user.is_admin) {
       return res.status(401).json({ fail: "unauthorized" });
     } else {
-      Contact.findOne({ _id: req.params.id }).then(contact => {
+      Contact.findOne({ _id: req.params.id }).then((contact) => {
         res.json(contact);
       });
     }
@@ -52,11 +52,12 @@ router.post("/", (req, res) => {
   if (!isValid) {
     return res.status(400).json(errors);
   }
+
   const newContact = new Contact({
     name: req.body.name,
     email: req.body.email,
-    company: req.body.company,
-    message: req.body.message
+    message: req.body.message,
+    open: false,
   });
   newContact.save().then(() => {
     res.json(newContact);

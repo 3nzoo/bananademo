@@ -29,7 +29,7 @@ import CreateProfile from "./components/create-profile/CreateProfile";
 import EditProfile from "./components/edit-profile/EditProfile";
 import AddPayment from "./components/add-info/AddPayment";
 import AddAddress from "./components/add-info/AddAddress";
-
+import Cart from "./components/dashboard/client/Cart";
 import Profiles from "./components/profiles/Profiles";
 import Profile from "./components/profile/Profile";
 import ProRequest from "./components/dashboard/client/ProRequest";
@@ -72,12 +72,6 @@ class App extends Component {
 
             <div className="container">
               <Route exact path="/" component={Landing} />
-              <Switch>
-                <Route path="/vinyl13" component={VinlyBanner13} />
-                <Route path="/vinyl18" component={VinlyBanner18} />
-                <Route path="/meshBanner" component={MeshBanner} />
-                <Route path="/superSmooth" component={SuperSmooth} />
-              </Switch>
 
               <Route exact path="/register" component={Register} />
               <Route exact path="/login" component={Login} />
@@ -86,6 +80,11 @@ class App extends Component {
               <Route exact path="/profile/:handle" component={Profile} />
               <Switch>
                 <PrivateRoute exact path="/dashboard" component={Dashboard} />
+                <Route path="/cart" component={Cart} />
+                <Route path="/vinyl13" component={VinlyBanner13} />
+                <Route path="/vinyl18" component={VinlyBanner18} />
+                <Route path="/meshBanner" component={MeshBanner} />
+                <Route path="/superSmooth" component={SuperSmooth} />
               </Switch>
               <Switch>
                 <PrivateRoute exact path="/AdminDash" component={AdminDash} />

@@ -240,9 +240,9 @@ class Mesh extends Component {
 
               <br />
             </div>
-            <div className="row mb-1  mx-auto">
+            <div className="row mb-1 mx-auto">
               <span className="ml-3 my-1 "># of Slides</span>
-              <div className="col-md-7  ml-auto">
+              <div className="col-md-7 ml-auto">
                 <SmallSelectListGroup
                   placeholder="1"
                   name="numSlides"

@@ -31,7 +31,7 @@ class QuoteSuperSmooth extends Component {
       quantity: "",
       price: "",
       displayMoreOptions: "",
-      errors: {}
+      errors: {},
     };
 
     this.onChange = this.onChange.bind(this);
@@ -57,7 +57,7 @@ class QuoteSuperSmooth extends Component {
     const totalSize = Math.round(((htot * wtot) / 144) * 100) / 100;
     this.setState({ totalBanner: totalSize });
   }
-  onChange = e => {
+  onChange = (e) => {
     // Disable alphabetic
     const re = /^[0-9\b]+$/;
     if (isNaN(e.target.value)) {
@@ -259,12 +259,12 @@ class QuoteSuperSmooth extends Component {
 QuoteSuperSmooth.propTypes = {
   loginUser: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired,
-  errors: PropTypes.object.isRequired
+  errors: PropTypes.object.isRequired,
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   auth: state.auth,
-  errors: state.errors
+  errors: state.errors,
 });
 
 export default connect(mapStateToProps, { loginUser })(QuoteSuperSmooth);

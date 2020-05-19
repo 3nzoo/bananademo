@@ -10,14 +10,14 @@ const SmallTextFieldGroup = ({
   info,
   type,
   onChange,
-  disabled
+  disabled,
 }) => {
   return (
     <div className="form-group m-auto ">
       <input
         type={type}
-        className={classnames("form-control form-control-sm", {
-          "is-invalid": error
+        className={classnames("form-control input-sm form-control-sm", {
+          "is-invalid": error,
         })}
         placeholder={placeholder}
         name={name}
@@ -39,11 +39,11 @@ SmallTextFieldGroup.propTypes = {
   error: PropTypes.string,
   type: PropTypes.string,
   onChange: PropTypes.func.isRequired,
-  disabled: PropTypes.string
+  disabled: PropTypes.string,
 };
 
 SmallTextFieldGroup.defaultProps = {
-  type: "text"
+  type: "text",
 };
 
 export default SmallTextFieldGroup;

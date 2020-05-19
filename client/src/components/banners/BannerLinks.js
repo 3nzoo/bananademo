@@ -5,7 +5,7 @@ class BannerLinks extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      banner: props.banner
+      banner: props.banner,
     };
   }
   render() {

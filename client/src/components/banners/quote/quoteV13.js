@@ -37,7 +37,7 @@ class QuoteV13 extends Component {
       quantity: "",
       price: "",
       displayMoreOptions: "",
-      errors: {}
+      errors: {},
     };
 
     this.onChange = this.onChange.bind(this);
@@ -63,7 +63,7 @@ class QuoteV13 extends Component {
     const totalSize = Math.round(((htot * wtot) / 144) * 100) / 100;
     this.setState({ totalBanner: totalSize });
   }
-  onChange = e => {
+  onChange = (e) => {
     // Disable alphabetic
     const re = /^[0-9\b]+$/;
     if (isNaN(e.target.value)) {
@@ -91,33 +91,6 @@ class QuoteV13 extends Component {
         this.totHeight(this.state.heightFeet, this.state.heightInch);
       });
     }
-
-    //   isNaN(this.state.quantity) ||
-    //   this.state.quantity === 0 ||
-    //   this.state.quantity == null
-    // ) {
-    //   this.state.quantity = 1;
-    // } else if (
-    //   isNaN(this.state.price) ||
-    //   this.state.quantity === 0 ||
-    //   this.state.quantity == null
-    // ) {
-    //   this.state.price = "0.00";
-    // }
-
-    // console.log(this.state.widthFeet1 + " feet1");
-
-    // this.state.widthTot = this.state.widthInch + this.state.widthFeet;
-    // this.state.heightTot = this.state.heightFeet + this.state.heightInch;
-    // if (isNaN(this.state.widthTot)) {
-    //   this.state.widthTot = "0";
-    // } else if (isNaN(this.state.heightTot)) {
-    //   this.state.heightTot = "0";
-    // }
-    // this.state.totalBanner = (this.state.widthTot * this.state.heightTot) / 144;
-    // this.state.totalBanner = Math.round(this.state.totalBanner * 100) / 100;
-    // this.state.price = this.state.quantity * (this.state.totalBanner * 3);
-    // this.state.price = this.state.price.toFixed(2);
   };
 
   render() {
@@ -341,8 +314,8 @@ class QuoteV13 extends Component {
               <button
                 type="button"
                 onClick={() => {
-                  this.setState(prevState => ({
-                    displayMoreOptions: !prevState.displayMoreOptions
+                  this.setState((prevState) => ({
+                    displayMoreOptions: !prevState.displayMoreOptions,
                   }));
                 }}
                 className={"btn ml-3 btn-sm btn-dark mt-2"}
@@ -417,12 +390,12 @@ class QuoteV13 extends Component {
 QuoteV13.propTypes = {
   loginUser: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired,
-  errors: PropTypes.object.isRequired
+  errors: PropTypes.object.isRequired,
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   auth: state.auth,
-  errors: state.errors
+  errors: state.errors,
 });
 
 export default connect(mapStateToProps, { loginUser })(QuoteV13);

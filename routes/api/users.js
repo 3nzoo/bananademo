@@ -66,7 +66,7 @@ router.post("/register", (req, res) => {
     return res.status(400).json(errors);
   }
 
-  User.findOne({ email: req.body.email }).then(user => {
+  User.findOne({ email: req.body.email }).then((user) => {
     if (user) {
       errors.email = "Email already exists";
       return res.status(400).json(errors);
@@ -76,7 +76,7 @@ router.post("/register", (req, res) => {
         email: req.body.email,
         password: req.body.password,
         is_admin: false,
-        position: "premiere"
+        position: "premiere",
       });
 
       bcrypt.genSalt(10, (err, salt) => {
@@ -85,12 +85,37 @@ router.post("/register", (req, res) => {
           newUser.password = hash;
           newUser
             .save()
-            .then(user => res.json(user))
-            .catch(err => console.log(err));
+            .then((user) => res.json(user))
+            .catch((err) => console.log(err));
         });
       });
     }
   });
+});
+
+// @route GET api/users/passforgot
+// @desc Check if user is available and send email if possible
+// Public
+router.get("/passforgot", (req, res) => {
+  User.findOne({ email: req.body.email }).then((user) => {
+    const newUser = {
+      id: user._id,
+      password: user.password,
+    };
+    jwt.sign(newUser, keys.secretOrKey, { expiresIn: 3600 }, (err, token) => {
+      res.json({
+        email: user.email,
+        token: "Bearer " + token,
+      });
+    });
+  });
+});
+
+// @route GET api/users/passforgot
+// @desc Check if user is available and send email if possible
+// Public
+router.post("/resetPassword/:hash", (req, res) => {
+  console.log("inside");
 });
 
 // @route   POST api/users/register/admin
@@ -107,7 +132,7 @@ router.post(
       return res.status(400).json(errors);
     }
 
-    User.findOne({ email: req.body.email }).then(user => {
+    User.findOne({ email: req.body.email }).then((user) => {
       if (user) {
         errors.email = "Email already exists";
         return res.status(400).json(errors);
@@ -120,7 +145,7 @@ router.post(
           email: req.body.email,
           password: req.body.password,
           is_admin: req.body.is_admin,
-          position: req.body.position
+          position: req.body.position,
         });
         if (newUser.position == "professional") {
           newUser.isApproved = true;
@@ -137,8 +162,8 @@ router.post(
             newUser.password = hash;
             newUser
               .save()
-              .then(user => res.json(user))
-              .catch(err => console.log(err));
+              .then((user) => res.json(user))
+              .catch((err) => console.log(err));
           });
         });
       }
@@ -154,7 +179,7 @@ router.post(
   "/approve/pro",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
-    User.findOne({ email: req.body.email }).then(user => {
+    User.findOne({ email: req.body.email }).then((user) => {
       if (!user) {
         errors.email = "user not found";
         return res.status(400).json(errors);
@@ -165,7 +190,7 @@ router.post(
           { email: user.email },
           { position: "professional" },
           { new: true }
-        ).then(user => res.json(user));
+        ).then((user) => res.json(user));
       } else {
         errors = "Page not found";
         return res.status(400).json(errors);
@@ -189,7 +214,7 @@ router.post("/login", (req, res) => {
   const password = req.body.password;
 
   // Find user by email
-  User.findOne({ email }).then(user => {
+  User.findOne({ email }).then((user) => {
     // Check for user
     if (!user) {
       errors.email = "User not found";
@@ -197,14 +222,15 @@ router.post("/login", (req, res) => {
     }
 
     // Check Password
-    bcrypt.compare(password, user.password).then(isMatch => {
+    bcrypt.compare(password, user.password).then((isMatch) => {
       if (isMatch) {
         // User Matched
         const payload = {
           id: user.id,
           name: user.name,
+          email: user.email,
           is_admin: user.is_admin,
-          position: user.position
+          position: user.position,
         }; // Create JWT Payload
         if (user.is_admin || user.isApproved) {
           // Sign Token
@@ -216,7 +242,7 @@ router.post("/login", (req, res) => {
               res.json({
                 approved: user.isApproved,
                 success: true,
-                token: "Bearer " + token
+                token: "Bearer " + token,
               });
             }
           );
@@ -242,7 +268,7 @@ router.get(
     res.json({
       id: req.user.id,
       name: req.user.name,
-      email: req.user.email
+      email: req.user.email,
     });
   }
 );
@@ -255,7 +281,7 @@ router.post(
   "/approve",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
-    User.findOne({ _id: req.body.id }).then(user => {
+    User.findOne({ _id: req.body.id }).then((user) => {
       if (!user) {
         errors.email = "user not found";
         return res.status(400).json(errors);
@@ -267,8 +293,8 @@ router.post(
           { isApproved: true },
           { new: true }
         )
-          .then(user => res.json(user))
-          .catch(err => res.status(404).json(err));
+          .then((user) => res.json(user))
+          .catch((err) => res.status(404).json(err));
       } else {
         errors = "Page not found";
         return res.status(400).json(errors);
@@ -286,16 +312,16 @@ router.delete(
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
     console.log(req);
-    User.findOne({ _id: req.body.id }).then(user => {
+    User.findOne({ _id: req.body.id }).then((user) => {
       if (req.user.is_admin && req.user.position == "admin" && user) {
         if (req.user.email != req.body.email && req.user.position == "admin") {
           User.findOneAndRemove({ _id: req.body.id })
             .then(() => res.json({ success: "Registration Declined" }))
-            .catch(err => res.status(404).json(err));
+            .catch((err) => res.status(404).json(err));
         }
       } else {
         res.json({
-          error: "Use only Admin account"
+          error: "Use only Admin account",
         });
       }
     });
@@ -307,14 +333,14 @@ router.delete(
   "/declineRequest1/:cl_id",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
-    User.findOne({ _id: req.params.cl_id }).then(user => {
+    User.findOne({ _id: req.params.cl_id }).then((user) => {
       if (!user) {
         errors.email = "user not found";
         return res.status(400).json(errors);
       } else if (req.user.is_admin && user.position != "admin") {
         User.findOneAndRemove({ _id: req.params.cl_id })
           .then(() => res.json({ success: "Registration Declined" }))
-          .catch(err => res.status(404).json(err));
+          .catch((err) => res.status(404).json(err));
       } else {
         errors = "Page not found";
         return res.status(400).json(errors);

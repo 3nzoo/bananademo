@@ -7,24 +7,28 @@ const TextFieldGroup = ({
   placeholder,
   value,
   label,
+  maxLength,
   error,
   info,
+  onFocus,
   type,
   onChange,
-  disabled
+  disabled,
 }) => {
   return (
     <div className="form-group">
       <input
         type={type}
         className={classnames("form-control form-control-lg", {
-          "is-invalid": error
+          "is-invalid": error,
         })}
         placeholder={placeholder}
         name={name}
         value={value}
+        maxLength={maxLength}
         onChange={onChange}
         disabled={disabled}
+        onFocus={onFocus}
       />
       {info && <small className="form-text text-muted">{info}</small>}
       {error && <div className="invalid-feedback">{error}</div>}
@@ -40,11 +44,11 @@ TextFieldGroup.propTypes = {
   error: PropTypes.string,
   type: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
-  disabled: PropTypes.string
+  disabled: PropTypes.string,
 };
 
 TextFieldGroup.defaultProps = {
-  type: "text"
+  type: "text",
 };
 
 export default TextFieldGroup;

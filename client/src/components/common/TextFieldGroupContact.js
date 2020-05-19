@@ -2,44 +2,52 @@ import React from "react";
 import classnames from "classnames";
 import PropTypes from "prop-types";
 
-const SmallSelectListGroup = ({
+const TextFieldGroup = ({
   name,
+  placeholder,
   value,
+  label,
+  maxLength,
   error,
   info,
+  onFocus,
+  type,
   onChange,
-  options,
+  disabled,
 }) => {
-  const selectOptions = options.map((option) => (
-    <option key={option.label} disabled={option.disabled} value={option.value}>
-      {option.label}
-    </option>
-  ));
   return (
-    <div className="form-group form-group-sm small">
-      <select
-        className={classnames("form-control smallInput form-control-sm", {
+    <div className="form-group">
+      <input
+        type={type}
+        className={classnames("form-control form-control-lg", {
           "is-invalid": error,
         })}
+        placeholder={placeholder}
         name={name}
         value={value}
+        maxLength={maxLength}
         onChange={onChange}
-      >
-        {selectOptions}
-      </select>
+        disabled={disabled}
+        onFocus={onFocus}
+      />
       {info && <small className="form-text text-muted">{info}</small>}
       {error && <div className="invalid-feedback">{error}</div>}
     </div>
   );
 };
 
-SmallSelectListGroup.propTypes = {
+TextFieldGroup.propTypes = {
   name: PropTypes.string.isRequired,
-  value: PropTypes.string,
+  placeholder: PropTypes.string,
   info: PropTypes.string,
   error: PropTypes.string,
+  type: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
-  options: PropTypes.array.isRequired,
+  disabled: PropTypes.string,
 };
 
-export default SmallSelectListGroup;
+TextFieldGroup.defaultProps = {
+  type: "text",
+};
+
+export default TextFieldGroup;

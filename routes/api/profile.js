@@ -31,14 +31,14 @@ router.get(
 
     Profile.findOne({ user: req.user.id })
       .populate("user", ["name", "position"])
-      .then(profile => {
+      .then((profile) => {
         if (!profile) {
           errors.noprofile = "There is no profile for this user";
           return res.status(404).json(errors);
         }
         res.json(profile);
       })
-      .catch(err => res.status(404).json(err));
+      .catch((err) => res.status(404).json(err));
   }
 );
 
@@ -59,7 +59,7 @@ router.get(
 
     Profile.find()
       .populate("user", ["name", "email", "position", "isApproved"])
-      .then(profiles => {
+      .then((profiles) => {
         if (!profiles) {
           errors.noprofile = "There are no profiles";
 
@@ -68,7 +68,9 @@ router.get(
 
         res.json(profiles);
       })
-      .catch(err => res.status(404).json({ profile: "There are no profiles" }));
+      .catch((err) =>
+        res.status(404).json({ profile: "There are no profiles" })
+      );
   }
 );
 
@@ -91,7 +93,7 @@ router.get(
       .select("name")
       .select("position")
       .select("email")
-      .then(profiles => {
+      .then((profiles) => {
         if (!profiles) {
           errors.noprofile = "There are no profiles";
           return res.status(404).json(errors);
@@ -99,7 +101,9 @@ router.get(
 
         res.json(profiles);
       })
-      .catch(err => res.status(404).json({ profile: "There are no profiles" }));
+      .catch((err) =>
+        res.status(404).json({ profile: "There are no profiles" })
+      );
   }
 );
 
@@ -122,7 +126,7 @@ router.get(
       .select("name")
       .select("position")
       .select("email")
-      .then(profiles => {
+      .then((profiles) => {
         if (!profiles) {
           errors.noprofile = "There are no profiles";
           return res.status(404).json(errors);
@@ -130,7 +134,9 @@ router.get(
 
         res.json(profiles);
       })
-      .catch(err => res.status(404).json({ profile: "There are no profiles" }));
+      .catch((err) =>
+        res.status(404).json({ profile: "There are no profiles" })
+      );
   }
 );
 
@@ -150,14 +156,16 @@ router.get(
     User.find({ position: "premiere" })
       .select("name")
       .select("email")
-      .then(profiles => {
+      .then((profiles) => {
         if (!profiles) {
           errors.noprofile = "There are no profiles";
           return res.status(404).json(errors);
         }
         res.json(profiles);
       })
-      .catch(err => res.status(404).json({ profile: "There are no profiles" }));
+      .catch((err) =>
+        res.status(404).json({ profile: "There are no profiles" })
+      );
   }
 );
 
@@ -178,17 +186,17 @@ router.get(
       .select("email")
       .select("is_admin")
       .select("isApproved")
-      .then(user => {
+      .then((user) => {
         if (!user) {
           errors.nouser = "No user available";
           return res.json(404).json(errors);
         }
 
-        const client = user.filter(item => item.is_admin === false);
+        const client = user.filter((item) => item.is_admin === false);
 
         res.json(client);
       })
-      .catch(err => res.status(404).json({ user: "No user available" }));
+      .catch((err) => res.status(404).json({ user: "No user available" }));
   }
 );
 
@@ -210,7 +218,7 @@ router.get(
     User.find({ position: "professional" })
       .select("name")
       .select("email")
-      .then(profiles => {
+      .then((profiles) => {
         if (!profiles) {
           errors.noprofile = "There are no profiles";
           return res.status(404).json(errors);
@@ -218,7 +226,9 @@ router.get(
 
         res.json(profiles);
       })
-      .catch(err => res.status(404).json({ profile: "There are no profiles" }));
+      .catch((err) =>
+        res.status(404).json({ profile: "There are no profiles" })
+      );
   }
 );
 
@@ -243,7 +253,7 @@ router.get(
       .select("handle")
       .select("isRequesting")
       .select("docs")
-      .then(profiles => {
+      .then((profiles) => {
         if (!profiles) {
           errors.noprofile = "There are no profiles";
           return res.status(404).json(errors);
@@ -251,7 +261,9 @@ router.get(
 
         res.json(profiles);
       })
-      .catch(err => res.status(404).json({ profile: "There are no profiles" }));
+      .catch((err) =>
+        res.status(404).json({ profile: "There are no profiles" })
+      );
   }
 );
 
@@ -262,13 +274,13 @@ router.post(
   "/request",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
-    Profile.findOne({ user: req.user.id }).then(profile => {
+    Profile.findOne({ user: req.user.id }).then((profile) => {
       if (profile) {
         Profile.findOneAndUpdate(
           { user: req.user.id },
           { isRequesting: true },
           { new: true }
-        ).then(profile => res.json(profile));
+        ).then((profile) => res.json(profile));
       }
     });
   }
@@ -281,7 +293,7 @@ router.post(
   "/declineProRequest/:id",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
-    Profile.findOne({ user: req.params.id }).then(profile => {
+    Profile.findOne({ user: req.params.id }).then((profile) => {
       if (req.user.is_admin && req.user.position == "admin") {
         if (req.user.email != req.body.email && req.user.position == "admin") {
           if (profile) {
@@ -289,7 +301,7 @@ router.post(
               { user: req.params.id },
               { isRequesting: false },
               { new: true }
-            ).then(profile => {
+            ).then((profile) => {
               profile.docs.splice(0, profile.docs.length);
               profile.save();
               res.json(profile);
@@ -328,26 +340,26 @@ router.post(
     if (req.body.businessType)
       profileFields.businessType = req.body.businessType;
 
-    Profile.findOne({ user: req.user.id }).then(profile => {
+    Profile.findOne({ user: req.user.id }).then((profile) => {
       if (profile) {
         // Update
         Profile.findOneAndUpdate(
           { user: req.user.id },
           { $set: profileFields },
           { new: true }
-        ).then(profile => res.json(profile));
+        ).then((profile) => res.json(profile));
       } else {
-        // Create
-
         // Check if handle exists
-        Profile.findOne({ handle: profileFields.handle }).then(profile => {
+        Profile.findOne({ handle: profileFields.handle }).then((profile) => {
           if (profile) {
             errors.handle = "That handle already exists";
             res.status(400).json(errors);
           }
 
           // Save Profile
-          new Profile(profileFields).save().then(profile => res.json(profile));
+          new Profile(profileFields)
+            .save()
+            .then((profile) => res.json(profile));
         });
       }
     });
@@ -367,27 +379,27 @@ router.post(
       return res.status(400).json(errors);
     }
 
-    Profile.findOne({ user: req.user.id }).then(profile => {
+    Profile.findOne({ user: req.user.id }).then((profile) => {
       const newPayment = {
         cardNum: req.body.cardNum,
         nameCard: req.body.nameCard,
         expiration: req.body.expiration,
         cvCode: req.body.cvCode,
-        is_Default: req.body.is_Default
+        is_Default: req.body.is_Default,
       };
 
       if (profile.payment.length < 1) {
         newPayment.is_Default = true;
       } else {
         const card = profile.payment
-          .map(payload => payload.cardNum)
+          .map((payload) => payload.cardNum)
           .indexOf(req.body.cardNum);
         if (card >= 0) {
           profile.payment.splice(card, 1);
         }
 
         const checkPay = profile.payment
-          .map(item => item.is_Default)
+          .map((item) => item.is_Default)
           .indexOf(true);
 
         if (checkPay >= 0) {
@@ -406,7 +418,7 @@ router.post(
 
       profile.payment.unshift(newPayment);
 
-      profile.save().then(profile => res.json(profile));
+      profile.save().then((profile) => res.json(profile));
     });
   }
 );
@@ -420,10 +432,10 @@ router.delete(
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
     Profile.findOne({ user: req.user.id })
-      .then(profile => {
+      .then((profile) => {
         // Get remove index
         const removeIndex = profile.payment
-          .map(item => item.id)
+          .map((item) => item.id)
           .indexOf(req.params.pay_id);
 
         // check payid before Splice out of array
@@ -434,7 +446,7 @@ router.delete(
         // if payment count is equal to 1
         if (profile.payment.length >= 1) {
           const checkPay = profile.payment
-            .map(item => item.is_Default)
+            .map((item) => item.is_Default)
             .indexOf(true);
           if (checkPay == -1) {
             profile.payment[0].is_Default = true;
@@ -442,9 +454,9 @@ router.delete(
         }
 
         // Save
-        profile.save().then(profile => res.json(profile));
+        profile.save().then((profile) => res.json(profile));
       })
-      .catch(err => res.status(404).json(err));
+      .catch((err) => res.status(404).json(err));
   }
 );
 
@@ -461,7 +473,7 @@ router.post(
       return res.status(400).json(errors);
     }
 
-    Profile.findOne({ user: req.user.id }).then(profile => {
+    Profile.findOne({ user: req.user.id }).then((profile) => {
       const newAdd = {
         name: req.body.name,
         company: req.body.company,
@@ -470,22 +482,56 @@ router.post(
         state: req.body.state,
         zipCode: req.body.zipCode,
         deliveryAdd: req.body.deliveryAdd,
-        billingAdd: req.body.billingAdd
+        billingAdd: req.body.billingAdd,
       };
+      const billingDefault = profile.address.filter(
+        (item) => item.billingAdd === true
+      );
+      const deliveryDefault = profile.address.filter(
+        (item) => item.deliveryAdd === true
+      );
 
-      const checkAdd = profile.address
-        .map(item => item.deliveryAdd)
-        .indexOf(true);
+      //if bill is true
+      if (req.body.billingAdd === true) {
+        const billIndex = profile.address.indexOf(billingDefault[0]);
 
-      if (checkAdd != -1) {
-        const oldAdd = profile.address[checkAdd];
-        profile.address.splice(checkAdd, 1);
-        oldAdd.deliveryAdd = false;
-        profile.address.unshift(oldAdd);
+        if (billingDefault[0] === undefined) {
+        } else {
+          profile.address.splice(billIndex, 1);
+          billingDefault[0].billingAdd = false;
+          profile.address.unshift(billingDefault[0]);
+        }
+      }
+
+      //if shipping is true
+      if (req.body.deliveryAdd === true) {
+        const delliveryIndex = profile.address.indexOf(deliveryDefault[0]);
+
+        if (deliveryDefault[0] === undefined) {
+        } else {
+          profile.address.splice(delliveryIndex, 1);
+          deliveryDefault[0].deliveryAdd = false;
+          profile.address.unshift(deliveryDefault[0]);
+        }
+      }
+
+      //if both false
+      if (req.body.billingAdd === false && req.body.deliveryAdd === false) {
+        if (
+          billingDefault[0] === undefined &&
+          deliveryDefault[0] === undefined
+        ) {
+          newAdd.deliveryAdd = true;
+          newAdd.billingAdd = true;
+        }
+      }
+
+      if (billingDefault[0] === undefined && deliveryDefault[0] === undefined) {
+        console.log("dapat both true");
       }
 
       profile.address.unshift(newAdd);
-      profile.save().then(profile => res.json(profile));
+      profile.save().then((profile) => res.json(profile));
     });
   }
 );
@@ -503,7 +549,7 @@ router.post(
       return res.status(400).json(errors);
     }
 
-    Profile.findOne({ user: req.user.id }).then(profile => {
+    Profile.findOne({ user: req.user.id }).then((profile) => {
       const newAdd = {
         name: req.body.name,
         company: req.body.company,
@@ -512,17 +558,17 @@ router.post(
         state: req.body.state,
         zipCode: req.body.zipCode,
         deliveryAdd: req.body.deliveryAdd,
-        billingAdd: req.body.billingAdd
+        billingAdd: req.body.billingAdd,
       };
 
       Profile.findOneAndUpdate(
         { user: req.user.id },
         { $set: profileFields },
         { new: true }
-      ).then(profile => res.json(profile));
+      ).then((profile) => res.json(profile));
 
       const checkAdd = profile.address
-        .map(item => item.deliveryAdd)
+        .map((item) => item.deliveryAdd)
         .indexOf(true);
 
       if (checkAdd != -1) {
@@ -533,50 +579,107 @@ router.post(
       }
 
       profile.address.unshift(newAdd);
-      profile.save().then(profile => res.json(profile));
+      profile.save().then((profile) => res.json(profile));
     });
   }
 );
 
-// @route   POST api/profile/approvePro
-// @desc    Approve ProRequest using admin
-// @access  Private Admin
+// @route   POST api/profile/address/billing/:add_id
+// @desc    update current default billing address
+// @access  Private
+
 router.post(
-  "/approvePro",
+  "/address/billing/:add_id",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
-    User.findOne({ _id: req.body.id }).then(user => {
-      if (!user) {
-        errors.email = "user not found";
-        return res.status(400).json(errors);
-      } else if (req.user.is_admin && user.position != "admin") {
-        Profile.findOneAndUpdate(
-          { user: user.id },
-          { position: "professional" },
-          { new: true }
-        ).then(x => {
-          Profile.findOneAndUpdate(
-            { user: user.id },
-            { isRequesting: false },
-            { new: true }
-          ).then(item => console.log());
-        });
-        User.findOneAndUpdate(
-          { _id: user.id },
-          { position: "professional" },
-          { new: true }
-        )
-          .then(user => res.json(user.position))
-          .catch(err => res.status(404).json(err));
+    Profile.findOne({ user: req.user.id }).then((profile) => {
+      const mybilling = profile.address.filter(
+        (item) => item.id === req.params.add_id
+      );
+
+      if (mybilling[0].billingAdd === true) {
+        return;
       } else {
-        errors = "Page not found";
-        return res.status(400).json(errors);
+        const prevBill = profile.address.filter((x) => x.billingAdd === true);
+        const remPrev = profile.address.indexOf(prevBill[0]);
+
+        profile.address.splice(remPrev, 1);
+        prevBill[0].billingAdd = false;
+        profile.address.splice(remPrev, 0, prevBill[0]);
+        const remIndex = profile.address.indexOf(mybilling[0]);
+        mybilling[0].billingAdd = true;
+        profile.address.splice(remIndex, 1, mybilling[0]);
+        profile.save().then((profile) => res.json(profile));
       }
     });
   }
 );
 
-// @route   DELETE api/profile/address/:exp_id
+// @route   POST api/profile/address/billing/:add_id
+// @desc    update current default billing address
+// @access  Private
+router.post(
+  "/payment/default/:add_id",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    Profile.findOne({ user: req.user.id }).then((profile) => {
+      const myPay = profile.payment.filter(
+        (item) => item.id === req.params.add_id
+      );
+      // console.log(myPay);
+      if (myPay[0].is_Default === true) {
+        return;
+      } else {
+        const prevPay = profile.payment.filter((x) => x.is_Default === true);
+
+        const remPrev = profile.payment.indexOf(prevPay[0]);
+        profile.payment.splice(remPrev, 1);
+        prevPay[0].is_Default = false;
+        profile.payment.splice(remPrev, 0, prevPay[0]);
+
+        const remIndex = profile.payment.indexOf(myPay[0]);
+        myPay[0].is_Default = true;
+        profile.payment.splice(remIndex, 1, myPay[0]);
+        profile.save().then((profile) => res.json(profile));
+      }
+    });
+  }
+);
+
+// @route   POST api/profile/address/shippin/:add_id
+// @desc    update current default shipping address
+// @access  Private
+
+router.post(
+  "/address/shipping/:add_id",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    Profile.findOne({ user: req.user.id }).then((profile) => {
+      const mybilling = profile.address.filter(
+        (item) => item.id === req.params.add_id
+      );
+
+      if (mybilling[0].deliveryAdd === true) {
+        return;
+      } else {
+        const prevBill = profile.address.filter((x) => x.deliveryAdd === true);
+        const remPrev = profile.address.indexOf(prevBill[0]);
+
+        profile.address.splice(remPrev, 1);
+        prevBill[0].deliveryAdd = false;
+        profile.address.splice(remPrev, 0, prevBill[0]);
+
+        const remIndex = profile.address.indexOf(mybilling[0]);
+        mybilling[0].deliveryAdd = true;
+        profile.address.splice(remIndex, 1, mybilling[0]);
+
+        profile.save().then((profile) => res.json(profile));
+      }
+    });
+  }
+);
+
+// @route   DELETE api/profile/address/:add_id
 // @desc    Delete address from profile
 // @access  Private
 router.delete(
@@ -584,10 +687,10 @@ router.delete(
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
     Profile.findOne({ user: req.user.id })
-      .then(profile => {
+      .then((profile) => {
         // Get remove index
         const removeIndex = profile.address
-          .map(item => item.id)
+          .map((item) => item.id)
           .indexOf(req.params.add_id);
 
         // check add_id before Splice out of array
@@ -598,7 +701,7 @@ router.delete(
         // if payment count is equal to 1
         if (profile.address.length >= 1) {
           const checkAdd = profile.address
-            .map(item => item.deliveryAdd)
+            .map((item) => item.deliveryAdd)
             .indexOf(true);
 
           if (checkAdd == -1) {
@@ -606,10 +709,56 @@ router.delete(
           }
         }
 
+        const billingDefault = profile.address.filter(
+          (item) => item.billingAdd === true
+        );
+
+        if (billingDefault[0] === undefined) {
+          profile.address[0].billingAdd = true;
+        }
+
         // Save
-        profile.save().then(profile => res.json(profile));
+        profile.save().then((profile) => res.json(profile));
       })
-      .catch(err => res.status(404).json(err));
+      .catch((err) => res.status(404).json(err));
+  }
+);
+
+// @route   POST api/profile/approvePro
+// @desc    Approve ProRequest using admin
+// @access  Private Admin
+router.post(
+  "/approvePro",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    User.findOne({ _id: req.body.id }).then((user) => {
+      if (!user) {
+        errors.email = "user not found";
+        return res.status(400).json(errors);
+      } else if (req.user.is_admin && user.position != "admin") {
+        Profile.findOneAndUpdate(
+          { user: user.id },
+          { position: "professional" },
+          { new: true }
+        ).then((x) => {
+          Profile.findOneAndUpdate(
+            { user: user.id },
+            { isRequesting: false },
+            { new: true }
+          ).then((item) => console.log());
+        });
+        User.findOneAndUpdate(
+          { _id: user.id },
+          { position: "professional" },
+          { new: true }
+        )
+          .then((user) => res.json(user.position))
+          .catch((err) => res.status(404).json(err));
+      } else {
+        errors = "Page not found";
+        return res.status(400).json(errors);
+      }
+    });
   }
 );
 
@@ -639,7 +788,7 @@ router.delete(
   "/admin",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
-    User.findOne({ email: req.body.email }).then(user => {
+    User.findOne({ email: req.body.email }).then((user) => {
       if (req.user.is_admin && req.user.position == "admin" && user) {
         if (req.user.email != req.body.email && req.user.position == "admin") {
           Profile.findOneAndRemove({ handle: req.body.handle }).then(() => {
@@ -652,7 +801,7 @@ router.delete(
         }
       } else {
         res.json({
-          error: "Use only Admin account"
+          error: "Use only Admin account",
         });
       }
     });

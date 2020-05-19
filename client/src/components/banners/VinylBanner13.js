@@ -11,7 +11,7 @@ class VinylBanner13 extends Component {
     super(props);
     this.state = {
       banner: "vinyl13",
-      errors: {}
+      errors: {},
     };
   }
 
@@ -36,13 +36,17 @@ class VinylBanner13 extends Component {
     const { user } = this.props.auth;
     const { errors } = this.state;
     let client = false;
-
+    const currenTime = Date.now() / 1000;
+    if (user.exp < currenTime) {
+      window.location.href = "/";
+    }
     if (errors.isApproved) {
       errors.email = errors.isApproved;
     }
     if (isAuthenticated && !user.is_admin) {
       client = true;
     }
+
     return (
       <div className="vinyl13">
         <div className="container">
@@ -93,12 +97,12 @@ class VinylBanner13 extends Component {
 VinylBanner13.propTypes = {
   loginUser: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired,
-  errors: PropTypes.object.isRequired
+  errors: PropTypes.object.isRequired,
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   auth: state.auth,
-  errors: state.errors
+  errors: state.errors,
 });
 
 export default connect(mapStateToProps, { loginUser })(VinylBanner13);

@@ -12,21 +12,11 @@ class VinylBanner18 extends Component {
     super(props);
     this.state = {
       banner: "vinyl18",
-      errors: {}
+      errors: {},
     };
   }
 
-  componentDidMount() {
-    if (this.props.auth.isAuthenticated) {
-      //   this.props.history.push("/dashboard");
-    }
-  }
-
   UNSAFE_componentWillReceiveProps(nextProps) {
-    if (nextProps.auth.isAuthenticated) {
-      //   this.props.history.push("/dashboard");
-    }
-
     if (nextProps.errors) {
       this.setState({ errors: nextProps.errors });
     }
@@ -36,6 +26,10 @@ class VinylBanner18 extends Component {
     const { isAuthenticated } = this.props.auth;
     const { user } = this.props.auth;
     const { errors } = this.state;
+    const currenTime = Date.now() / 1000;
+    if (user.exp < currenTime || user.is_admin) {
+      window.location.href = "/";
+    }
     let client = false;
     if (errors.isApproved) {
       errors.email = errors.isApproved;
@@ -47,10 +41,20 @@ class VinylBanner18 extends Component {
       <div className="vinyl18">
         <div className="container">
           <div className="row">
-            <div className="col-md-3 pl-1 order-6 order-md-2">
+            <div
+              className={
+                "col-md-3 pl-1  " +
+                (isAuthenticated ? "order-6 order-md-2 " : "order-6 order-md-2")
+              }
+            >
               <BannerLinks banner={this.state.banner} />
             </div>
-            <div className="col-md-5 small p-0 mt-3 mx-auto ml-auto order-4">
+            <div
+              className={
+                "col-md-5 small p-0 mt-3 mx-auto ml-auto " +
+                (isAuthenticated ? "order-2 order-md-4" : "order-4")
+              }
+            >
               <img className="img-fluid mb-4" src={vinyl18} alt="vinly18oz" />
               <h4 className="display-5 text-center">Vinyl Banner (18oz)</h4>
               <p className="text-left">
@@ -79,7 +83,12 @@ class VinylBanner18 extends Component {
                 </li>
               </ul>
             </div>
-            <div className="col-md-3 mb-4 mt-3 ml-auto order-2 order-md-6 loginBG">
+            <div
+              className={
+                "col-md-3 mb-4 mt-3 ml-auto loginBG  " +
+                (isAuthenticated ? "order-4 order-md-6" : "order-2 order-md-6")
+              }
+            >
               {client ? <QuoteV18 /> : <Login />}
             </div>
           </div>
@@ -92,12 +101,12 @@ class VinylBanner18 extends Component {
 VinylBanner18.propTypes = {
   loginUser: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired,
-  errors: PropTypes.object.isRequired
+  errors: PropTypes.object.isRequired,
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   auth: state.auth,
-  errors: state.errors
+  errors: state.errors,
 });
 
 export default connect(mapStateToProps, { loginUser })(VinylBanner18);

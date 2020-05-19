@@ -12,7 +12,7 @@ class SuperSmooth extends Component {
     super(props);
     this.state = {
       banner: "superSmooth",
-      errors: {}
+      errors: {},
     };
   }
 
@@ -29,7 +29,10 @@ class SuperSmooth extends Component {
     const { user } = this.props.auth;
     const { errors } = this.state;
     let client = false;
-
+    const currenTime = Date.now() / 1000;
+    if (user.exp < currenTime) {
+      window.location.href = "/";
+    }
     if (errors.isApproved) {
       errors.email = errors.isApproved;
     }
@@ -37,14 +40,24 @@ class SuperSmooth extends Component {
       client = true;
     }
     return (
-      <div className="vinyl18">
+      <div className="superSmooth">
         <div className="container">
           <div className="row">
-            <div className="col-md-3 pl-1 order-6 order-md-2">
+            <div
+              className={
+                "col-md-3 pl-1  " +
+                (isAuthenticated ? "order-6 order-md-2 " : "order-6 order-md-2")
+              }
+            >
               <BannerLinks banner={this.state.banner} />
             </div>
 
-            <div className="col-md-5 small mx-auto p-0 mt-3 ml-auto order-4">
+            <div
+              className={
+                "col-md-5 small p-0 mt-3 mx-auto ml-auto " +
+                (isAuthenticated ? "order-2 order-md-4" : "order-4")
+              }
+            >
               <img
                 className="img-fluid mb-4"
                 src={superSmooth}
@@ -64,7 +77,12 @@ class SuperSmooth extends Component {
                 <li>Usage: Indoor use with UV printing to last for years</li>
               </ul>
             </div>
-            <div className="col-md-3 mt-3 ml-auto mb-4 order-2 order-md-6 loginBG">
+            <div
+              className={
+                "col-md-3 mb-4 mt-3 ml-auto loginBG  " +
+                (isAuthenticated ? "order-4 order-md-6" : "order-2 order-md-6")
+              }
+            >
               {client ? <QuoteSuperSmooth /> : <Login />}
             </div>
           </div>
@@ -77,12 +95,12 @@ class SuperSmooth extends Component {
 SuperSmooth.propTypes = {
   loginUser: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired,
-  errors: PropTypes.object.isRequired
+  errors: PropTypes.object.isRequired,
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   auth: state.auth,
-  errors: state.errors
+  errors: state.errors,
 });
 
 export default connect(mapStateToProps, { loginUser })(SuperSmooth);

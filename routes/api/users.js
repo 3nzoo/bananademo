@@ -10,6 +10,7 @@ const passport = require("passport");
 const validateRegisterInput = require("../../validation/register");
 const validateLoginInput = require("../../validation/login");
 
+const validateForgetInput = require("../../validation/forgot");
 // Load User model
 const User = require("../../models/User");
 
@@ -302,6 +303,19 @@ router.post(
     });
   }
 );
+
+// @route   POST api/users/request
+// @desc    Send email with link to user with code
+// @access  Public
+// Done
+router.post("/request", (req, res) => {
+  User.findOne({ email: req.body.email }).then((user) => {
+    const { errors, isValid } = validateForgetInput(req.body);
+    if (!isValid) {
+      return res.status(400).json(errors);
+    }
+  });
+});
 
 // @route   POST api/users/declineRequest
 // @desc    Decline Premiere registration using _id by admin

@@ -620,10 +620,10 @@ class QuoteV18 extends Component {
                 </div>
                 {moreInputs}
                 <div className="row text-centert py-2 my-3 quant brown ">
-                  <div className="col-sm-4 my-2 p-0 mx-auto ml- text-white text-center ">
+                  <div className="col-4 my-2 p-0 mx-auto ml- text-white text-center ">
                     QUANTITY:
                   </div>
-                  <div className="col-sm-3 my-auto mx-auto p-0 text-right">
+                  <div className="col-3 my-auto mx-auto p-0 text-right">
                     <SmallTextFieldGroup
                       placeholder="1"
                       name="quantity"
@@ -634,7 +634,7 @@ class QuoteV18 extends Component {
                       className="text-right"
                     />
                   </div>
-                  <div className="col-sm-4 my-2 mx-auto text-right pl-0 ">
+                  <div className="col-4 my-2 mx-auto text-right pl-0 ">
                     <strong className=" text-white text-right ">
                       {/* {console.log(this.state.price + "ere")} */}${" "}
                       {isNaN(this.state.price) ||
@@ -732,20 +732,19 @@ class QuoteV18 extends Component {
                   </div>
                 </div>
                 <div className="row text-centert bg-primary py-2 my-3 quant ">
-                  <div className="col-sm-3 my-2 text-white text-center ">
+                  <div className="col-5 my-2 text-white text-center ">
                     TOTAL
                   </div>
-                  <div className="col-sm-7 my-2 mx-auto text-center">
-                    <strong className="ml-auto text-center text-white pr-2">
+                  <div className="col-6 my-2 mx-auto text-right pr-2">
+                    <strong className="mx-auto text-center text-white ">
                       {/* {console.log(this.state.priceWship + "wow")} */}$
-                      {isNaN(this.state.priceWship) ||
-                      this.state.priceWship == null ||
-                      this.state.priceWship === 0
+                      {isNaN(this.state.price) ||
+                      this.state.price == null ||
+                      this.state.price === 0
                         ? "0.00"
-                        : this.state.priceWship <= 24 &&
-                          this.state.priceWship > 0
-                        ? "25.00"
-                        : this.state.priceWship}
+                        : this.state.price <= 7 && this.state.price > 0
+                        ? "8.00"
+                        : this.state.price}
                     </strong>
                   </div>
                 </div>

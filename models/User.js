@@ -23,6 +23,14 @@ const UserSchema = new Schema({
     type: String,
     required: true,
   },
+  resetToken: {
+    type: String,
+    required: false,
+  },
+  resetExp: {
+    type: Date,
+    required: false,
+  },
   isApproved: {
     type: Boolean,
     default: false,

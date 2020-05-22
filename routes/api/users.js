@@ -5,6 +5,7 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const keys = require("../../config/keys");
 const passport = require("passport");
+const nodemailer = require("nodemailer");
 
 // Load Input Validation
 const validateRegisterInput = require("../../validation/register");
@@ -309,11 +310,47 @@ router.post(
 // @access  Public
 // Done
 router.post("/request", (req, res) => {
-  User.findOne({ email: req.body.email }).then((user) => {
+  User.findOne({ email: req.body.email }).then((item) => {
     const { errors, isValid } = validateForgetInput(req.body);
     if (!isValid) {
       return res.status(400).json(errors);
     }
+    if (!item) {
+      return res.status(404);
+    }
+    const user = require("../../config/keys");
+
+    let transpo = nodemailer.createTransport({
+      name: "example.com",
+      host: "smtp.ethereal.email",
+      port: 587,
+      secure: false,
+      auth: {
+        user: user.adminMail,
+        pass: user.mailPass,
+      },
+      // tls: {
+      //   rejectUnauthorized: false,
+      // },
+    });
+
+    let link =
+      "http://" + req.headers.host + "/api/auth/reset/" + "abcdefg12345";
+
+    let mailOptions = {
+      from: user.adminMail,
+      to: item.email,
+      subject: "Password change request",
+      html: "<h1>Welcome</h1><p>That was easy!</p>",
+      // text: `Hi ${item.username}\n Please click on the following link ${link}`,
+    };
+
+    transpo.sendMail(mailOptions, (error, result) => {
+      if (error) {
+        return res.status(500).json({ message: error });
+      }
+      res.status(200).json({ "Email sent": result });
+    });
   });
 });
 

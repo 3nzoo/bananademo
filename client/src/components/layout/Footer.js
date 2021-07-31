@@ -36,7 +36,7 @@ class Footer extends Component {
                 <a href={"http://www.instagram.com"} className="text-dark mr-2">
                   <i className="fab fa-instagram"></i>
                 </a>
-                <a href="mailto: abc@example.com" className="text-dark ">
+                <a href="mailto: bananabannerscorp@gmail.com" className="text-dark ">
                   <i className="fas fa-envelope"></i>
                 </a>
               </h2>

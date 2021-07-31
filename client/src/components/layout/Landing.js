@@ -29,7 +29,7 @@ class Landing extends Component {
                 />
               </div>
               <div className="col-lg-8 col-md-12 float-md-left  ">
-                <h1 className="text-left px-0  row">bananabanners.com</h1>
+                <h1 className="text-left px-0  row">bananabanner.store</h1>
                 <h3 className="text-left font-weight-normal  row">
                   From your desktop to your door
                 </h3>

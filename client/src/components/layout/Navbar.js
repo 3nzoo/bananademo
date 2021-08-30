@@ -183,13 +183,13 @@ class Navbar extends Component {
             <ul className="navbar-nav mr-auto ">
               {!isValid ? (
                 <li className="nav-item">
-                  <a
+                  {/* <a
                     className="nav-link text-center small text-dark muted mr-auto"
                     href="tel:1(808)739-2842"
                   >
                     <i className="fas fa-phone mr-1"></i>
                     1(808)739-2842
-                  </a>
+                  </a> */}
                 </li>
               ) : (
                 <div></div>

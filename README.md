@@ -2,7 +2,7 @@
 
 bananabanner demo site Repo
 
-1. MERN stack
+1. MERNT stack
 2. Redux
 3. passport
 4. JWT
@@ -10,4 +10,4 @@ bananabanner demo site Repo
 6. Mongoose
 7. CRA
 
-converting to TS Graphql...
+converting to serverless Graphql...

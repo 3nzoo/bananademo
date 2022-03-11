@@ -5,6 +5,11 @@ body {
   background-color: #f1f1f1;
   padding-bottom: 100px;
 }
+
+.App {
+  min-height: 90vh;
+}
+
 .pay:hover {
   background-color: white;
   cursor: pointer;

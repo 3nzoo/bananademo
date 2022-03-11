@@ -1,17 +1,17 @@
-import React, { Component } from "react";
-import { Link, withRouter } from "react-router-dom";
-import PropTypes from "prop-types";
-import { connect } from "react-redux";
-import { logoutUser } from "../../actions/authActions";
-import { clearCurrentProfile } from "../../actions/profileActions";
-import SmallTextFieldGroup from "../common/SmallTextFieldGroup";
-import { loginUser } from "../../actions/authActions";
+import React, { Component } from 'react';
+import { Link, withRouter } from 'react-router-dom';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { logoutUser } from '../../actions/authActions';
+import { clearCurrentProfile } from '../../actions/profileActions';
+import SmallTextFieldGroup from '../common/SmallTextFieldGroup';
+import { loginUser } from '../../actions/authActions';
 class Navbar extends Component {
   constructor() {
     super();
     this.state = {
-      email: "",
-      password: "",
+      email: '',
+      password: '',
       errors: {},
     };
     this.onChange = this.onChange.bind(this);
@@ -20,7 +20,7 @@ class Navbar extends Component {
 
   UNSAFE_componentWillReceiveProps(nextProps) {
     if (nextProps.auth.isAuthenticated) {
-      this.props.history.push("/dashboard");
+      this.props.history.push('/dashboard');
     }
 
     if (nextProps.errors) {
@@ -53,56 +53,56 @@ class Navbar extends Component {
     const { user } = this.props.auth;
     const isValid = user.is_admin;
     const authLinks = (
-      <ul className="navbar-nav text-center ml-auto">
-        <li className="nav-item">
-          <Link className="nav-link" to="/dashboard">
+      <ul className='navbar-nav text-center ml-auto'>
+        <li className='nav-item'>
+          <Link className='nav-link' to='/dashboard'>
             Home
           </Link>
         </li>
-        <li className="nav-item">
-          <Link className="nav-link" to="/cart">
-            <i className="fas fa-shopping-cart mr-1"></i>
+        <li className='nav-item'>
+          <Link className='nav-link' to='/cart'>
+            <i className='fas fa-shopping-cart mr-1'></i>
           </Link>
         </li>
-        <li className="nav-item dropdown ">
+        <li className='nav-item dropdown '>
           <Link
-            className="nav-link dropdown-toggle"
-            to="/#"
-            id="navbarDropdown"
-            role="button"
-            data-toggle="dropdown"
-            aria-haspopup="true"
-            aria-expanded="false"
+            className='nav-link dropdown-toggle'
+            to='/#'
+            id='navbarDropdown'
+            role='button'
+            data-toggle='dropdown'
+            aria-haspopup='true'
+            aria-expanded='false'
           >
-            <i className="fas fa-user mr-1"></i>{" "}
+            <i className='fas fa-user mr-1'></i>{' '}
           </Link>
 
           <div
-            className="dropdown-menu navLink text-center"
-            aria-labelledby="navbarDropdown"
+            className='dropdown-menu navLink text-center'
+            aria-labelledby='navbarDropdown'
           >
-            <Link className="dropdown-item small bannerLink" to="/settings">
+            <Link className='dropdown-item small bannerLink' to='/settings'>
               Account Settings
             </Link>
             <Link
-              className="dropdown-item small bannerLink"
-              to="/change_password"
+              className='dropdown-item small bannerLink'
+              to='/change_password'
             >
               Change Password
             </Link>
 
-            <div className="dropdown-divider small border-white"></div>
-            <Link className="dropdown-item small bannerLink" to="/orders">
+            <div className='dropdown-divider small border-white'></div>
+            <Link className='dropdown-item small bannerLink' to='/orders'>
               Order Status
             </Link>
-            <Link className="dropdown-item small bannerLink" to="/unpaidOrders">
+            <Link className='dropdown-item small bannerLink' to='/unpaidOrders'>
               Pending Payment
             </Link>
-            <div className="dropdown-divider border-white"></div>
+            <div className='dropdown-divider border-white'></div>
             <Link
-              className="dropdown-item small bannerLink"
+              className='dropdown-item small bannerLink'
               onClick={this.onLogoutClick.bind(this)}
-              to="/landing"
+              to='/landing'
             >
               LOGOUT
             </Link>
@@ -112,12 +112,12 @@ class Navbar extends Component {
     );
 
     const adminLinks = (
-      <ul className="navbar-nav ml-auto">
-        <li className="nav-item text-center">
+      <ul className='navbar-nav ml-auto'>
+        <li className='nav-item text-center'>
           <Link
-            className="nav-link"
+            className='nav-link'
             onClick={this.onLogoutClick.bind(this)}
-            to="/landing"
+            to='/landing'
           >
             Logout
           </Link>
@@ -127,37 +127,37 @@ class Navbar extends Component {
 
     const guestLinks = (
       <form onSubmit={this.onSubmit}>
-        <ul className="navbar-nav ">
-          <li className="nav-item my-1 my-lg-auto my-md-auto mx-1">
+        <ul className='navbar-nav '>
+          <li className='nav-item my-1 my-lg-auto my-md-auto mx-1'>
             <SmallTextFieldGroup
-              placeholder="Email Address"
-              name="email"
-              type="email"
+              placeholder='Email Address'
+              name='email'
+              type='email'
               value={this.state.email}
               onChange={this.onChange}
               error={errors.email}
             />
           </li>
-          <li className="nav-item my-1 my-lg-auto my-md-auto mx-1">
+          <li className='nav-item my-1 my-lg-auto my-md-auto mx-1'>
             <SmallTextFieldGroup
-              placeholder="Password"
-              name="password"
-              type="password"
+              placeholder='Password'
+              name='password'
+              type='password'
               value={this.state.password}
               onChange={this.onChange}
               error={errors.password}
             />
           </li>
 
-          <li className="nav-item my-1 my-lg-auto my-md-auto mx-1">
+          <li className='nav-item my-1 my-lg-auto my-md-auto mx-1'>
             <input
-              type="submit"
-              value="Login"
-              className="btn btn-sm btn-dark btn-block"
+              type='submit'
+              value='Login'
+              className='btn btn-sm btn-dark btn-block'
             />
           </li>
-          <li className="nav-item my-1 my-lg-auto my-md-auto mx-1">
-            <Link className=" btn btn-sm btn-danger btn-block " to="/register">
+          <li className='nav-item my-1 my-lg-auto my-md-auto mx-1'>
+            <Link className=' btn btn-sm btn-danger btn-block ' to='/register'>
               Sign Up
             </Link>
           </li>
@@ -166,23 +166,23 @@ class Navbar extends Component {
     );
 
     return (
-      <nav className="navbar navbar-expand-md navbar-light bg-warning mb-4">
-        <div className="container  ">
-          <Link className="navbar-brand ml-2 " to="/">
+      <nav className='navbar navbar-expand-md navbar-light bg-warning mb-auto'>
+        <div className='container  '>
+          <Link className='navbar-brand ml-2 ' to='/'>
             Banana Banners
-          </Link>{" "}
+          </Link>{' '}
           <button
-            className="navbar-toggler float-right"
-            type="button"
-            data-toggle="collapse"
-            data-target="#mobile-nav"
+            className='navbar-toggler float-right'
+            type='button'
+            data-toggle='collapse'
+            data-target='#mobile-nav'
           >
-            <span className="navbar-toggler-icon" />
+            <span className='navbar-toggler-icon' />
           </button>
-          <div className=" collapse navbar-collapse" id="mobile-nav">
-            <ul className="navbar-nav mr-auto ">
+          <div className=' collapse navbar-collapse' id='mobile-nav'>
+            <ul className='navbar-nav mr-auto '>
               {!isValid ? (
-                <li className="nav-item">
+                <li className='nav-item'>
                   {/* <a
                     className="nav-link text-center small text-dark muted mr-auto"
                     href="tel:1(808)739-2842"

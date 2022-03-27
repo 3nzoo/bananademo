@@ -68,9 +68,10 @@ class App extends Component {
       <Provider store={store}>
         <Router>
           <div className='App d-flex flex-column'>
+            <div className='bg-cover position-fixed bg-light w-100 h-100' />
             <Navbar />
 
-            <div className='container'>
+            <div className='container py-4'>
               <Route exact path='/' component={Landing} />
 
               <Route exact path='/register' component={Register} />

@@ -3,3 +3,6 @@ package-lock.json
 /config/keys_dev.js
 /.vscode
 /vscode
+Client-flow.drawio
+Admin-flow.drawio
+data-model.drawio

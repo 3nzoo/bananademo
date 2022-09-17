@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import Popup from 'reactjs-popup';
-import SmallTextFieldGroup from '../common/SmallTextFieldGroup';
-import TextAreaFieldGroup from '../common/TextAreaFieldGroup';
+// import Popup from 'reactjs-popup';
+// import SmallTextFieldGroup from '../common/SmallTextFieldGroup';
+// import TextAreaFieldGroup from '../common/TextAreaFieldGroup';
 class Footer extends Component {
   render() {
     const { user } = this.props.auth;

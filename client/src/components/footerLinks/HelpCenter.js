@@ -1,15 +1,15 @@
 // Public Home Page
-import React, { Component } from "react";
-import { Link } from "react-router-dom";
-import { PropTypes } from "prop-types";
-import { connect } from "react-redux";
-import logo from "../../img/LOGO.png";
-import BannerLinks from "../banners/BannerLinks";
+import React, { Component } from 'react';
+// import { Link } from 'react-router-dom';
+import { PropTypes } from 'prop-types';
+import { connect } from 'react-redux';
+// import logo from "../../img/LOGO.png";
+import BannerLinks from '../banners/BannerLinks';
 class HelpCenter extends Component {
   constructor() {
     super();
     this.state = {
-      displayHelp: "",
+      displayHelp: '',
     };
   }
   onDeleteClick(id) {}
@@ -17,20 +17,20 @@ class HelpCenter extends Component {
     const { displayHelp } = this.state;
     let showHelp;
 
-    if (displayHelp === "Artwork") {
+    if (displayHelp === 'Artwork') {
       showHelp = (
-        <div className=" row mt-2 col-12 m-0 p-0">
-          <div className="accordion col-12 p-0 m-0" id="accordionExample">
-            <div className="card">
-              <div className="card-header" id="headingOne">
-                <h2 className="mb-0">
+        <div className=' row mt-2 col-12 m-0 p-0'>
+          <div className='accordion col-12 p-0 m-0' id='accordionExample'>
+            <div className='card'>
+              <div className='card-header' id='headingOne'>
+                <h2 className='mb-0'>
                   <button
-                    className="btn btn-link row acbtn text-left"
-                    type="button"
-                    data-toggle="collapse"
-                    data-target="#collapseOne"
-                    aria-expanded="true"
-                    aria-controls="collapseOne"
+                    className='btn btn-link row acbtn text-left'
+                    type='button'
+                    data-toggle='collapse'
+                    data-target='#collapseOne'
+                    aria-expanded='true'
+                    aria-controls='collapseOne'
                   >
                     What file types does banana banner accept?
                   </button>
@@ -38,12 +38,12 @@ class HelpCenter extends Component {
               </div>
 
               <div
-                id="collapseOne"
-                className="collapse "
-                aria-labelledby="headingOne"
-                data-parent="#accordionExample"
+                id='collapseOne'
+                className='collapse '
+                aria-labelledby='headingOne'
+                data-parent='#accordionExample'
               >
-                <div className="card-body small text-justify">
+                <div className='card-body small text-justify'>
                   <strong>
                     We only accept these file formats: JPG and PDF (single page)
                   </strong>
@@ -56,16 +56,16 @@ class HelpCenter extends Component {
                 </div>
               </div>
             </div>
-            <div className="card">
-              <div className="card-header" id="headingTwo">
-                <h2 className="mb-0">
+            <div className='card'>
+              <div className='card-header' id='headingTwo'>
+                <h2 className='mb-0'>
                   <button
-                    className="btn btn-link row acbtn text-left collapsed"
-                    type="button"
-                    data-toggle="collapse"
-                    data-target="#collapseTwo"
-                    aria-expanded="false"
-                    aria-controls="collapseTwo"
+                    className='btn btn-link row acbtn text-left collapsed'
+                    type='button'
+                    data-toggle='collapse'
+                    data-target='#collapseTwo'
+                    aria-expanded='false'
+                    aria-controls='collapseTwo'
                   >
                     What file specifications does banana banner recommend for
                     fast processing?
@@ -73,40 +73,40 @@ class HelpCenter extends Component {
                 </h2>
               </div>
               <div
-                id="collapseTwo"
-                className="collapse"
-                aria-labelledby="headingTwo"
-                data-parent="#accordionExample"
+                id='collapseTwo'
+                className='collapse'
+                aria-labelledby='headingTwo'
+                data-parent='#accordionExample'
               >
-                <div className="card-body small text-justify">
+                <div className='card-body small text-justify'>
                   We accept JPG and single page PDF. We suggest 150 dpi
                   resolution at 100% of the final print size. Also do not
                   include any bleed or crop marks.
                 </div>
               </div>
             </div>
-            <div className="card">
-              <div className="card-header" id="headingThree">
-                <h2 className="mb-0">
+            <div className='card'>
+              <div className='card-header' id='headingThree'>
+                <h2 className='mb-0'>
                   <button
-                    className="btn btn-link row acbtn text-left collapsed"
-                    type="button"
-                    data-toggle="collapse"
-                    data-target="#collapseThree"
-                    aria-expanded="false"
-                    aria-controls="collapseThree"
+                    className='btn btn-link row acbtn text-left collapsed'
+                    type='button'
+                    data-toggle='collapse'
+                    data-target='#collapseThree'
+                    aria-expanded='false'
+                    aria-controls='collapseThree'
                   >
                     Should I remove Hidden Layers in my artwork?
                   </button>
                 </h2>
               </div>
               <div
-                id="collapseThree"
-                className="collapse"
-                aria-labelledby="headingThree"
-                data-parent="#accordionExample"
+                id='collapseThree'
+                className='collapse'
+                aria-labelledby='headingThree'
+                data-parent='#accordionExample'
               >
-                <div className="card-body small text-justify">
+                <div className='card-body small text-justify'>
                   Yes. Just like transparencies, hidden layers in artwork can
                   have unpredictable results when printed. These results are not
                   always visible in previews. We highly suggest that you remove
@@ -116,28 +116,28 @@ class HelpCenter extends Component {
                 </div>
               </div>
             </div>
-            <div className="card">
-              <div className="card-header" id="headingFour">
-                <h2 className="mb-0">
+            <div className='card'>
+              <div className='card-header' id='headingFour'>
+                <h2 className='mb-0'>
                   <button
-                    className="btn btn-link row acbtn text-left collapsed"
-                    type="button"
-                    data-toggle="collapse"
-                    data-target="#collapseFour"
-                    aria-expanded="false"
-                    aria-controls="collapseFour"
+                    className='btn btn-link row acbtn text-left collapsed'
+                    type='button'
+                    data-toggle='collapse'
+                    data-target='#collapseFour'
+                    aria-expanded='false'
+                    aria-controls='collapseFour'
                   >
                     Should I scale down my artwork?
                   </button>
                 </h2>
               </div>
               <div
-                id="collapseFour"
-                className="collapse"
-                aria-labelledby="headingFour"
-                data-parent="#accordionExample"
+                id='collapseFour'
+                className='collapse'
+                aria-labelledby='headingFour'
+                data-parent='#accordionExample'
               >
-                <div className="card-body small text-justify">
+                <div className='card-body small text-justify'>
                   <p>
                     It is not always necessary to scale your artwork down but
                     here are a few good things to know
@@ -163,28 +163,28 @@ class HelpCenter extends Component {
                 </div>
               </div>
             </div>
-            <div className="card">
-              <div className="card-header" id="headingFive">
-                <h2 className="mb-0">
+            <div className='card'>
+              <div className='card-header' id='headingFive'>
+                <h2 className='mb-0'>
                   <button
-                    className="btn btn-link row acbtn text-left collapsed"
-                    type="button"
-                    data-toggle="collapse"
-                    data-target="#collapseFive"
-                    aria-expanded="false"
-                    aria-controls="collapseFive"
+                    className='btn btn-link row acbtn text-left collapsed'
+                    type='button'
+                    data-toggle='collapse'
+                    data-target='#collapseFive'
+                    aria-expanded='false'
+                    aria-controls='collapseFive'
                   >
                     Can I submit encrypted pdf?
                   </button>
                 </h2>
               </div>
               <div
-                id="collapseFive"
-                className="collapse"
-                aria-labelledby="headingFive"
-                data-parent="#accordionExample"
+                id='collapseFive'
+                className='collapse'
+                aria-labelledby='headingFive'
+                data-parent='#accordionExample'
               >
-                <div className="card-body text-justify small">
+                <div className='card-body text-justify small'>
                   No. Encrypted PDF files may result in a misprint or your order
                   being placed on hold. Please make sure all PDFs submitted are
                   not encrypted, all fonts are outlined and all images are
@@ -192,112 +192,112 @@ class HelpCenter extends Component {
                 </div>
               </div>
             </div>
-            <div className="card">
-              <div className="card-header" id="headingSix">
-                <h2 className="mb-0">
+            <div className='card'>
+              <div className='card-header' id='headingSix'>
+                <h2 className='mb-0'>
                   <button
-                    className="btn btn-link row acbtn text-left collapsed"
-                    type="button"
-                    data-toggle="collapse"
-                    data-target="#collapseSix"
-                    aria-expanded="false"
-                    aria-controls="collapseSix"
+                    className='btn btn-link row acbtn text-left collapsed'
+                    type='button'
+                    data-toggle='collapse'
+                    data-target='#collapseSix'
+                    aria-expanded='false'
+                    aria-controls='collapseSix'
                   >
                     Do I need bleed or crop marks for my files?
                   </button>
                 </h2>
               </div>
               <div
-                id="collapseSix"
-                className="collapse"
-                aria-labelledby="headingSix"
-                data-parent="#accordionExample"
+                id='collapseSix'
+                className='collapse'
+                aria-labelledby='headingSix'
+                data-parent='#accordionExample'
               >
-                <div className="card-body text-justify small">
+                <div className='card-body text-justify small'>
                   No bleed or crop marks. Make your artwork match the size
                   requested on the order. We are not responsible for crop marks
                   or registration printed.
                 </div>
               </div>
             </div>
-            <div className="card">
-              <div className="card-header" id="headingSeven">
-                <h2 className="mb-0">
+            <div className='card'>
+              <div className='card-header' id='headingSeven'>
+                <h2 className='mb-0'>
                   <button
-                    className="btn btn-link row acbtn text-left collapsed"
-                    type="button"
-                    data-toggle="collapse"
-                    data-target="#collapseSeven"
-                    aria-expanded="false"
-                    aria-controls="collapseSeven"
+                    className='btn btn-link row acbtn text-left collapsed'
+                    type='button'
+                    data-toggle='collapse'
+                    data-target='#collapseSeven'
+                    aria-expanded='false'
+                    aria-controls='collapseSeven'
                   >
                     Should I include any fonts with my files?
                   </button>
                 </h2>
               </div>
               <div
-                id="collapseSeven"
-                className="collapse"
-                aria-labelledby="headingSeven"
-                data-parent="#accordionExample"
+                id='collapseSeven'
+                className='collapse'
+                aria-labelledby='headingSeven'
+                data-parent='#accordionExample'
               >
-                <div className="card-body small text-justify">
+                <div className='card-body small text-justify'>
                   NO. Instead, please ensure that all fonts are outlined prior
                   to file upload. If you are using Photoshop, please provide
                   flattened file only.
                 </div>
               </div>
             </div>
-            <div className="card">
-              <div className="card-header" id="headingEight">
-                <h2 className="mb-0">
+            <div className='card'>
+              <div className='card-header' id='headingEight'>
+                <h2 className='mb-0'>
                   <button
-                    className="btn btn-link row acbtn text-left collapsed"
-                    type="button"
-                    data-toggle="collapse"
-                    data-target="#collapseEight"
-                    aria-expanded="false"
-                    aria-controls="collapseEight"
+                    className='btn btn-link row acbtn text-left collapsed'
+                    type='button'
+                    data-toggle='collapse'
+                    data-target='#collapseEight'
+                    aria-expanded='false'
+                    aria-controls='collapseEight'
                   >
                     My artwork file contains transparency, will it print ok?
                   </button>
                 </h2>
               </div>
               <div
-                id="collapseEight"
-                className="collapse"
-                aria-labelledby="headingEight"
-                data-parent="#accordionExample"
+                id='collapseEight'
+                className='collapse'
+                aria-labelledby='headingEight'
+                data-parent='#accordionExample'
               >
-                <div className="card-body small text-justify">
+                <div className='card-body small text-justify'>
                   No, it is always best to flatten any file you send to Banana
                   Banner. Banana Banner considers flattening transparency part
                   of basic file setup and will not check for this issue.
                 </div>
               </div>
             </div>
-            <div className="card">
-              <div className="card-header" id="headingNine">
-                <h2 className="mb-0">
+            <div className='card'>
+              <div className='card-header' id='headingNine'>
+                <h2 className='mb-0'>
                   <button
-                    className="btn btn-link row acbtn text-left collapsed"
-                    type="button"
-                    data-toggle="collapse"
-                    data-target="#collapseNine"
-                    aria-expanded="false"
-                    aria-controls="collapseNine"
+                    className='btn btn-link row acbtn text-left collapsed'
+                    type='button'
+                    data-toggle='collapse'
+                    data-target='#collapseNine'
+                    aria-expanded='false'
+                    aria-controls='collapseNine'
                   >
                     What is the difference between raster and vector
                   </button>
                 </h2>
               </div>
               <div
-                id="collapseNine"
-                className="collapse"
-                aria-labelledby="headingNine"
-                data-parent="#accordionExample"
+                id='collapseNine'
+                className='collapse'
+                aria-labelledby='headingNine'
+                data-parent='#accordionExample'
               >
-                <div className="card-body small text-justify">
+                <div className='card-body small text-justify'>
                   <p>
                     Raster-based artwork such as photos or flattened artwork
                     (from Adobe Photoshop) are made up of tiny squares (pixels),
@@ -324,28 +324,28 @@ class HelpCenter extends Component {
                 </div>
               </div>
             </div>
-            <div className="card mb-5">
-              <div className="card-header" id="headingTen">
-                <h2 className="mb-0">
+            <div className='card mb-5'>
+              <div className='card-header' id='headingTen'>
+                <h2 className='mb-0'>
                   <button
-                    className="btn btn-link row acbtn text-left collapsed"
-                    type="button"
-                    data-toggle="collapse"
-                    data-target="#collapseTen"
-                    aria-expanded="false"
-                    aria-controls="collapseTen"
+                    className='btn btn-link row acbtn text-left collapsed'
+                    type='button'
+                    data-toggle='collapse'
+                    data-target='#collapseTen'
+                    aria-expanded='false'
+                    aria-controls='collapseTen'
                   >
                     What is overprint, and how can it ruin my file?
                   </button>
                 </h2>
               </div>
               <div
-                id="collapseTen"
-                className="collapse"
-                aria-labelledby="headingTen"
-                data-parent="#accordionExample"
+                id='collapseTen'
+                className='collapse'
+                aria-labelledby='headingTen'
+                data-parent='#accordionExample'
               >
-                <div className="card-body small text-justify">
+                <div className='card-body small text-justify'>
                   Overprint is used to intentionally overlap inks for a number
                   of reasons. We suggest that you turn all overprint objects off
                   before submitting, for it may cause unexpected results.
@@ -355,20 +355,20 @@ class HelpCenter extends Component {
           </div>
         </div>
       );
-    } else if (displayHelp === "Shipping") {
+    } else if (displayHelp === 'Shipping') {
       showHelp = (
-        <div className=" row mt-2 col-12 m-0 p-0">
-          <div className="accordion col-12 p-0 m-0" id="accordionExample">
-            <div className="card">
-              <div className="card-header" id="headingOne">
-                <h2 className="mb-0">
+        <div className=' row mt-2 col-12 m-0 p-0'>
+          <div className='accordion col-12 p-0 m-0' id='accordionExample'>
+            <div className='card'>
+              <div className='card-header' id='headingOne'>
+                <h2 className='mb-0'>
                   <button
-                    className="btn btn-link row acbtn text-left"
-                    type="button"
-                    data-toggle="collapse"
-                    data-target="#collapseOne"
-                    aria-expanded="true"
-                    aria-controls="collapseOne"
+                    className='btn btn-link row acbtn text-left'
+                    type='button'
+                    data-toggle='collapse'
+                    data-target='#collapseOne'
+                    aria-expanded='true'
+                    aria-controls='collapseOne'
                   >
                     Do you offer same day service?
                   </button>
@@ -376,12 +376,12 @@ class HelpCenter extends Component {
               </div>
 
               <div
-                id="collapseOne"
-                className="collapse "
-                aria-labelledby="headingOne"
-                data-parent="#accordionExample"
+                id='collapseOne'
+                className='collapse '
+                aria-labelledby='headingOne'
+                data-parent='#accordionExample'
               >
-                <div className="card-body small text-justify">
+                <div className='card-body small text-justify'>
                   <p>
                     Yes, we do. However, your order has to be placed before 12
                     noon PST to be qualified for same day service.
@@ -389,56 +389,56 @@ class HelpCenter extends Component {
                 </div>
               </div>
             </div>
-            <div className="card">
-              <div className="card-header" id="headingTwo">
-                <h2 className="mb-0">
+            <div className='card'>
+              <div className='card-header' id='headingTwo'>
+                <h2 className='mb-0'>
                   <button
-                    className="btn btn-link row acbtn text-left collapsed"
-                    type="button"
-                    data-toggle="collapse"
-                    data-target="#collapseTwo"
-                    aria-expanded="false"
-                    aria-controls="collapseTwo"
+                    className='btn btn-link row acbtn text-left collapsed'
+                    type='button'
+                    data-toggle='collapse'
+                    data-target='#collapseTwo'
+                    aria-expanded='false'
+                    aria-controls='collapseTwo'
                   >
                     Why dont you offer shipping on large rigid signs?
                   </button>
                 </h2>
               </div>
               <div
-                id="collapseTwo"
-                className="collapse"
-                aria-labelledby="headingTwo"
-                data-parent="#accordionExample"
+                id='collapseTwo'
+                className='collapse'
+                aria-labelledby='headingTwo'
+                data-parent='#accordionExample'
               >
-                <div className="card-body small text-justify">
+                <div className='card-body small text-justify'>
                   At this moment, sizes over 3' 10"x3' 2" are only available for
                   Store Pickup. We currently are not able to ship sizes larger
                   than 3' 10"x3' 2".
                 </div>
               </div>
             </div>
-            <div className="card">
-              <div className="card-header" id="headingThree">
-                <h2 className="mb-0">
+            <div className='card'>
+              <div className='card-header' id='headingThree'>
+                <h2 className='mb-0'>
                   <button
-                    className="btn btn-link row acbtn text-left collapsed"
-                    type="button"
-                    data-toggle="collapse"
-                    data-target="#collapseThree"
-                    aria-expanded="false"
-                    aria-controls="collapseThree"
+                    className='btn btn-link row acbtn text-left collapsed'
+                    type='button'
+                    data-toggle='collapse'
+                    data-target='#collapseThree'
+                    aria-expanded='false'
+                    aria-controls='collapseThree'
                   >
                     Why is my shipment is taking longer than expected?
                   </button>
                 </h2>
               </div>
               <div
-                id="collapseThree"
-                className="collapse"
-                aria-labelledby="headingThree"
-                data-parent="#accordionExample"
+                id='collapseThree'
+                className='collapse'
+                aria-labelledby='headingThree'
+                data-parent='#accordionExample'
               >
-                <div className="card-body small text-justify">
+                <div className='card-body small text-justify'>
                   <p>
                     Orders shipping via FedEx Ground may take 1-5 business days
                     in transit depending on your location. Weekends, holidays,
@@ -455,28 +455,28 @@ class HelpCenter extends Component {
                 </div>
               </div>
             </div>
-            <div className="card">
-              <div className="card-header" id="headingFour">
-                <h2 className="mb-0">
+            <div className='card'>
+              <div className='card-header' id='headingFour'>
+                <h2 className='mb-0'>
                   <button
-                    className="btn btn-link row acbtn text-left collapsed"
-                    type="button"
-                    data-toggle="collapse"
-                    data-target="#collapseFour"
-                    aria-expanded="false"
-                    aria-controls="collapseFour"
+                    className='btn btn-link row acbtn text-left collapsed'
+                    type='button'
+                    data-toggle='collapse'
+                    data-target='#collapseFour'
+                    aria-expanded='false'
+                    aria-controls='collapseFour'
                   >
                     Where is your store pickup location?
                   </button>
                 </h2>
               </div>
               <div
-                id="collapseFour"
-                className="collapse"
-                aria-labelledby="headingFour"
-                data-parent="#accordionExample"
+                id='collapseFour'
+                className='collapse'
+                aria-labelledby='headingFour'
+                data-parent='#accordionExample'
               >
-                <div className="card-body small text-justify">
+                <div className='card-body small text-justify'>
                   <p>
                     Our store pickup location is at 98-101 Hila Pl, Pearl City,
                     HI 96782. Please bring a copy of your invoice when picking
@@ -485,28 +485,28 @@ class HelpCenter extends Component {
                 </div>
               </div>
             </div>
-            <div className="card">
-              <div className="card-header" id="headingFive">
-                <h2 className="mb-0">
+            <div className='card'>
+              <div className='card-header' id='headingFive'>
+                <h2 className='mb-0'>
                   <button
-                    className="btn btn-link row acbtn text-left collapsed"
-                    type="button"
-                    data-toggle="collapse"
-                    data-target="#collapseFive"
-                    aria-expanded="false"
-                    aria-controls="collapseFive"
+                    className='btn btn-link row acbtn text-left collapsed'
+                    type='button'
+                    data-toggle='collapse'
+                    data-target='#collapseFive'
+                    aria-expanded='false'
+                    aria-controls='collapseFive'
                   >
                     How will you ship my banners??
                   </button>
                 </h2>
               </div>
               <div
-                id="collapseFive"
-                className="collapse"
-                aria-labelledby="headingFive"
-                data-parent="#accordionExample"
+                id='collapseFive'
+                className='collapse'
+                aria-labelledby='headingFive'
+                data-parent='#accordionExample'
               >
-                <div className="card-body text-justify small">
+                <div className='card-body text-justify small'>
                   <p>
                     All Banana Banner products will be shipped using FEDEX. Due
                     to some restrictions set forth by FEDEX, we have taken
@@ -526,28 +526,28 @@ class HelpCenter extends Component {
                 </div>
               </div>
             </div>
-            <div className="card">
-              <div className="card-header" id="headingSix">
-                <h2 className="mb-0">
+            <div className='card'>
+              <div className='card-header' id='headingSix'>
+                <h2 className='mb-0'>
                   <button
-                    className="btn btn-link row acbtn text-left collapsed"
-                    type="button"
-                    data-toggle="collapse"
-                    data-target="#collapseSix"
-                    aria-expanded="false"
-                    aria-controls="collapseSix"
+                    className='btn btn-link row acbtn text-left collapsed'
+                    type='button'
+                    data-toggle='collapse'
+                    data-target='#collapseSix'
+                    aria-expanded='false'
+                    aria-controls='collapseSix'
                   >
                     why is my shipping charge high??
                   </button>
                 </h2>
               </div>
               <div
-                id="collapseSix"
-                className="collapse"
-                aria-labelledby="headingSix"
-                data-parent="#accordionExample"
+                id='collapseSix'
+                className='collapse'
+                aria-labelledby='headingSix'
+                data-parent='#accordionExample'
               >
-                <div className="card-body text-justify small">
+                <div className='card-body text-justify small'>
                   Due to the large physical size of products some orders may
                   have higher than expected shipping charges. Unfortunately
                   there is little of what we can do as we are bound by the
@@ -558,20 +558,20 @@ class HelpCenter extends Component {
           </div>
         </div>
       );
-    } else if (displayHelp === "General") {
+    } else if (displayHelp === 'General') {
       showHelp = (
-        <div className=" row mt-2 col-12 m-0 p-0">
-          <div className="accordion col-12 p-0 m-0" id="accordionExample">
-            <div className="card">
-              <div className="card-header" id="headingOne">
-                <h2 className="mb-0">
+        <div className=' row mt-2 col-12 m-0 p-0'>
+          <div className='accordion col-12 p-0 m-0' id='accordionExample'>
+            <div className='card'>
+              <div className='card-header' id='headingOne'>
+                <h2 className='mb-0'>
                   <button
-                    className="btn btn-link row acbtn text-left"
-                    type="button"
-                    data-toggle="collapse"
-                    data-target="#collapseOne"
-                    aria-expanded="true"
-                    aria-controls="collapseOne"
+                    className='btn btn-link row acbtn text-left'
+                    type='button'
+                    data-toggle='collapse'
+                    data-target='#collapseOne'
+                    aria-expanded='true'
+                    aria-controls='collapseOne'
                   >
                     Do you color match?
                   </button>
@@ -579,65 +579,65 @@ class HelpCenter extends Component {
               </div>
 
               <div
-                id="collapseOne"
-                className="collapse "
-                aria-labelledby="headingOne"
-                data-parent="#accordionExample"
+                id='collapseOne'
+                className='collapse '
+                aria-labelledby='headingOne'
+                data-parent='#accordionExample'
               >
-                <div className="card-body small text-justify">
+                <div className='card-body small text-justify'>
                   <p>We do not color match.</p>
                 </div>
               </div>
             </div>
-            <div className="card">
-              <div className="card-header" id="headingTwo">
-                <h2 className="mb-0">
+            <div className='card'>
+              <div className='card-header' id='headingTwo'>
+                <h2 className='mb-0'>
                   <button
-                    className="btn btn-link row acbtn text-left collapsed"
-                    type="button"
-                    data-toggle="collapse"
-                    data-target="#collapseTwo"
-                    aria-expanded="false"
-                    aria-controls="collapseTwo"
+                    className='btn btn-link row acbtn text-left collapsed'
+                    type='button'
+                    data-toggle='collapse'
+                    data-target='#collapseTwo'
+                    aria-expanded='false'
+                    aria-controls='collapseTwo'
                   >
                     What size are your grommets?
                   </button>
                 </h2>
               </div>
               <div
-                id="collapseTwo"
-                className="collapse"
-                aria-labelledby="headingTwo"
-                data-parent="#accordionExample"
+                id='collapseTwo'
+                className='collapse'
+                aria-labelledby='headingTwo'
+                data-parent='#accordionExample'
               >
-                <div className="card-body small text-justify">
+                <div className='card-body small text-justify'>
                   We use #2 grommets, which are approximately 3/8''. Grommets
                   are placed every 2' standard.
                 </div>
               </div>
             </div>
-            <div className="card">
-              <div className="card-header" id="headingThree">
-                <h2 className="mb-0">
+            <div className='card'>
+              <div className='card-header' id='headingThree'>
+                <h2 className='mb-0'>
                   <button
-                    className="btn btn-link row acbtn text-left collapsed"
-                    type="button"
-                    data-toggle="collapse"
-                    data-target="#collapseThree"
-                    aria-expanded="false"
-                    aria-controls="collapseThree"
+                    className='btn btn-link row acbtn text-left collapsed'
+                    type='button'
+                    data-toggle='collapse'
+                    data-target='#collapseThree'
+                    aria-expanded='false'
+                    aria-controls='collapseThree'
                   >
                     What is Turnaround service?
                   </button>
                 </h2>
               </div>
               <div
-                id="collapseThree"
-                className="collapse"
-                aria-labelledby="headingThree"
-                data-parent="#accordionExample"
+                id='collapseThree'
+                className='collapse'
+                aria-labelledby='headingThree'
+                data-parent='#accordionExample'
               >
-                <div className="card-body small text-justify">
+                <div className='card-body small text-justify'>
                   <p>Turnaround time begins once your file is uploaded.</p>
                   <p>
                     If your file is placed on hold, the turnaround time will
@@ -687,28 +687,28 @@ class HelpCenter extends Component {
                 </div>
               </div>
             </div>
-            <div className="card">
-              <div className="card-header" id="headingFour">
-                <h2 className="mb-0">
+            <div className='card'>
+              <div className='card-header' id='headingFour'>
+                <h2 className='mb-0'>
                   <button
-                    className="btn btn-link row acbtn text-left collapsed"
-                    type="button"
-                    data-toggle="collapse"
-                    data-target="#collapseFour"
-                    aria-expanded="false"
-                    aria-controls="collapseFour"
+                    className='btn btn-link row acbtn text-left collapsed'
+                    type='button'
+                    data-toggle='collapse'
+                    data-target='#collapseFour'
+                    aria-expanded='false'
+                    aria-controls='collapseFour'
                   >
                     Why do you have a minimum charge per item?
                   </button>
                 </h2>
               </div>
               <div
-                id="collapseFour"
-                className="collapse"
-                aria-labelledby="headingFour"
-                data-parent="#accordionExample"
+                id='collapseFour'
+                className='collapse'
+                aria-labelledby='headingFour'
+                data-parent='#accordionExample'
               >
-                <div className="card-body small text-justify">
+                <div className='card-body small text-justify'>
                   <p>
                     While we offer competitive pricing, we have to account for
                     production and labor costs for each job.
@@ -721,28 +721,28 @@ class HelpCenter extends Component {
                 </div>
               </div>
             </div>
-            <div className="card">
-              <div className="card-header" id="headingFive">
-                <h2 className="mb-0">
+            <div className='card'>
+              <div className='card-header' id='headingFive'>
+                <h2 className='mb-0'>
                   <button
-                    className="btn btn-link row acbtn text-left collapsed"
-                    type="button"
-                    data-toggle="collapse"
-                    data-target="#collapseFive"
-                    aria-expanded="false"
-                    aria-controls="collapseFive"
+                    className='btn btn-link row acbtn text-left collapsed'
+                    type='button'
+                    data-toggle='collapse'
+                    data-target='#collapseFive'
+                    aria-expanded='false'
+                    aria-controls='collapseFive'
                   >
                     Order Cancelation?
                   </button>
                 </h2>
               </div>
               <div
-                id="collapseFive"
-                className="collapse"
-                aria-labelledby="headingFive"
-                data-parent="#accordionExample"
+                id='collapseFive'
+                className='collapse'
+                aria-labelledby='headingFive'
+                data-parent='#accordionExample'
               >
-                <div className="card-body text-justify small">
+                <div className='card-body text-justify small'>
                   An order can be canceled at any time prior to it entering into
                   production. To cancel please log in to our website to view
                   your order details and click cancel print job. If you do not
@@ -751,54 +751,54 @@ class HelpCenter extends Component {
                 </div>
               </div>
             </div>
-            <div className="card">
-              <div className="card-header" id="headingSix">
-                <h2 className="mb-0">
+            <div className='card'>
+              <div className='card-header' id='headingSix'>
+                <h2 className='mb-0'>
                   <button
-                    className="btn btn-link row acbtn text-left collapsed"
-                    type="button"
-                    data-toggle="collapse"
-                    data-target="#collapseSix"
-                    aria-expanded="false"
-                    aria-controls="collapseSix"
+                    className='btn btn-link row acbtn text-left collapsed'
+                    type='button'
+                    data-toggle='collapse'
+                    data-target='#collapseSix'
+                    aria-expanded='false'
+                    aria-controls='collapseSix'
                   >
                     Do you offer hemmed edges??
                   </button>
                 </h2>
               </div>
               <div
-                id="collapseSix"
-                className="collapse"
-                aria-labelledby="headingSix"
-                data-parent="#accordionExample"
+                id='collapseSix'
+                className='collapse'
+                aria-labelledby='headingSix'
+                data-parent='#accordionExample'
               >
-                <div className="card-body text-justify small">
+                <div className='card-body text-justify small'>
                   Yes, we do traditional sewn hemmed edges.
                 </div>
               </div>
             </div>
-            <div className="card">
-              <div className="card-header" id="headingSeven">
-                <h2 className="mb-0">
+            <div className='card'>
+              <div className='card-header' id='headingSeven'>
+                <h2 className='mb-0'>
                   <button
-                    className="btn btn-link row acbtn text-left collapsed"
-                    type="button"
-                    data-toggle="collapse"
-                    data-target="#collapseSeven"
-                    aria-expanded="false"
-                    aria-controls="collapseSeven"
+                    className='btn btn-link row acbtn text-left collapsed'
+                    type='button'
+                    data-toggle='collapse'
+                    data-target='#collapseSeven'
+                    aria-expanded='false'
+                    aria-controls='collapseSeven'
                   >
                     Is there any cleaning or maintenance required?
                   </button>
                 </h2>
               </div>
               <div
-                id="collapseSeven"
-                className="collapse"
-                aria-labelledby="headingSeven"
-                data-parent="#accordionExample"
+                id='collapseSeven'
+                className='collapse'
+                aria-labelledby='headingSeven'
+                data-parent='#accordionExample'
               >
-                <div className="card-body small text-justify">
+                <div className='card-body small text-justify'>
                   The best method of cleaning your outdoor vinyl banner is to
                   lay it flat (if possible) on a clean area, table or floor. It
                   is recommended that you use a mild dishwashing liquid and warm
@@ -811,28 +811,28 @@ class HelpCenter extends Component {
                 </div>
               </div>
             </div>
-            <div className="card">
-              <div className="card-header" id="headingEight">
-                <h2 className="mb-0">
+            <div className='card'>
+              <div className='card-header' id='headingEight'>
+                <h2 className='mb-0'>
                   <button
-                    className="btn btn-link row acbtn text-left collapsed"
-                    type="button"
-                    data-toggle="collapse"
-                    data-target="#collapseEight"
-                    aria-expanded="false"
-                    aria-controls="collapseEight"
+                    className='btn btn-link row acbtn text-left collapsed'
+                    type='button'
+                    data-toggle='collapse'
+                    data-target='#collapseEight'
+                    aria-expanded='false'
+                    aria-controls='collapseEight'
                   >
                     Why does it take so long to upload files?
                   </button>
                 </h2>
               </div>
               <div
-                id="collapseEight"
-                className="collapse"
-                aria-labelledby="headingEight"
-                data-parent="#accordionExample"
+                id='collapseEight'
+                className='collapse'
+                aria-labelledby='headingEight'
+                data-parent='#accordionExample'
               >
-                <div className="card-body small text-justify">
+                <div className='card-body small text-justify'>
                   Your file size and your network connection are the two main
                   factors affecting upload speed. Another way to ensure your
                   file gets uploaded in a timely manner is flattening your
@@ -840,28 +840,28 @@ class HelpCenter extends Component {
                 </div>
               </div>
             </div>
-            <div className="card">
-              <div className="card-header" id="headingNine">
-                <h2 className="mb-0">
+            <div className='card'>
+              <div className='card-header' id='headingNine'>
+                <h2 className='mb-0'>
                   <button
-                    className="btn btn-link row acbtn text-left collapsed"
-                    type="button"
-                    data-toggle="collapse"
-                    data-target="#collapseNine"
-                    aria-expanded="false"
-                    aria-controls="collapseNine"
+                    className='btn btn-link row acbtn text-left collapsed'
+                    type='button'
+                    data-toggle='collapse'
+                    data-target='#collapseNine'
+                    aria-expanded='false'
+                    aria-controls='collapseNine'
                   >
                     Do you Print using any spot or pantone colors?
                   </button>
                 </h2>
               </div>
               <div
-                id="collapseNine"
-                className="collapse"
-                aria-labelledby="headingNine"
-                data-parent="#accordionExample"
+                id='collapseNine'
+                className='collapse'
+                aria-labelledby='headingNine'
+                data-parent='#accordionExample'
               >
-                <div className="card-body small text-justify">
+                <div className='card-body small text-justify'>
                   <p>
                     We only print 4 color process (CMYK). If you use Spot or
                     Pantone colors, please have them converted to process colors
@@ -870,28 +870,28 @@ class HelpCenter extends Component {
                 </div>
               </div>
             </div>
-            <div className="card mb-5">
-              <div className="card-header" id="headingTen">
-                <h2 className="mb-0">
+            <div className='card mb-5'>
+              <div className='card-header' id='headingTen'>
+                <h2 className='mb-0'>
                   <button
-                    className="btn btn-link row acbtn text-left collapsed"
-                    type="button"
-                    data-toggle="collapse"
-                    data-target="#collapseTen"
-                    aria-expanded="false"
-                    aria-controls="collapseTen"
+                    className='btn btn-link row acbtn text-left collapsed'
+                    type='button'
+                    data-toggle='collapse'
+                    data-target='#collapseTen'
+                    aria-expanded='false'
+                    aria-controls='collapseTen'
                   >
                     Why is ink chipping off?
                   </button>
                 </h2>
               </div>
               <div
-                id="collapseTen"
-                className="collapse"
-                aria-labelledby="headingTen"
-                data-parent="#accordionExample"
+                id='collapseTen'
+                className='collapse'
+                aria-labelledby='headingTen'
+                data-parent='#accordionExample'
               >
-                <div className="card-body small text-justify">
+                <div className='card-body small text-justify'>
                   The reason you might have chipping on some edges of your
                   product is most likely due to the heavy ink coverage that you
                   used in your artwork. Once your prints are cut down, there are
@@ -906,58 +906,58 @@ class HelpCenter extends Component {
     } else {
       showHelp = (
         <div
-          className=" small text-center
-    mx-auto"
+          className=' small text-center
+    mx-auto'
         >
           Click to choose category...
         </div>
       );
     }
     return (
-      <div className="HelpCenter">
-        <div className="container">
-          <div className="row">
-            <div className="col-md-3 pl-1 order-6 order-md-2">
+      <div className='HelpCenter'>
+        <div className='container'>
+          <div className='row'>
+            <div className='col-md-3 pl-1 order-6 order-md-2'>
               <BannerLinks />
             </div>
-            <div className=" col-md-9 order-2 order-md-6 mt-3">
-              <div className="col-12 m-auto navLink text-center row">
-                <h3 className="p-2 navLink pt-3 ">HELP CENTER</h3>
+            <div className=' col-md-9 order-2 order-md-6 mt-3'>
+              <div className='col-12 m-auto navLink text-center row'>
+                <h3 className='p-2 navLink pt-3 '>HELP CENTER</h3>
               </div>
-              <div className="col-12 mt-3 mb-3 text-center">
+              <div className='col-12 mt-3 mb-3 text-center'>
                 <button
                   onClick={() => {
                     this.setState((prevState) => ({
-                      displayHelp: "Artwork",
+                      displayHelp: 'Artwork',
                     }));
                   }}
-                  className="btn btn-info btn py-1 mr-2"
+                  className='btn btn-info btn py-1 mr-2'
                 >
                   Artwork
                 </button>
                 <button
                   onClick={() => {
                     this.setState((prevState) => ({
-                      displayHelp: "Shipping",
+                      displayHelp: 'Shipping',
                     }));
                   }}
-                  className="btn btn-info btn py-1 mr-2"
+                  className='btn btn-info btn py-1 mr-2'
                 >
                   Shipping
                 </button>
                 <button
                   onClick={() => {
                     this.setState((prevState) => ({
-                      displayHelp: "General",
+                      displayHelp: 'General',
                     }));
                   }}
-                  className="btn btn-info btn py-1 mr-2 "
+                  className='btn btn-info btn py-1 mr-2 '
                 >
                   General
                 </button>
               </div>
 
-              <div className="mx-auto row">{showHelp}</div>
+              <div className='mx-auto row'>{showHelp}</div>
             </div>
           </div>
         </div>

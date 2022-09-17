@@ -1,16 +1,16 @@
-import React, { Component } from "react";
-import PropTypes from "prop-types";
-import { connect } from "react-redux";
-import { loginUser } from "../../actions/authActions";
-import vinyl13 from "../../img/13oz.jpg";
-import Login from "../auth/Login";
-import QuoteV13 from "./quote/quoteV13";
-import BannerLinks from "./BannerLinks";
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { loginUser } from '../../actions/authActions';
+import vinyl13 from '../../img/13oz.jpg';
+import Login from '../auth/Login';
+import QuoteV13 from './quote/quoteV13';
+import BannerLinks from './BannerLinks';
 class VinylBanner13 extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      banner: "vinyl13",
+      banner: 'vinyl13',
       errors: {},
     };
   }
@@ -38,7 +38,7 @@ class VinylBanner13 extends Component {
     let client = false;
     const currenTime = Date.now() / 1000;
     if (user.exp < currenTime) {
-      window.location.href = "/";
+      window.location.href = '/';
     }
     if (errors.isApproved) {
       errors.email = errors.isApproved;
@@ -48,16 +48,29 @@ class VinylBanner13 extends Component {
     }
 
     return (
-      <div className="vinyl13">
-        <div className="container">
-          <div className="row">
-            <div className="col-md-3 pl-1 order-6 order-md-2">
+      <div className='vinyl13'>
+        <div className='container'>
+          <div className='row'>
+            <div
+              className={
+                'col-md-3 pl-1  ' +
+                (isAuthenticated ? 'order-6 order-md-2 ' : 'order-6 order-md-2')
+              }
+            >
               <BannerLinks banner={this.state.banner} />
             </div>
-            <div className="col-md-5 p-0 small mx-auto mt-3 ml-auto order-4">
-              <img className="img-fluid mb-4" src={vinyl13} alt="viny13oz" />
-              <h4 className="display-5 text-center">Vinyl Banner (13oz)</h4>
-              <p className="text-left">
+            {/* <div className="col-md-3 pl-1 order-6 order-md-2">
+              <BannerLinks banner={this.state.banner} />
+            </div> */}
+            <div
+              className={
+                'col-md-5 small p-0 mt-3 mx-auto ml-auto ' +
+                (isAuthenticated ? 'order-2 order-md-4' : 'order-4')
+              }
+            >
+              <img className='img-fluid mb-4' src={vinyl13} alt='viny13oz' />
+              <h4 className='display-5 text-center'>Vinyl Banner (13oz)</h4>
+              <p className='text-left'>
                 We use a premium heavyweight 13 oz. scrim vinyl banner. It has a
                 very smooth surface for best printing results. This material is
                 typically used for billboards, building wraps, banners, event
@@ -84,7 +97,7 @@ class VinylBanner13 extends Component {
                 </li>
               </ul>
             </div>
-            <div className="col-md-3 mt-3 ml-auto order-2 mb-4 order-md-6 loginBG">
+            <div className='col-md-3 mt-3 ml-auto order-2 mb-4 order-md-6 loginBG'>
               {client ? <QuoteV13 /> : <Login />}
             </div>
           </div>

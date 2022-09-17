@@ -1,39 +1,28 @@
 {
-  "name": "BananaBanner",
+  "name": "banana-banners",
   "version": "1.0.0",
-  "description": "E-commerce site for banana banner",
-  "main": "server.js",
-  "engines": {
-    "node": "14.x",
-    "npm": "6.x"
-  },
+  "description": "ecommerce website",
+  "main": "index.js",
   "scripts": {
     "client-install": "npm install --prefix client",
-    "start": "node server.js",
-    "server": "nodemon server.js",
+    "server": "nodemon start --prefix server",
     "client": "npm start --prefix client",
-    "banana": "concurrently \"npm run server\" \"npm run client\"",
-    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
+    "banana": "concurrently \"npm run server\" \"npm run client\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/3nzoo/bananademo.git"
   },
   "author": "3nzoo",
-  "license": "MIT",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/3nzoo/bananademo/issues"
+  },
+  "homepage": "https://github.com/3nzoo/bananademo#readme",
   "dependencies": {
-    "@sendgrid/mail": "^7.1.1",
-    "bcryptjs": "^2.4.3",
-    "body-parser": "^1.18.2",
-    "concurrently": "^3.5.1",
-    "express": "^4.16.3",
-    "express-fileupload": "^1.1.6",
-    "gravatar": "^1.6.0",
-    "jade": "^1.11.0",
-    "jsonwebtoken": "^8.2.0",
-    "mongoose": "^5.4.17",
-    "nodemailer": "^6.4.6",
-    "passport": "^0.4.0",
-    "passport-jwt": "^4.0.0",
-    "validator": "^9.4.1"
+    "concurrently": "7.4.0"
   },
   "devDependencies": {
-    "nodemon": "^1.18.10"
+    "nodemon": "2.0.19"
   }
 }

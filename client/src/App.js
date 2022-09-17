@@ -71,7 +71,7 @@ class App extends Component {
             <div className='bg-cover position-fixed bg-light w-100 h-100' />
             <Navbar />
 
-            <div className='container py-4'>
+            <div className='container py-4 main-con'>
               <Route exact path='/' component={Landing} />
 
               <Route exact path='/register' component={Register} />

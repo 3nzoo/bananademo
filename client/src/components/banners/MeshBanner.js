@@ -1,17 +1,17 @@
-import React, { Component } from "react";
-import PropTypes from "prop-types";
-import { connect } from "react-redux";
-import { loginUser } from "../../actions/authActions";
-import mesh from "../../img/mesh.png";
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { loginUser } from '../../actions/authActions';
+import mesh from '../../img/mesh.png';
 
-import Mesh from "./quote/mesh";
-import Login from "../auth/Login";
-import BannerLinks from "./BannerLinks";
+import Mesh from './quote/mesh';
+import Login from '../auth/Login';
+import BannerLinks from './BannerLinks';
 class MeshBanner extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      banner: "meshBanner",
+      banner: 'meshBanner',
       errors: {},
     };
   }
@@ -31,7 +31,7 @@ class MeshBanner extends Component {
     let client = false;
     const currenTime = Date.now() / 1000;
     if (user.exp < currenTime || user.is_admin) {
-      window.location.href = "/";
+      window.location.href = '/';
     }
     if (errors.isApproved) {
       errors.email = errors.isApproved;
@@ -40,13 +40,13 @@ class MeshBanner extends Component {
       client = true;
     }
     return (
-      <div className="mesh">
-        <div className="container">
-          <div className="row">
+      <div className='mesh'>
+        <div className='container'>
+          <div className='row'>
             <div
               className={
-                "col-md-3 pl-1  " +
-                (isAuthenticated ? "order-6 order-md-2 " : "order-6 order-md-2")
+                'col-md-3 pl-1  ' +
+                (isAuthenticated ? 'order-6 order-md-2 ' : 'order-6 order-md-2')
               }
             >
               <BannerLinks banner={this.state.banner} />
@@ -54,19 +54,19 @@ class MeshBanner extends Component {
 
             <div
               className={
-                "col-md-5 small p-0 mt-3 mx-auto ml-auto " +
-                (isAuthenticated ? "order-2 order-md-4" : "order-4")
+                'col-md-5 small p-0 mt-3 mx-auto ml-auto ' +
+                (isAuthenticated ? 'order-2 order-md-4' : 'order-4')
               }
             >
-              <img className="img-fluid mb-4" src={mesh} alt="mesh" />
-              <h4 className="display-5 text-center">Mesh Banner</h4>
-              <p className="text-left small">
+              <img className='img-fluid mb-4' src={mesh} alt='mesh' />
+              <h4 className='display-5 text-center'>Mesh Banner</h4>
+              <p className='text-left small'>
                 Mesh banners are printed on 10 oz. heavy-duty banner material.
                 They are suitable for large outdoor advertisements where wind
                 load is an issue. Mesh banners are printed with UV inks.
               </p>
               <strong>Features</strong>
-              <ul className="small">
+              <ul className='small'>
                 <li>
                   Single-Sided single piece maximum size 10’ x 145’ w/o pocket
                   and 9.5’ x 145’ w/ pocket ; Double-Sided banners maximum size
@@ -89,8 +89,8 @@ class MeshBanner extends Component {
 
             <div
               className={
-                "col-md-3 mb-4 mt-3 ml-auto loginBG  " +
-                (isAuthenticated ? "order-4 order-md-6" : "order-2 order-md-6")
+                'col-md-3 mb-4 mt-3 ml-auto loginBG  ' +
+                (isAuthenticated ? 'order-4 order-md-6' : 'order-2 order-md-6')
               }
             >
               {client ? <Mesh /> : <Login />}

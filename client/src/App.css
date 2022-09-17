@@ -5,7 +5,7 @@ body {
   background-color: #ffc107;
   padding-bottom: 100px;
 }
-.bg-cover{
+.bg-cover {
   z-index: -1;
 }
 .App {
@@ -169,4 +169,8 @@ a.bannerLink:active {
 .monkey {
   max-width: 210px;
   height: auto;
+}
+
+.main-con {
+  min-height: 84vh;
 }

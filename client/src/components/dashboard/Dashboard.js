@@ -1,10 +1,10 @@
-import React, { Component } from "react";
-import PropTypes from "prop-types";
-import { connect } from "react-redux";
-import { Redirect } from "react-router-dom";
-import { getCurrentProfile, deleteAccount } from "../../actions/profileActions";
-import Spinner from "../common/Spinner";
-import ClientDash from "./client/ClientDash";
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
+import { getCurrentProfile, deleteAccount } from '../../actions/profileActions';
+import Spinner from '../common/Spinner';
+import ClientDash from './client/ClientDash';
 
 class Dashboard extends Component {
   componentDidMount() {
@@ -24,7 +24,7 @@ class Dashboard extends Component {
       dashboardContent = <Spinner />;
     } else {
       if (user.is_admin === true) {
-        return <Redirect to="/adminDash" />;
+        return <Redirect to='/adminDash' />;
         // dashboardContent = (
         //   <div>
         //     <AdminDash />
@@ -41,10 +41,10 @@ class Dashboard extends Component {
     }
 
     return (
-      <div className="dashboard">
-        <div className="container">
-          <div className="row">
-            <div className="col-md-12">{dashboardContent}</div>
+      <div className='dashboard'>
+        <div className='container'>
+          <div className='row'>
+            <div className='col-md-12'>{dashboardContent}</div>
           </div>
         </div>
       </div>

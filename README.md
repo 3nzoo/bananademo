@@ -14,7 +14,7 @@ $ npm run start
 ## Stacks Used for this demo
 
 
-`1. MERNT stack\n`
+`1. MERNT stack`
 `2. Redux`
 `3. passport`
 `4. JWT`
